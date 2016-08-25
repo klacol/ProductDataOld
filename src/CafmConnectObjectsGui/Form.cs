@@ -32,7 +32,7 @@ namespace CafmConnectObjectsGui
             if (1 == 1) // Test result.
             {
                 string filename = openFileDialog1.FileName;
-                filename = @"C:\Users\Aengenvoort\Documents\GitHub\CafmConnectObjects\samples\PART03_Broetje_GFX.zip";
+                filename = @"samples\PART03_Broetje_GFX.zip";
                 try
                 {
                     vdi3805 = new VDI3805.VDI3805(filename);
