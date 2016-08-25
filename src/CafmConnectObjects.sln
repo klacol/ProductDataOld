@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VDI3805", "VDI3805\VDI3805.csproj", "{1F53F921-835B-44F3-AF9B-759A842D07F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CafmConnectObjects", "CafmConnectObjects\CafmConnectObjects.csproj", "{E572EE7F-C731-414E-AFB0-B0A7F8F86C39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CafmConnectObjectsGui", "CafmConnectObjectsGui\CafmConnectObjectsGui.csproj", "{885450FA-1545-45E3-985C-0FB76C279A65}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1F53F921-835B-44F3-AF9B-759A842D07F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F53F921-835B-44F3-AF9B-759A842D07F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F53F921-835B-44F3-AF9B-759A842D07F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F53F921-835B-44F3-AF9B-759A842D07F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E572EE7F-C731-414E-AFB0-B0A7F8F86C39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E572EE7F-C731-414E-AFB0-B0A7F8F86C39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E572EE7F-C731-414E-AFB0-B0A7F8F86C39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E572EE7F-C731-414E-AFB0-B0A7F8F86C39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{885450FA-1545-45E3-985C-0FB76C279A65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{885450FA-1545-45E3-985C-0FB76C279A65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{885450FA-1545-45E3-985C-0FB76C279A65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{885450FA-1545-45E3-985C-0FB76C279A65}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
