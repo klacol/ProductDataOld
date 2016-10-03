@@ -179,7 +179,7 @@ namespace VDI3805
         public string NameTestAuthority;
         public string MediaDetails;
         public List<ProductMainGroup1_100> ProductMainGroup1s_100;
-        public List<BsNumber_800> BsNumber_800;
+        public List<BuidlingSystemNumber_800> BsNumber_800;
         public List<ProductAccessory_900> ProductAccessories_900;
         public List<AccessorySelection1_930> AccessorySelection1s_930;
         public List<MediaData_960> MediaDatas_960;
@@ -204,7 +204,7 @@ namespace VDI3805
             NameTestAuthority = dataSet.Fields[10];
             MediaDetails = dataSet.Fields[11];
 
-            BsNumber_800 = new BsNumber_800().Register(recordSets);
+            BsNumber_800 = new BuidlingSystemNumber_800().Register(recordSets);
 
             ProductMainGroup1s_100 = new ProductMainGroup1_100().Register(recordSets, BsNumber_800);
             ProductAccessories_900 = new ProductAccessory_900().Register(recordSets);
@@ -229,7 +229,7 @@ namespace VDI3805
 
         public ProductMainGroup1_100() { }
 
-        public List<ProductMainGroup1_100> Register(List<RecordSet> recordSets, List<BsNumber_800> BsNumbers)
+        public List<ProductMainGroup1_100> Register(List<RecordSet> recordSets, List<BuidlingSystemNumber_800> BsNumbers)
         {
             List<ProductMainGroup1_100> ProductMainGroup1s_100 = new List<ProductMainGroup1_100>();
             foreach (RecordSet dataSet in recordSets.Where(x => x.RecordType == "100").ToList())
@@ -276,7 +276,7 @@ namespace VDI3805
 
         public ProductMainGroup2_110() { }
 
-        public List<ProductMainGroup2_110> Register(List<RecordSet> recordSets, List<BsNumber_800> BsNumbers, string[] indexFilter)
+        public List<ProductMainGroup2_110> Register(List<RecordSet> recordSets, List<BuidlingSystemNumber_800> BsNumbers, string[] indexFilter)
         {
             List<ProductMainGroup2_110> ProductMainGroup2s_110 = new List<ProductMainGroup2_110>();
 
@@ -298,7 +298,7 @@ namespace VDI3805
 
                 ProductMainGroup2_110.AccessoryMainGroup2_160 = new AccessoryMainGroup2_160().Register(recordSets,BsNumbers.Where(x => x.Productmaingroup2_110 == ProductMainGroup2_110.Index)
                                                                                                                                                    .Select(y => y.Accessorymaingroup2_160).ToArray());
-                ProductMainGroup2_110.ProductVariantA_200 = new ProductVariantA_200().Register(recordSets, BsNumbers.Where(x => x.Productmaingroup2_110 == ProductMainGroup2_110.Index)
+                ProductMainGroup2_110.ProductVariantA_200 = new ProductVariantA_200().Register(recordSets, BsNumbers, BsNumbers.Where(x => x.Productmaingroup2_110 == ProductMainGroup2_110.Index)
                                                                                                                                                    .Select(y => y.ProductvariantA_200).ToArray());
                 ProductMainGroup2_110.ProductVariantB_300 = new ProductVariantB_300().Register(recordSets, BsNumbers.Where(x => x.Productmaingroup2_110 == ProductMainGroup2_110.Index)
                                                                                                                                                    .Select(y => y.ProductvariantB_300).ToArray());
@@ -364,7 +364,7 @@ namespace VDI3805
         public List<CrossReferenceAccessory_160_01> Register(List<RecordSet> recordSets, string[] indexFilter)
         {
             List<CrossReferenceAccessory_160_01> CrossReferenceAccessories_160_01 = new List<CrossReferenceAccessory_160_01>();
-            foreach (RecordSet dataSet in recordSets.Where(x => x.RecordType == "160")
+            foreach (RecordSet dataSet in recordSets.Where(x => x.RecordType == "160.01")
                                                                     .Where(x => indexFilter.Contains(x.Index))
                                                                     .ToList())
             {
@@ -390,12 +390,13 @@ namespace VDI3805
         public string AccessoryDesignation;
         public string MediaDetails;
         public string AccessorySelection1;
+        public List<VariantTypeA1_250> VariantTypeA1_250;
 
         public ProductVariantA_200() { }
 
-        public List<ProductVariantA_200> Register(List<RecordSet> recordSets, string[] indexFilter)
+        public List<ProductVariantA_200> Register(List<RecordSet> recordSets, List<BuidlingSystemNumber_800> BsNumbers,string[] indexFilter)
         {
-            List<ProductVariantA_200> ProductVariantAs_200 = new List<ProductVariantA_200>();
+            List<ProductVariantA_200> ProductVariantA_200s = new List<ProductVariantA_200>();
             foreach (RecordSet dataSet in recordSets.Where(x => x.RecordType == "200")
                                                                     .Where(x => indexFilter.Contains(x.Index))
                                                                     .ToList())
@@ -407,10 +408,14 @@ namespace VDI3805
                 ProductVariantA_200.AccessoryDesignation = dataSet.Fields[3];
                 ProductVariantA_200.MediaDetails = dataSet.Fields[4];
                 ProductVariantA_200.AccessorySelection1 = dataSet.Fields[5];
-                ProductVariantAs_200.Add(ProductVariantA_200);
+
+                ProductVariantA_200.VariantTypeA1_250 = new VariantTypeA1_250().Register(recordSets, BsNumbers, BsNumbers.Where(x => x.Productmaingroup2_110 == ProductVariantA_200.Index)
+                                                                                                                                                   .Select(y => y.ProductvariantA_200).ToArray());
+
+                ProductVariantA_200s.Add(ProductVariantA_200);
             }
 
-            return ProductVariantAs_200;
+            return ProductVariantA_200s;
         }
     }
 
@@ -422,22 +427,143 @@ namespace VDI3805
 
     public class VariantTypeA1_250
     {
+        public string RecordType;
+        public string Index;
+        public string AccessoryDesignation;
+        public string MediaDetails;
+        public string AccessorySelection1;
+        public List<CrossReferenceAccessory_250_01> CrossReferenceAccessory_250_01;
+
         public VariantTypeA1_250() { }
+
+        public List<VariantTypeA1_250> Register(List<RecordSet> recordSets, List<BuidlingSystemNumber_800> BsNumbers, string[] indexFilter)
+        {
+            List<VariantTypeA1_250> VariantTypeA1s_250 = new List<VariantTypeA1_250>();
+            foreach (RecordSet dataSet in recordSets.Where(x => x.RecordType == "250")
+                                                                    .Where(x => indexFilter.Contains(x.Index))
+                                                                    .ToList())
+            {
+                VariantTypeA1_250 VariantTypeA1_250 = new VariantTypeA1_250();
+                while (dataSet.Fields.Count <= 5) dataSet.Fields.Add(string.Empty);
+                VariantTypeA1_250.RecordType = dataSet.Fields[1];
+                VariantTypeA1_250.Index = ("000" + dataSet.Fields[2]).Right(3);
+                VariantTypeA1_250.AccessoryDesignation = dataSet.Fields[3];
+                VariantTypeA1_250.MediaDetails = dataSet.Fields[4];
+                VariantTypeA1_250.AccessorySelection1 = dataSet.Fields[5];
+
+                VariantTypeA1_250.CrossReferenceAccessory_250_01 = new CrossReferenceAccessory_250_01().Register(recordSets, BsNumbers, BsNumbers.Where(x => x.Productmaingroup2_110 == VariantTypeA1_250.Index)
+                                                                                                                                                   .Select(y => y.VarianttypeA1_250).ToArray());
+
+                VariantTypeA1s_250.Add(VariantTypeA1_250);
+            }
+
+            return VariantTypeA1s_250;
+        }
     }
 
     public class CrossReferenceAccessory_250_01
     {
+        public string RecordType;
+        public string Index;
+        public string AccessoryIndex;
+        public string Quantity;
+        public string FixedOrOptionalAllocation; // f= fixed o=optional
+        public string AllocationToAccessory; //P=per project; A=per article
+
         public CrossReferenceAccessory_250_01() { }
+
+        public List<CrossReferenceAccessory_250_01> Register(List<RecordSet> recordSets, List<BuidlingSystemNumber_800> BsNumbers,string[] indexFilter)
+        {
+            List<CrossReferenceAccessory_250_01> CrossReferenceAccessory_250_01s = new List<CrossReferenceAccessory_250_01>();
+            foreach (RecordSet dataSet in recordSets.Where(x => x.RecordType == "250.01")
+                                                                    .Where(x => indexFilter.Contains(x.Index))
+                                                                    .ToList())
+            {
+                CrossReferenceAccessory_250_01 CrossReferenceAccessory_250_01 = new CrossReferenceAccessory_250_01();
+                while (dataSet.Fields.Count <= 6) dataSet.Fields.Add(string.Empty);
+                CrossReferenceAccessory_250_01.RecordType = dataSet.Fields[1];
+                CrossReferenceAccessory_250_01.Index = ("000" + dataSet.Fields[2]).Right(3);
+                CrossReferenceAccessory_250_01.AccessoryIndex = dataSet.Fields[3];
+                CrossReferenceAccessory_250_01.Quantity = dataSet.Fields[4];
+                CrossReferenceAccessory_250_01.FixedOrOptionalAllocation = dataSet.Fields[5];
+                CrossReferenceAccessory_250_01.AllocationToAccessory = dataSet.Fields[5];
+                CrossReferenceAccessory_250_01s.Add(CrossReferenceAccessory_250_01);
+            }
+
+            return CrossReferenceAccessory_250_01s;
+        }
     }
 
     public class VariantTypeA2_260
     {
+        public string RecordType;
+        public string Index;
+        public string AccessoryIndex900;
+        public string Quantity;
+        public string FixedOrOptionalAllocation; // f= fixed o=optional
+        public string AllocationToAccessory; //P=per project; A=per article
+        public List<CrossReferenceAccessory_260_01> CrossReferenceAccessory_260_01;
+
         public VariantTypeA2_260() { }
+
+        public List<VariantTypeA2_260> Register(List<RecordSet> recordSets, List<BuidlingSystemNumber_800> BsNumbers,string[] indexFilter)
+        {
+            List<VariantTypeA2_260> VariantTypeA2_260s = new List<VariantTypeA2_260>();
+            foreach (RecordSet dataSet in recordSets.Where(x => x.RecordType == "260.01")
+                                                                    .Where(x => indexFilter.Contains(x.Index))
+                                                                    .ToList())
+            {
+                VariantTypeA2_260 VariantTypeA2_260 = new VariantTypeA2_260();
+                while (dataSet.Fields.Count <= 6) dataSet.Fields.Add(string.Empty);
+                VariantTypeA2_260.RecordType = dataSet.Fields[1];
+                VariantTypeA2_260.Index = ("000" + dataSet.Fields[2]).Right(3);
+                VariantTypeA2_260.AccessoryIndex900 = dataSet.Fields[3];
+                VariantTypeA2_260.Quantity = dataSet.Fields[4];
+                VariantTypeA2_260.FixedOrOptionalAllocation = dataSet.Fields[5];
+                VariantTypeA2_260.AllocationToAccessory = dataSet.Fields[5];
+
+                VariantTypeA2_260.CrossReferenceAccessory_260_01 = new CrossReferenceAccessory_260_01().Register(recordSets, BsNumbers, BsNumbers.Where(x => x.Productmaingroup2_110 == VariantTypeA2_260.Index)
+                                                                                                                                   .Select(y => y.VarianttypeA2_260).ToArray());
+
+
+                VariantTypeA2_260s.Add(VariantTypeA2_260);
+            }
+
+            return VariantTypeA2_260s;
+        }
     }
 
     public class CrossReferenceAccessory_260_01
     {
+        public string RecordType;
+        public string Index;
+        public string AccessoryIndex900;
+        public string Quantity;
+        public string FixedOrOptionalAllocation; // f= fixed o=optional
+        public string AllocationToAccessory; //P=per project; A=per article
+
         public CrossReferenceAccessory_260_01() { }
+
+        public List<CrossReferenceAccessory_260_01> Register(List<RecordSet> recordSets, List<BuidlingSystemNumber_800> BsNumbers, string[] indexFilter)
+        {
+            List<CrossReferenceAccessory_260_01> CrossReferenceAccessory_260_01s = new List<CrossReferenceAccessory_260_01>();
+            foreach (RecordSet dataSet in recordSets.Where(x => x.RecordType == "260.01")
+                                                                    .Where(x => indexFilter.Contains(x.Index))
+                                                                    .ToList())
+            {
+                CrossReferenceAccessory_260_01 CrossReferenceAccessory_260_01 = new CrossReferenceAccessory_260_01();
+                while (dataSet.Fields.Count <= 6) dataSet.Fields.Add(string.Empty);
+                CrossReferenceAccessory_260_01.RecordType = dataSet.Fields[1];
+                CrossReferenceAccessory_260_01.Index = ("000" + dataSet.Fields[2]).Right(3);
+                CrossReferenceAccessory_260_01.AccessoryIndex900 = dataSet.Fields[3];
+                CrossReferenceAccessory_260_01.Quantity = dataSet.Fields[4];
+                CrossReferenceAccessory_260_01.FixedOrOptionalAllocation = dataSet.Fields[5];
+                CrossReferenceAccessory_260_01.AllocationToAccessory = dataSet.Fields[5];
+                CrossReferenceAccessory_260_01s.Add(CrossReferenceAccessory_260_01);
+            }
+
+            return CrossReferenceAccessory_260_01s;
+        }
     }
 
     public class ProductVariantB_300
@@ -483,7 +609,35 @@ namespace VDI3805
 
     public class CrossReferenceAccessory_350_01
     {
+        public string RecordType;
+        public string Index;
+        public string AccessoryIndex;
+        public string Quantity;
+        public string FixedOrOptionalAllocation; // f= fixed o=optional
+        public string AllocationToAccessory; //P=per project; A=per article
+
         public CrossReferenceAccessory_350_01() { }
+
+        public List<CrossReferenceAccessory_350_01> Register(List<RecordSet> recordSets, string[] indexFilter)
+        {
+            List<CrossReferenceAccessory_350_01> CrossReferenceAccessory_350_01s = new List<CrossReferenceAccessory_350_01>();
+            foreach (RecordSet dataSet in recordSets.Where(x => x.RecordType == "350.01")
+                                                                    .Where(x => indexFilter.Contains(x.Index))
+                                                                    .ToList())
+            {
+                CrossReferenceAccessory_350_01 CrossReferenceAccessory_350_01 = new CrossReferenceAccessory_350_01();
+                while (dataSet.Fields.Count <= 6) dataSet.Fields.Add(string.Empty);
+                CrossReferenceAccessory_350_01.RecordType = dataSet.Fields[1];
+                CrossReferenceAccessory_350_01.Index = ("000" + dataSet.Fields[2]).Right(3);
+                CrossReferenceAccessory_350_01.AccessoryIndex = dataSet.Fields[3];
+                CrossReferenceAccessory_350_01.Quantity = dataSet.Fields[4];
+                CrossReferenceAccessory_350_01.FixedOrOptionalAllocation = dataSet.Fields[5];
+                CrossReferenceAccessory_350_01.AllocationToAccessory = dataSet.Fields[5];
+                CrossReferenceAccessory_350_01s.Add(CrossReferenceAccessory_350_01);
+            }
+
+            return CrossReferenceAccessory_350_01s;
+        }
     }
 
     public class VariantTypeB2_360
@@ -493,7 +647,35 @@ namespace VDI3805
 
     public class CrossReferenceAccessory_360_01
     {
+        public string RecordType;
+        public string Index;
+        public string AccessoryIndex;
+        public string Quantity;
+        public string FixedOrOptionalAllocation; // f= fixed o=optional
+        public string AllocationToAccessory; //P=per project; A=per article
+
         public CrossReferenceAccessory_360_01() { }
+
+        public List<CrossReferenceAccessory_360_01> Register(List<RecordSet> recordSets, string[] indexFilter)
+        {
+            List<CrossReferenceAccessory_360_01> CrossReferenceAccessory_360_01s = new List<CrossReferenceAccessory_360_01>();
+            foreach (RecordSet dataSet in recordSets.Where(x => x.RecordType == "360.01")
+                                                                    .Where(x => indexFilter.Contains(x.Index))
+                                                                    .ToList())
+            {
+                CrossReferenceAccessory_360_01 CrossReferenceAccessory_360_01 = new CrossReferenceAccessory_360_01();
+                while (dataSet.Fields.Count <= 6) dataSet.Fields.Add(string.Empty);
+                CrossReferenceAccessory_360_01.RecordType = dataSet.Fields[1];
+                CrossReferenceAccessory_360_01.Index = ("000" + dataSet.Fields[2]).Right(3);
+                CrossReferenceAccessory_360_01.AccessoryIndex = dataSet.Fields[3];
+                CrossReferenceAccessory_360_01.Quantity = dataSet.Fields[4];
+                CrossReferenceAccessory_360_01.FixedOrOptionalAllocation = dataSet.Fields[5];
+                CrossReferenceAccessory_360_01.AllocationToAccessory = dataSet.Fields[5];
+                CrossReferenceAccessory_360_01s.Add(CrossReferenceAccessory_360_01);
+            }
+
+            return CrossReferenceAccessory_360_01s;
+        }
     }
 
     public class ProductVariantC_400
@@ -539,7 +721,35 @@ namespace VDI3805
 
     public class CrossReferenceAccessory_450_01
     {
+        public string RecordType;
+        public string Index;
+        public string AccessoryIndex;
+        public string Quantity;
+        public string FixedOrOptionalAllocation; // f= fixed o=optional
+        public string AllocationToAccessory; //P=per project; A=per article
+
         public CrossReferenceAccessory_450_01() { }
+
+        public List<CrossReferenceAccessory_450_01> Register(List<RecordSet> recordSets, string[] indexFilter)
+        {
+            List<CrossReferenceAccessory_450_01> CrossReferenceAccessory_450_01s = new List<CrossReferenceAccessory_450_01>();
+            foreach (RecordSet dataSet in recordSets.Where(x => x.RecordType == "450.01")
+                                                                    .Where(x => indexFilter.Contains(x.Index))
+                                                                    .ToList())
+            {
+                CrossReferenceAccessory_450_01 CrossReferenceAccessory_450_01 = new CrossReferenceAccessory_450_01();
+                while (dataSet.Fields.Count <= 6) dataSet.Fields.Add(string.Empty);
+                CrossReferenceAccessory_450_01.RecordType = dataSet.Fields[1];
+                CrossReferenceAccessory_450_01.Index = ("000" + dataSet.Fields[2]).Right(3);
+                CrossReferenceAccessory_450_01.AccessoryIndex = dataSet.Fields[3];
+                CrossReferenceAccessory_450_01.Quantity = dataSet.Fields[4];
+                CrossReferenceAccessory_450_01.FixedOrOptionalAllocation = dataSet.Fields[5];
+                CrossReferenceAccessory_450_01.AllocationToAccessory = dataSet.Fields[5];
+                CrossReferenceAccessory_450_01s.Add(CrossReferenceAccessory_450_01);
+            }
+
+            return CrossReferenceAccessory_450_01s;
+        }
     }
 
     public class VariantTypeC2_460
@@ -549,7 +759,35 @@ namespace VDI3805
 
     public class CrossReferenceAccessory_460_01
     {
+        public string RecordType;
+        public string Index;
+        public string AccessoryIndex;
+        public string Quantity;
+        public string FixedOrOptionalAllocation; // f= fixed o=optional
+        public string AllocationToAccessory; //P=per project; A=per article
+
         public CrossReferenceAccessory_460_01() { }
+
+        public List<CrossReferenceAccessory_460_01> Register(List<RecordSet> recordSets, string[] indexFilter)
+        {
+            List<CrossReferenceAccessory_460_01> CrossReferenceAccessory_460_01s = new List<CrossReferenceAccessory_460_01>();
+            foreach (RecordSet dataSet in recordSets.Where(x => x.RecordType == "460.01")
+                                                                    .Where(x => indexFilter.Contains(x.Index))
+                                                                    .ToList())
+            {
+                CrossReferenceAccessory_460_01 CrossReferenceAccessory_460_01 = new CrossReferenceAccessory_460_01();
+                while (dataSet.Fields.Count <= 6) dataSet.Fields.Add(string.Empty);
+                CrossReferenceAccessory_460_01.RecordType = dataSet.Fields[1];
+                CrossReferenceAccessory_460_01.Index = ("000" + dataSet.Fields[2]).Right(3);
+                CrossReferenceAccessory_460_01.AccessoryIndex = dataSet.Fields[3];
+                CrossReferenceAccessory_460_01.Quantity = dataSet.Fields[4];
+                CrossReferenceAccessory_460_01.FixedOrOptionalAllocation = dataSet.Fields[5];
+                CrossReferenceAccessory_460_01.AllocationToAccessory = dataSet.Fields[5];
+                CrossReferenceAccessory_460_01s.Add(CrossReferenceAccessory_460_01);
+            }
+
+            return CrossReferenceAccessory_460_01s;
+        }
     }
 
     public class ProductVariantD_500
@@ -595,12 +833,73 @@ namespace VDI3805
 
     public class CrossReferenceAccessory_550_01
     {
+        public string RecordType;
+        public string Index;
+        public string AccessoryIndex;
+        public string Quantity;
+        public string FixedOrOptionalAllocation; // f= fixed o=optional
+        public string AllocationToAccessory; //P=per project; A=per article
+
         public CrossReferenceAccessory_550_01() { }
+
+        public List<CrossReferenceAccessory_550_01> Register(List<RecordSet> recordSets, string[] indexFilter)
+        {
+            List<CrossReferenceAccessory_550_01> CrossReferenceAccessory_550_01s = new List<CrossReferenceAccessory_550_01>();
+            foreach (RecordSet dataSet in recordSets.Where(x => x.RecordType == "550.01")
+                                                                    .Where(x => indexFilter.Contains(x.Index))
+                                                                    .ToList())
+            {
+                CrossReferenceAccessory_550_01 CrossReferenceAccessory_550_01 = new CrossReferenceAccessory_550_01();
+                while (dataSet.Fields.Count <= 6) dataSet.Fields.Add(string.Empty);
+                CrossReferenceAccessory_550_01.RecordType = dataSet.Fields[1];
+                CrossReferenceAccessory_550_01.Index = ("000" + dataSet.Fields[2]).Right(3);
+                CrossReferenceAccessory_550_01.AccessoryIndex = dataSet.Fields[3];
+                CrossReferenceAccessory_550_01.Quantity = dataSet.Fields[4];
+                CrossReferenceAccessory_550_01.FixedOrOptionalAllocation = dataSet.Fields[5];
+                CrossReferenceAccessory_550_01.AllocationToAccessory = dataSet.Fields[5];
+                CrossReferenceAccessory_550_01s.Add(CrossReferenceAccessory_550_01);
+            }
+
+            return CrossReferenceAccessory_550_01s;
+        }
     }
 
     public class VariantTypeD2_560
     {
         public VariantTypeD2_560() { }
+    }
+
+    public class CrossReferenceAccessory_560_01
+    { 
+        public string RecordType;
+        public string Index;
+        public string AccessoryIndex;
+        public string Quantity;
+        public string FixedOrOptionalAllocation; // f= fixed o=optional
+        public string AllocationToAccessory; //P=per project; A=per article
+
+        public CrossReferenceAccessory_560_01() { }
+
+        public List<CrossReferenceAccessory_560_01> Register(List<RecordSet> recordSets, string[] indexFilter)
+        {
+            List<CrossReferenceAccessory_560_01> CrossReferenceAccessory_560_01s = new List<CrossReferenceAccessory_560_01>();
+            foreach (RecordSet dataSet in recordSets.Where(x => x.RecordType == "560.01")
+                                                                    .Where(x => indexFilter.Contains(x.Index))
+                                                                    .ToList())
+            {
+                CrossReferenceAccessory_560_01 CrossReferenceAccessory_560_01 = new CrossReferenceAccessory_560_01();
+                while (dataSet.Fields.Count <= 6) dataSet.Fields.Add(string.Empty);
+                CrossReferenceAccessory_560_01.RecordType = dataSet.Fields[1];
+                CrossReferenceAccessory_560_01.Index = ("000" + dataSet.Fields[2]).Right(3);
+                CrossReferenceAccessory_560_01.AccessoryIndex = dataSet.Fields[3];
+                CrossReferenceAccessory_560_01.Quantity = dataSet.Fields[4];
+                CrossReferenceAccessory_560_01.FixedOrOptionalAllocation = dataSet.Fields[5];
+                CrossReferenceAccessory_560_01.AllocationToAccessory = dataSet.Fields[5];
+                CrossReferenceAccessory_560_01s.Add(CrossReferenceAccessory_560_01);
+            }
+
+            return CrossReferenceAccessory_560_01s;
+        }
     }
 
     public class FunctionsDeclaration_600
@@ -774,7 +1073,7 @@ namespace VDI3805
 
     }
 
-    public class BsNumber_800
+    public class BuidlingSystemNumber_800
     {
         public string RecordType;
         public string Index;
@@ -799,14 +1098,14 @@ namespace VDI3805
         public string Productelementdata_700;
         public string Accessoryproductelement_760;
 
-        public BsNumber_800() { }
+        public BuidlingSystemNumber_800() { }
 
-        public List<BsNumber_800> Register(List<RecordSet> recordSets)
+        public List<BuidlingSystemNumber_800> Register(List<RecordSet> recordSets)
         {
-            List<BsNumber_800> BsNumbers_800 = new List<BsNumber_800>();
+            List<BuidlingSystemNumber_800> BsNumbers_800 = new List<BuidlingSystemNumber_800>();
             foreach (RecordSet dataSet in recordSets.Where(x => x.RecordType == "800").ToList())
             {
-                BsNumber_800 BsNumber_800 = new BsNumber_800();
+                BuidlingSystemNumber_800 BsNumber_800 = new BuidlingSystemNumber_800();
                 while (dataSet.Fields.Count <= 6) dataSet.Fields.Add(string.Empty);
                 BsNumber_800.RecordType = dataSet.Fields[1].Substring(0, 3);
                 BsNumber_800.Index = ("000" + dataSet.Fields[2]).Right(3);
@@ -1192,7 +1491,7 @@ namespace VDI3805
 
             foreach (string prop in record.Fields)
             {
-                Properties.Add(new Property(1, "SetType", record.Fields[1], "", "A3", "700", null));
+                Properties.Add(new Property(1, "RecordType", record.Fields[1], "", "A3", "700", null));
                 Properties.Add(new Property(2, "Index", record.Fields[2], "", "N", "1 to 99999", null));
                 Properties.Add(new Property(3, "SortNumberDisplaySequence", record.Fields[3], "", "N", "", null));
                 Properties.Add(new Property(4, "ProductRange", record.Fields[4], "", "A", "", null));

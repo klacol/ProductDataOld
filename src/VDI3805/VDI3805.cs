@@ -34,8 +34,6 @@ namespace VDI3805
 
         public LeadData_010 LeadData_010;
 
-        public ManufacturerFile manufacturerFile { get; set; }
-
         private List<RecordSet> dataSets;
 
         private VDI3805()
@@ -122,34 +120,22 @@ namespace VDI3805
             }
         }
 
-
-        public string Print()
-        {
-            var dump = ObjectDumper.Dump(this);
-
-            return dump.ToString();
-        }
-
-
         public string ToXml()
         {
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(VDI3805));
+            StringWriter stringWriter = new StringWriter();
 
-            XmlSerializer xsSubmit = new XmlSerializer(typeof(VDI3805));
-            StringWriter sww = new StringWriter();
+            var settingsPrettyprint = new XmlWriterSettings();
+            settingsPrettyprint.OmitXmlDeclaration = true;
+            settingsPrettyprint.Indent = true;
+            settingsPrettyprint.NewLineOnAttributes = true;
 
-            var settings = new XmlWriterSettings();
-            settings.OmitXmlDeclaration = true;
-            settings.Indent = true;
-            settings.NewLineOnAttributes = true;
-
-
-            using (XmlWriter writer = XmlWriter.Create(sww, settings))
+            using (XmlWriter writer = XmlWriter.Create(stringWriter, settingsPrettyprint))
             {
-                xsSubmit.Serialize(writer, this);
+                xmlSerializer.Serialize(writer, this);
             }
 
-            return sww.ToString();
+            return stringWriter.ToString();
         }
-
     }
 }

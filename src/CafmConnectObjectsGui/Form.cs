@@ -40,7 +40,6 @@ namespace CafmConnectObjectsGui
 
                 vdi3805 = new VDI3805.VDI3805(filename);
 
-                //string fileContent = vdi3805.Print();
                 string fileContentAsXml = vdi3805.ToXml();
                 fileNameXml = filename.Replace("zip", "xml");
                 File.WriteAllText(fileNameXml, fileContentAsXml);
