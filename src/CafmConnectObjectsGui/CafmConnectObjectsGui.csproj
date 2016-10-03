@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CafmConnectObjectsGui</RootNamespace>
     <AssemblyName>CafmConnectObjectsGui</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -79,11 +79,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Samples\PART03_Broetje_200406_20160324_Katalog.VDI" />
     <None Include="Samples\PART03_Broetje_GFX.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CafmConnectObjects\CafmConnectObjects.csproj">
+      <Project>{e572ee7f-c731-414e-afb0-b0a7f8f86c39}</Project>
+      <Name>CafmConnectObjects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VDI3805\VDI3805.csproj">
       <Project>{1f53f921-835b-44f3-af9b-759a842d07f6}</Project>
       <Name>VDI3805</Name>
