@@ -45,6 +45,7 @@ namespace CafmConnectObjectsGui
                 File.WriteAllText(fileNameXml, fileContentAsXml);
 
                 linkLabel2.Text = fileNameXml;
+                linkLabel2.Links.Clear();
                 linkLabel2.Links.Add(0, 1000, fileNameXml);
                 linkLabel2.Enabled=true;
 
