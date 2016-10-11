@@ -6,10 +6,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using CafmConnectObjects;
+using CafmConnect.Manufacturer;
 using VDI3805;
 using System.Web.Script.Serialization;
 using System.IO;
+using CafmConnect;
+using CafmConnect.Manufacturer;
 
 namespace CafmConnectObjectsGui
 {
@@ -62,8 +64,23 @@ namespace CafmConnectObjectsGui
 
         private void buttonCafmConnectCreate_Click(object sender, EventArgs e)
         {
-            CafmConnect cc = new CafmConnect();
-            cc.CreateNewFile();
+
+            CafmConnect.Workspace ws = new Workspace();
+            string key = ws.CreateCcFile("Author", "Organization", "System", "Authorization");
+
+            string siteGuid = ws.AddNewSite(key,"CGN","SiteDescription","SiteStreet","50667","Cologne","DE");
+
+
+            CafmConnect.Manufacturer.CcManufacturerProduct product = new CcManufacturerProduct("461");
+            product.Description = "Aufzug xy";
+            product.Attributes.Add(new CcManufacturerProductDetail("Anzahl Haltestellen", "Anzahl Haltestellen", "10"));
+            product.Attributes.Add(new CcManufacturerProductDetail("Tragkraft in Personen", "Tragkraft in Personen", "5"));
+            product.Attributes.Add(new CcManufacturerProductDetail("Tragkraft", "Tragkraft", "500"));
+
+            if (siteGuid != null) ws.AddNewProduct(key, siteGuid, "461", product);
+
+            ws.SaveCcFileAs(key, "c:\\tmp\\MyNewFile.ifcxml", true, true);
+
 
         }
 
