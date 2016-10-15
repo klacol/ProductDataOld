@@ -49,6 +49,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -73,6 +75,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Utils\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VDI3805\VDI3805.csproj">
+      <Project>{1F53F921-835B-44F3-AF9B-759A842D07F6}</Project>
+      <Name>VDI3805</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

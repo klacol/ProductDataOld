@@ -11,6 +11,7 @@ namespace CafmConnect.Manufacturer
         List<CcManufacturerProductDetail> m_attributes;
         string m_Code;
         string m_Description;
+        string m_Name;
         string m_name = "temp";
 
         public CcManufacturerProduct(string classificationCode)
@@ -40,18 +41,8 @@ namespace CafmConnect.Manufacturer
             }
         }
 
-        public string Description
-        {
-            get
-            {
-                return m_Description;
-            }
+        public string Description { get { return m_Description; } set { m_Description = value; } }
 
-            set
-            {
-                m_Description = value;
-            }
-        }
         public string Name { get { return m_name; } set { m_name = value; } }
     }
 

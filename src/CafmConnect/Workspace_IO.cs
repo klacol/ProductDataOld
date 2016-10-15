@@ -5,12 +5,15 @@ using System.Reflection;
 using Ifc4;
 using System.Linq;
 using CafmConnect.Manufacturer;
+using VDI3805;
+using System.IO.Compression;
 
 namespace CafmConnect
 {
     public partial class Workspace
     {
         Dictionary<string, Ifc4.Document> m_ifc4Documents;
+        Dictionary<string, string> m_ifc4TextDocuments;
         static Workspace m_current = null;
         const string m_extension = ".ifcxml";
 
@@ -21,8 +24,7 @@ namespace CafmConnect
         {
             m_current = this;
             m_ifc4Documents = new Dictionary<string, Ifc4.Document>();
-
-            //m_CAFMConnectCatalogueOfObjectTypes = LoadClassification("CAFMConnectCatalogueOfObjectTypes");
+            m_ifc4TextDocuments = new Dictionary<string, string>();
         }
 
         public Dictionary<string, Document> Documents
@@ -30,6 +32,14 @@ namespace CafmConnect
             get
             {
                 return Current.m_ifc4Documents;
+            }
+        }
+
+        public Dictionary<string, string> TextDocuments
+        {
+            get
+            {
+                return Current.m_ifc4TextDocuments;
             }
         }
 
@@ -56,24 +66,11 @@ namespace CafmConnect
         /// <param name="authorization">name of the person, that has authorized the content of the file</param>
         public string CreateCcFile(string author, string organization, string originatingSystem, string authorization)
         {
-            // ------------------------------------------------------
-            // Please work every time with the catalogue template file
-            // Check the Original Source: http://katalog.cafm-connect.org/CC-Katalog/CAFM-ConnectFacilitiesViewTemplate.ifcxml
-            //-------------------------------------------------------
-
-            string tempPath = Path.GetTempPath();
-            string tempName = Guid.NewGuid().ToString()+".ifczip";
-
-            string tempModelFilename = Path.Combine(tempPath, tempName);
-            using (var resource = Assembly.GetExecutingAssembly().GetManifestResourceStream("CafmConnect.Catalogue.CAFM-ConnectFacilitiesViewTemplate.ifcxml"))
-            {
-                using (var file = new FileStream(tempModelFilename, FileMode.Create, FileAccess.Write))
-                {
-                    resource?.CopyTo(file);
-                }
-            }
-
+            string tempModelFilename = InitializeCcFile();
             Document doc = null;
+
+            string a = "1";
+
             if (!Current.Documents.ContainsKey(tempModelFilename))
             {
                 doc = Ifc4.Workspace.CurrentWorkspace.OpenDocument(tempModelFilename);
@@ -82,6 +79,37 @@ namespace CafmConnect
                 doc.IfcXmlDocument.Header.OriginatingSystem = originatingSystem;
                 doc.IfcXmlDocument.Header.Authorization = authorization;
                 Current.Documents.Add(tempModelFilename, doc);
+            }
+
+            return tempModelFilename;
+        }
+
+        public string CreateCcFileFromVDI3805(VDI3805.VDI3805 vdi3805)
+        {
+            string tempModelFilename = InitializeCcFile();
+            Document doc = null;
+
+            if (!Current.Documents.ContainsKey(tempModelFilename))
+            {
+                doc = Ifc4.Workspace.CurrentWorkspace.OpenDocument(tempModelFilename);
+                doc.IfcXmlDocument.Header.Author = vdi3805.ManufacturerName;
+                doc.IfcXmlDocument.Header.Organization = vdi3805.ManufacturerText;
+                doc.IfcXmlDocument.Header.OriginatingSystem = vdi3805.Filename;
+                doc.IfcXmlDocument.Header.Authorization = vdi3805.ManufacturerUrl;
+                Current.Documents.Add(tempModelFilename, doc);
+            }
+            string siteGuid = AddNewSite(tempModelFilename, vdi3805.ManufacturerName,vdi3805.ManufacturerName,vdi3805.ManufacturerName2,vdi3805.ManufacturerText, vdi3805.LeadData_010.IssueMonth, vdi3805.CountryCode);
+            foreach (ProductMainGroup1_100 pmg in vdi3805.LeadData_010.ProductMainGroup1_100s)
+            {
+                CafmConnect.Manufacturer.CcManufacturerProduct product = new CcManufacturerProduct("461");
+                product.Description = pmg.ProductDesignation;
+                product.Name = pmg.ProductDesignation;
+                //product.Attributes.Add(new CcManufacturerProductDetail("Anzahl Haltestellen", "Anzahl Haltestellen", "10"));
+                //product.Attributes.Add(new CcManufacturerProductDetail("Tragkraft in Personen", "Tragkraft in Personen", "5"));
+                //product.Attributes.Add(new CcManufacturerProductDetail("Tragkraft", "Tragkraft", (i * 2).ToString()));
+
+                if (siteGuid != null) AddNewProduct(tempModelFilename, siteGuid, "461", product);
+
             }
 
             return tempModelFilename;
@@ -138,17 +166,20 @@ namespace CafmConnect
         /// <param name="newFilename"></param>
         public void SaveCcFileAs(string currentFilename, string newFilename, bool overrideFile = true, bool newFile = false)
         {
-            string finalFilename = Path.Combine(Path.GetDirectoryName(newFilename), Path.GetFileNameWithoutExtension(newFilename) + m_extension);
             if (Current.Documents.ContainsKey(currentFilename))
             {
-                if (File.Exists(finalFilename))
+                if (File.Exists(newFilename))
                 {
                     if (overrideFile)
-                        File.Delete(finalFilename);
+                        File.Delete(newFilename);
                 }
-                Current.Documents[currentFilename].Workspace.SaveDocument(finalFilename);
-                if (newFile) File.SetCreationTime(finalFilename, DateTime.Now);
-                File.SetLastWriteTime(finalFilename, DateTime.Now);
+
+                bool result = Current.Documents[currentFilename].Workspace.SaveDocument(newFilename);
+                if (newFile) File.SetCreationTime(newFilename, DateTime.Now);
+                File.SetLastWriteTime(newFilename, DateTime.Now);
+
+
+                //m_ifc4TextDocuments.Add(currentFilename           
             }
         }
 
@@ -212,18 +243,25 @@ namespace CafmConnect
                 // ---------------------------------------
                 // z.B. 
                 string catalogueName = "CAFMConnectCatalogueOfObjectTypes";
-                var filteredIfcClassificationReferenceCollection = GetIfcClassificationReferenceCollectionFromCatalogue(currentFilename,catalogueName);
-                var filteredIfcClassificationReference = filteredIfcClassificationReferenceCollection.SingleOrDefault(item => item.Identification == product.Code);
+
+                if (m_TempAllIfcClassificationReferenceCollection == null)
+                m_TempAllIfcClassificationReferenceCollection = GetIfcClassificationReferenceCollectionFromCatalogue(currentFilename,catalogueName);
+                
+                var filteredIfcClassificationReference = m_TempAllIfcClassificationReferenceCollection.FirstOrDefault(item => item.Identification == product.Code);
                 // ---------------------------------------
 
-                Ifc4.CcFacility newSystem = Current.Documents[currentFilename].Project.Facilities.AddNewSystem(Current.Documents[currentFilename].Project);
-                newSystem.IfcSystem.GlobalId = Ifc4.GlobalId.ConvertToIfcGuid(Guid.NewGuid());
-                newSystem.IfcSystem.Name = product.Code;
-                newSystem.IfcSystem.Description = product.Description;
-
+                Ifc4.CcFacility newSystem = Current.Documents[currentFilename].Project.Facilities.Where(x => x.IfcSystem.Name == product.Code).FirstOrDefault();
+                if (newSystem == null)
+                { 
+                    newSystem = Current.Documents[currentFilename].Project.Facilities.AddNewSystem(Current.Documents[currentFilename].Project);
+                    newSystem.IfcSystem.GlobalId = Ifc4.GlobalId.ConvertToIfcGuid(Guid.NewGuid());
+                    newSystem.IfcSystem.Name = product.Code;
+                    newSystem.IfcSystem.Description = product.Description;
+                }
                 CcFacility newFacility = newSystem.Facilities.AddNewFacility();
                 newFacility.ObjectTypeId = filteredIfcClassificationReference.Id; // z.B "i2139"
-                newFacility.Number = product.Code;
+                newFacility.Number = product.Name;
+                newFacility.IfcObjectDefinition.Name = product.Code;
                 newFacility.Description = product.Description;
 
                 var propertyDescriptors = from propertyDescriptor in System.ComponentModel.TypeDescriptor.GetProperties(newFacility).Cast<System.ComponentModel.PropertyDescriptor>().OfType<Ifc4.CustomModel.CustomPropertyDescriptor>()
@@ -287,6 +325,46 @@ namespace CafmConnect
         {
             if (value == null) return string.Empty;
             else return value;
+        }
+
+        private string InitializeCcFile()
+        {
+           // ------------------------------------------------------
+           // Please work every time with the catalogue template file
+           // Check the Original Source: http://katalog.cafm-connect.org/CC-Katalog/CAFM-ConnectFacilitiesViewTemplate.ifcxml
+           //-------------------------------------------------------
+
+           string tempPath = Path.GetTempPath();
+           string tempName = Guid.NewGuid().ToString() + ".ifcxml";
+
+           string tempModelFilename = Path.Combine(tempPath, tempName);
+           using (var resource = Assembly.GetExecutingAssembly().GetManifestResourceStream("CafmConnect.Catalogue.CAFM-ConnectFacilitiesViewTemplate.ifcxml"))
+            {
+                using (var file = new FileStream(tempModelFilename, FileMode.Create, FileAccess.Write))
+                {
+                    resource?.CopyTo(file);
+                }
+            }
+
+           return tempModelFilename;
+        }
+
+        public string GetModelOfCcFile(string dataFileName)
+        {
+           string content = string.Empty;
+           using (ZipArchive zip = ZipFile.Open(dataFileName, ZipArchiveMode.Read))
+                foreach (ZipArchiveEntry entry in zip.Entries)
+                    if (Path.GetFileNameWithoutExtension(entry.Name) == Path.GetFileNameWithoutExtension(dataFileName))
+                    {
+                        dataFileName = entry.Name;
+                        string tmpFileName = Path.Combine(Path.GetTempPath(), dataFileName);
+                        entry.ExtractToFile(tmpFileName, true);
+                        using (StreamReader reader = new StreamReader(tmpFileName))
+                            {
+                                content = reader.ReadToEnd();
+                            }
+                    }
+            return content;
         }
     }
 }
