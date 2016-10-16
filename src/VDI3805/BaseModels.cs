@@ -32,17 +32,15 @@ namespace VDI3805
     public class Property
     {
         public int ItemNumber { get; set; }
-        public TextLabel FieldName { get; set; }
         public string Value { get; set; }
         public string Unit { get; set; }
         public string Format { get; set; }
         public string Remarks { get; set; }
         public List<string> EnumValues { get; set; }
 
-        public Property(int itemNumber,string fieldName,string value,string unit,string format,string remarks, List<string> allowedValues)
+        public Property(int itemNumber,string value,string unit,string format,string remarks, List<string> allowedValues)
         {
             ItemNumber = itemNumber;
-            FieldName = new TextLabel(fieldName, fieldName);
             Value = value;
             Unit = unit;
             Format = format;
@@ -118,28 +116,7 @@ namespace VDI3805
 
         public LeadData_010 LeadData_010;
 
-        public void RegisterProperties(string VdiPartNumber,List<RecordSet> productDataSets)
-        {
-            //CAST PRODUCT TYPE
-            //
-            List<HeatGenerator> HeatGenerators = new List<HeatGenerator>();
-            foreach (RecordSet productDataSet in productDataSets) HeatGenerators.Add(new HeatGenerator(productDataSet, CountryCode, "421.10"));
-            //foreach (BsNumber product in Products)
-            //{
-            //    product.Productelementdata_700
-            //    foreach (DataSet productDataSet in productDataSets.Where(x=>x)
-
-            //    while (productDataSet.Fields.Count <= 4) productDataSet.Fields.Add(string.Empty);
-            //    product.SetType = productDataSet.Fields[1].Substring(0, 3);
-            //    product.Index = Convert.ToInt32(productDataSet.Fields[2]);
-            //    product.Number = productDataSet.Fields[3].Substring(0, 53);
-            //    product.Comment = productDataSet.Fields[4];
-
-
-            //    Products.Add(product);
-            //}
-        }
-      
+     
         public void MapBsNumbers()
         {
             //foreach (BsNumber_800 bsNumber in Products)
@@ -314,7 +291,7 @@ namespace VDI3805
                                                                                                                                                    .Select(y => y.ProductvariantD_500).ToArray());
                 ProductMainGroup2_110.FunctionsDeclaration_600s = new FunctionsDeclaration_600().Register(recordSets);
 
-                ProductMainGroup2_110.ProductElementData_700s = new ProductElementData_700().Register(recordSets);
+                ProductMainGroup2_110.ProductElementData_700s = new ProductElementData_700().Register("PART03", recordSets);
                 ProductMainGroup2_110.AccessoryGroup_830s = new AccessoryGroup_830().Register(recordSets);
                 ProductMainGroup2s_110.Add(ProductMainGroup2_110);
             }
@@ -1293,6 +1270,9 @@ namespace VDI3805
     {
         public string RecordType;
         public int Index;
+        
+        public List<HeatGenerator> HeatGenerators;
+
         public List<ProductSpecificPart_710> ProductSpecificPart_710s;
         public List<AccessoryProductElement_760> AccessoryProductElement_760s;
         public List<CrossReferenceGeometry_720> CrossReferenceGeometry_720s;
@@ -1300,110 +1280,37 @@ namespace VDI3805
 
         public ProductElementData_700() { }
 
-        public List<ProductElementData_700> Register(List<RecordSet> recordSets)
+        public List<ProductElementData_700> Register(string partNumber,List<RecordSet> recordSets)
         {
             List<ProductElementData_700> ProductElementDatas_700 = new List<ProductElementData_700>();
-            foreach (RecordSet dataSet in recordSets.Where(x => x.RecordType == "160").ToList())
+            foreach (RecordSet dataSet in recordSets.Where(x => x.RecordType == "700").ToList())
             {
                 ProductElementData_700 ProductElementData_700 = new ProductElementData_700();
                 while (dataSet.Fields.Count <= 6) dataSet.Fields.Add(string.Empty);
                 ProductElementData_700.RecordType = dataSet.Fields[1];
                 ProductElementData_700.Index = Convert.ToInt32(dataSet.Fields[2]);
                 ProductElementDatas_700.Add(ProductElementData_700);
+
+                switch (partNumber)
+                {
+                    case "PART03":
+                        if (HeatGenerators==null) HeatGenerators = new List<HeatGenerator>();
+                        HeatGenerator HeatGenerator = new HeatGenerator();
+                        HeatGenerator.Register(dataSet);
+                        HeatGenerators.Add(HeatGenerator);
+                        break;
+                }
+
             }
 
             return ProductElementDatas_700;
         }
 
-
-        //manufacturerFile.RegisterProductData(dataSets.Where(x => x.SetType == "800").ToList());
-        //manufacturerFile.RegisterProperties(manufacturerFile.VDI3805PartNumber, dataSets.Where(x => x.SetType == "700").ToList());
-        //manufacturerFile.MapBsNumbers();
-        //switch (datensatz.SetType)
-        //    {
-        //        case "100":
-        //            manufacturerFile.ProductMainGroups1.Add(new ProductMainGroup1(datensatz));
-        //            break;
-        //        case "110":
-        //            manufacturerFile.ProductMainGroups2.Add(new ProductMainGroup2(datensatz));
-        //            break;
-        //        case "160": case "260": case "360": case "460": case "560": case "760":
-        //        case "200": case "300": case "400": case "500":
-        //        case "250": case "350": case "450": case "550":
-        //            manufacturerFile.Variants.Add(new Variant(datensatz));
-        //            break;
-        //        case "600":
-        //            manufacturerFile.Declarations.Add(new Declaration(datensatz));
-        //            break;
-        //        case "700":
-        //            switch (manufacturerFile.VDI3805PartNumber)
-        //            {
-        //                case "PART02": //Heizungsarmaturen
-        //                    break;
-        //                case "PART03": //Wärmeerzeuger
-        //                               //Heat Generators
-        //                               //VDI2552 : 421.10
-
-        //                    manufacturerFile.HeatGenerators.Add(new HeatGenerator(datensatz, manufacturerFile.CountryCode, "421.10"));
-        //                    break;
-        //                case "PART04": //Pumpen
-        //                    break;
-        //                case "PART05": //Luftdurchlässe
-        //                    break;
-        //                case "PART06": //Heizkörper
-        //                    break;
-        //                case "PART07": //Ventilatoren
-        //                    break;
-        //                case "PART08": //Brenner
-        //                    break;
-        //                case "PART09": //Modullüftungsgeräte
-        //                    break;
-        //                case "PART10": //Luftfilter
-        //                    break;
-        //                case "PART11": //Wärmetauscher Fluid/ Wasserdampf - Luft
-        //                    break;
-        //                case "PART14": //RLT - Schalldämpfer(passiv)
-        //                    break;
-        //                case "PART16": //Brandschutzklappe
-        //                    break;
-        //                case "PART17": //Armaturen für die Trinkwasserinstallation
-        //                    break;
-        //                case "PART18": //Flächenheizung / -kühlung
-        //                    break;
-        //                case "PART19": //Sonnenkollektoren
-        //                    break;
-        //                case "PART20": //Speicher und Durchlauferhitzer
-        //                    break;
-        //                case "PART22": //Wärmepumpen
-        //                    break;
-        //                case "PART23": //Wohnungslüftungsgeräte
-        //                    break;
-        //                case "PART25": //Deckenkühlelemente
-        //                    break;
-        //                case "PART29": //Rohre und Formstücke
-        //                    break;
-        //                case "PART32": //Verteiler / Sammler
-        //                    break;
-        //                case "PART35": //Klappen, Blenden und Volumenstromregler
-        //                    break;
-        //                case "PART37": //Dezentrale Fassadenlüftungsgeräte
-        //                    break;
-        //                case "PART99": //Allgemeine Komponenten
-        //                    break;
-        //            }
-        //            break;
-        //        default:
-        //            break;
-
-        //    }
-        //}
-
     }
 
     public class ProductSpecificPart_710
     {
-        public ProductSpecificPart_710() { }
-
+               public ProductSpecificPart_710() { }
     }
 
     public class AccessoryProductElement_760

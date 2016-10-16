@@ -140,7 +140,8 @@ namespace CafmConnectObjectsGui
                 linkLabel1.Text = string.Empty;
                 int maxVariants = Convert.ToInt16(textBox2.Text);
 
-                string fileName = @"c:\tmp\MyProductFile" + maxVariants.ToString() + ".ifczip";
+                string folder = @"c:\tmp";
+                string fileName = Path.Combine(folder,Path.GetFileNameWithoutExtension(vdi3805.Filename))+".ifczip";
 
                 Stopwatch sw = new Stopwatch();
                 sw.Start();
@@ -151,7 +152,7 @@ namespace CafmConnectObjectsGui
                 ws.SaveCcFileAs(key, fileName, true, true);
                 sw.Stop();
 
-                linkLabel1.Text = ws.GetModelOfCcFile(fileName);
+                linkLabel1.Text = fileName;
                 textBox3.Text = ws.GetModelOfCcFile(fileName);
             }
         }

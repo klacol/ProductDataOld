@@ -101,14 +101,21 @@ namespace CafmConnect
             string siteGuid = AddNewSite(tempModelFilename, vdi3805.ManufacturerName,vdi3805.ManufacturerName,vdi3805.ManufacturerName2,vdi3805.ManufacturerText, vdi3805.LeadData_010.IssueMonth, vdi3805.CountryCode);
             foreach (ProductMainGroup1_100 pmg in vdi3805.LeadData_010.ProductMainGroup1_100s)
             {
-                CafmConnect.Manufacturer.CcManufacturerProduct product = new CcManufacturerProduct("461");
+                string code = vdi3805.GetCclassification(pmg.ProductDesignation);
+                CafmConnect.Manufacturer.CcManufacturerProduct product = new CcManufacturerProduct(code);
                 product.Description = pmg.ProductDesignation;
                 product.Name = pmg.ProductDesignation;
+                product.Attributes.Add(new CcManufacturerProductDetail("Beschreibung", "Beschreibung", pmg.ProductDesignation));
+
+                //product.Attributes.Add(new CcManufacturerProductDetail("Beschreibung", "Beschreibung", pmg.ProductMainGroup2_110s.FirstOrDefault().ProductElementData_700s.FirstOrDefault().HeatGenerators.FirstOrDefault().ProductName.ToString()));
+
+
+
                 //product.Attributes.Add(new CcManufacturerProductDetail("Anzahl Haltestellen", "Anzahl Haltestellen", "10"));
                 //product.Attributes.Add(new CcManufacturerProductDetail("Tragkraft in Personen", "Tragkraft in Personen", "5"));
                 //product.Attributes.Add(new CcManufacturerProductDetail("Tragkraft", "Tragkraft", (i * 2).ToString()));
 
-                if (siteGuid != null) AddNewProduct(tempModelFilename, siteGuid, "461", product);
+                if (siteGuid != null) AddNewProduct(tempModelFilename, siteGuid, code, product);
 
             }
 

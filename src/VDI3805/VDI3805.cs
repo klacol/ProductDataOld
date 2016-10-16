@@ -137,5 +137,39 @@ namespace VDI3805
 
             return stringWriter.ToString();
         }
+
+        public string GetCclassification(string productDesignation)
+        {
+            string Cclassification = string.Empty;
+
+            Dictionary<string, string> mapping = new Dictionary<string, string>();
+
+            mapping.Add("PART02", "422.82");    //Heizungsarmaturen
+            mapping.Add("PART03", "421.10");    //Wärmeerzeuger
+            mapping.Add("PART04","");           //Pumpen
+            mapping.Add("PART05", "");          //Luftdurchlässe
+            mapping.Add("PART06", "");          //Heizkörper
+            mapping.Add("PART07", "");          //Ventilatoren
+            mapping.Add("PART08", "");          //Brenner
+            mapping.Add("PART09", "");          //Modullüftungsgeräte
+            mapping.Add("PART10", "");          //Luftfilter
+            mapping.Add("PART11", "");          //Wärmetauscher Fluid/ Wasserdampf - Luft
+            mapping.Add("PART14", "");          //RLT - Schalldämpfer(passiv)
+            mapping.Add("PART16", "");          //Brandschutzklappe
+            mapping.Add("PART17", "");          //Armaturen für die Trinkwasserinstallation
+            mapping.Add("PART18", "");          //Flächenheizung / -kühlung
+            mapping.Add("PART19", "");          //Sonnenkollektoren
+            mapping.Add("PART20", "");          //Speicher und Durchlauferhitzer
+            mapping.Add("PART22", "");          //Wärmepumpen
+            mapping.Add("PART23", "");          //Wohnungslüftungsgeräte
+            mapping.Add("PART25", "");          //Deckenkühlelemente
+            mapping.Add("PART29", "");          //Rohre und Formstücke
+            mapping.Add("PART32", "");          //Verteiler / Sammler
+            mapping.Add("PART35", "");          //Klappen, Blenden und Volumenstromregler
+            mapping.Add("PART37", "");          //Dezentrale Fassadenlüftungsgeräte
+            mapping.Add("PART99", "");          //Allgemeine Komponenten
+
+            return mapping[VDI3805PartNumber];
+        }
     }
 }
