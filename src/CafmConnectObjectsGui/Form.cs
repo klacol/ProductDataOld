@@ -21,6 +21,7 @@ namespace CafmConnectObjectsGui
 
         private string fileNameXml;
         private VDI3805.VDI3805 vdi3805;
+        private string workingFolder;
 
         public Form()
         {
@@ -44,6 +45,7 @@ namespace CafmConnectObjectsGui
             if (result.ToString()=="OK")
             {
                 string filename = openFileDialog1.FileName;
+                workingFolder = Path.GetDirectoryName(filename);
                 //filename = @"samples\PART03_Broetje_GFX.zip";
                 textBox1.Text = "Please wait...";
                 textBox1.Refresh();
@@ -77,7 +79,7 @@ namespace CafmConnectObjectsGui
             textBox3.Refresh();
             int maxVariants = Convert.ToInt16(textBox2.Text);
 
-            string fileName = @"c:\tmp\MyProductFile"+maxVariants.ToString()+".ifczip";
+            string fileName = Path.GetTempPath()+maxVariants.ToString()+".ifczip";
 
             CafmConnect.Workspace ws = new Workspace();
             string key = ws.CreateCcFile("Author", "Organization", "System", "Authorization");
@@ -140,8 +142,7 @@ namespace CafmConnectObjectsGui
                 linkLabel1.Text = string.Empty;
                 int maxVariants = Convert.ToInt16(textBox2.Text);
 
-                string folder = @"c:\tmp";
-                string fileName = Path.Combine(folder,Path.GetFileNameWithoutExtension(vdi3805.Filename))+".ifczip";
+                string fileName = Path.Combine(workingFolder,Path.GetFileNameWithoutExtension(vdi3805.Filename))+".ifczip";
 
                 Stopwatch sw = new Stopwatch();
                 sw.Start();
