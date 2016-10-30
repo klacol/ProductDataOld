@@ -30,7 +30,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.buttonVDI3805Read = new System.Windows.Forms.Button();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.buttonCafmConnectCreate = new System.Windows.Forms.Button();
             this.linkLabelVDI3085 = new System.Windows.Forms.LinkLabel();
@@ -67,8 +67,8 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "VDI3805(*.zip)|*.zip";
+            this.openFileDialog.FileName = "openFileDialog1";
+            this.openFileDialog.Filter = "VDI3805(*.zip)|*.zip";
             // 
             // textBox1
             // 
@@ -214,7 +214,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonVDI3805Read;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button buttonCafmConnectCreate;
         private System.Windows.Forms.LinkLabel linkLabelVDI3085;

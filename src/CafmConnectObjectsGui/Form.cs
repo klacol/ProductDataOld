@@ -31,6 +31,7 @@ namespace CafmConnectObjectsGui
             linkLabelVDI3085.Text = string.Empty;
             labelCounter.Text = string.Empty;
             labelStopwatch.Text = string.Empty;
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -40,17 +41,23 @@ namespace CafmConnectObjectsGui
 
         private void buttonVDI3805Read_Click(object sender, EventArgs e)
         {
-            
-            DialogResult result = openFileDialog1.ShowDialog(); 
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = Path.Combine( Application.StartupPath, "Samples");
+            //openFileDialog.Filter = "VDI Files (*.zip)|*.txt|All files (*.*)|*.*";
+
+
+            DialogResult result = openFileDialog.ShowDialog(); 
             if (result.ToString()=="OK")
             {
-                string filename = openFileDialog1.FileName;
+                string filename = openFileDialog.FileName;
                 workingFolder = Path.GetDirectoryName(filename);
                 //filename = @"samples\PART03_Broetje_GFX.zip";
-                textBox1.Text = "Please wait...";
+                textBox1.Text = "Reading and analyzing the VDI3805 file, this can take a while, please wait...";
                 textBox1.Refresh();
 
                 vdi3805 = new VDI3805.VDI3805(filename);
+                textBox1.Text += Environment.NewLine + "Reading of file finished...";
+                textBox1.Refresh();
 
                 string fileContentAsXml = vdi3805.ToXml();
                 fileNameXml = filename.Replace("zip", "xml");
@@ -60,6 +67,11 @@ namespace CafmConnectObjectsGui
                 linkLabelVDI3085.Links.Clear();
                 linkLabelVDI3085.Links.Add(0, 1000, fileNameXml);
                 linkLabelVDI3085.Enabled=true;
+                linkLabelVDI3085.Refresh();
+                var lineCount = File.ReadLines(fileNameXml).Count();
+                textBox1.Text += Environment.NewLine + "Intermediate XML file saved sucessufully on disk (" + lineCount.ToString()+" Lines)";
+                textBox1.Text += Environment.NewLine + "Loading the file to show the first 10.000 Lines";
+                textBox1.Refresh();
 
                 textBox1.Text = fileContentAsXml;
             }           

@@ -170,7 +170,7 @@ namespace VDI3805
 
         private LeadData_010() {}
 
-        public LeadData_010(List<RecordSet> recordSets)
+        public LeadData_010(List<RecordSet> recordSets,string PartNumber)
         {
             RecordSet dataSet = recordSets.Where(x => x.RecordType == "010").FirstOrDefault();
 
@@ -189,11 +189,12 @@ namespace VDI3805
 
             BuildingSystemNumber_800s = new BuildingSystemNumber_800().Register(recordSets);  //This List is placed in the "written rule" in the class ProductMainGroup2_110
 
-            ProductMainGroup1_100s = new ProductMainGroup1_100().Register(recordSets, BuildingSystemNumber_800s);
+            ProductMainGroup1_100s = new ProductMainGroup1_100().Register(recordSets,BuildingSystemNumber_800s,PartNumber);
             ProductAccessory_900s = new ProductAccessory_900().Register(recordSets);
             AccessorySelection1_930s = new AccessorySelection1_930().Register(recordSets);
             MediaData_960s = new MediaData_960().Register(recordSets);
             GeometryData_970s = new GeometryData_970().Register(recordSets);
+
         }
     }
 
@@ -212,7 +213,7 @@ namespace VDI3805
 
         public ProductMainGroup1_100() { }
 
-        public List<ProductMainGroup1_100> Register(List<RecordSet> recordSets, List<BuildingSystemNumber_800> BsNumbers)
+        public List<ProductMainGroup1_100> Register(List<RecordSet> recordSets, List<BuildingSystemNumber_800> BsNumbers, string PartNumber)
         {
             List<ProductMainGroup1_100> ProductMainGroup1s_100 = new List<ProductMainGroup1_100>();
             foreach (RecordSet dataSet in recordSets.Where(x => x.RecordType == "100").ToList())
@@ -230,7 +231,7 @@ namespace VDI3805
                 ProductMainGroup1_100.MediaDetails = dataSet.Fields[9];
                 
                 ProductMainGroup1_100.ProductMainGroup2_110s = new ProductMainGroup2_110().Register(recordSets, BsNumbers, BsNumbers.Where(x => x.Productmaingroup1_100 == ProductMainGroup1_100.Index)
-                                                                                                                                    .Select(y => y.Productmaingroup2_110).ToArray());
+                                                                                                                                    .Select(y => y.Productmaingroup2_110).ToArray(), PartNumber);
                 ProductMainGroup1s_100.Add(ProductMainGroup1_100);
             }
             return ProductMainGroup1s_100;
@@ -259,7 +260,7 @@ namespace VDI3805
 
         public ProductMainGroup2_110() { }
 
-        public List<ProductMainGroup2_110> Register(List<RecordSet> recordSets, List<BuildingSystemNumber_800> BsNumbers, string[] indexFilter)
+        public List<ProductMainGroup2_110> Register(List<RecordSet> recordSets, List<BuildingSystemNumber_800> BsNumbers, string[] indexFilter, string PartNumber)
         {
             List<ProductMainGroup2_110> ProductMainGroup2s_110 = new List<ProductMainGroup2_110>();
 
@@ -291,7 +292,7 @@ namespace VDI3805
                                                                                                                                                    .Select(y => y.ProductvariantD_500).ToArray());
                 ProductMainGroup2_110.FunctionsDeclaration_600s = new FunctionsDeclaration_600().Register(recordSets);
 
-                ProductMainGroup2_110.ProductElementData_700s = new ProductElementData_700().Register("PART03", recordSets);
+                ProductMainGroup2_110.ProductElementData_700s = new ProductElementData_700().Register(PartNumber, recordSets);
                 ProductMainGroup2_110.AccessoryGroup_830s = new AccessoryGroup_830().Register(recordSets);
                 ProductMainGroup2s_110.Add(ProductMainGroup2_110);
             }
@@ -1271,12 +1272,20 @@ namespace VDI3805
         public string RecordType;
         public int Index;
         
-        public List<HeatGenerator> HeatGenerators;
-
         public List<ProductSpecificPart_710> ProductSpecificPart_710s;
         public List<AccessoryProductElement_760> AccessoryProductElement_760s;
         public List<CrossReferenceGeometry_720> CrossReferenceGeometry_720s;
         public List<FunctionInternalData_730> FunctionInternalData_730s;
+
+        public HeatingValueAssembly HeatingValueAssembly;                   //PART02
+        public HeatGenerator HeatGenerator;                                 //PART03
+        public Pump Pump;                                                   //PART04
+        public AirOpening AirOpening;                                       //PART05
+        public Radiator Radiator;                                           //PART06
+        public Fan Fan;                                                     //PART07
+        public Burner Burner;                                               //PART08
+        public ModularVentilationEquipment ModularVentilationEquipment;     //PART09
+
 
         public ProductElementData_700() { }
 
@@ -1286,20 +1295,48 @@ namespace VDI3805
             foreach (RecordSet dataSet in recordSets.Where(x => x.RecordType == "700").ToList())
             {
                 ProductElementData_700 ProductElementData_700 = new ProductElementData_700();
-                while (dataSet.Fields.Count <= 6) dataSet.Fields.Add(string.Empty);
+                while (dataSet.Fields.Count <= 2) dataSet.Fields.Add(string.Empty);
                 ProductElementData_700.RecordType = dataSet.Fields[1];
                 ProductElementData_700.Index = Convert.ToInt32(dataSet.Fields[2]);
                 ProductElementDatas_700.Add(ProductElementData_700);
 
                 switch (partNumber)
                 {
+                    case "PART02":
+                        if (ProductElementData_700.HeatingValueAssembly == null) ProductElementData_700.HeatingValueAssembly = new HeatingValueAssembly();
+                        ProductElementData_700.HeatingValueAssembly.Register(dataSet);
+                        break;
                     case "PART03":
-                        if (HeatGenerators==null) HeatGenerators = new List<HeatGenerator>();
-                        HeatGenerator HeatGenerator = new HeatGenerator();
-                        HeatGenerator.Register(dataSet);
-                        HeatGenerators.Add(HeatGenerator);
+                        if (ProductElementData_700.HeatGenerator == null) ProductElementData_700.HeatGenerator = new HeatGenerator();
+                        ProductElementData_700.HeatGenerator.Register(dataSet);
+                        break;
+                    case "PART04":
+                        if (ProductElementData_700.Pump == null) ProductElementData_700.Pump = new Pump();
+                        ProductElementData_700.Pump.Register(dataSet);
+                        break;
+                    case "PART05":
+                        if (ProductElementData_700.AirOpening == null) ProductElementData_700.AirOpening = new AirOpening();
+                        ProductElementData_700.AirOpening.Register(dataSet);
+                        break;
+                    case "PART06":
+                        if (ProductElementData_700.Radiator == null) ProductElementData_700.Radiator = new Radiator();
+                        ProductElementData_700.Radiator.Register(dataSet);
+                        break;
+                    case "PART07":
+                        if (ProductElementData_700.Fan == null) ProductElementData_700.Fan = new Fan();
+                        ProductElementData_700.Fan.Register(dataSet);
+                        break;
+                    case "PART08":
+                        if (ProductElementData_700.Burner == null) ProductElementData_700.Burner = new Burner();
+                        ProductElementData_700.Burner.Register(dataSet);
+                        break;
+                    case "PART09":
+                        if (ProductElementData_700.ModularVentilationEquipment == null) ProductElementData_700.ModularVentilationEquipment = new ModularVentilationEquipment();
+                        ProductElementData_700.ModularVentilationEquipment.Register(dataSet);
                         break;
                 }
+
+                ProductElementDatas_700.Add(ProductElementData_700);
 
             }
 

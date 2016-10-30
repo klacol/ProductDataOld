@@ -6,12 +6,40 @@ using System.Threading.Tasks;
 
 namespace VDI3805
 {
+    public class HeatingValueAssembly : ProductElementData_700  //VDI 3805 Part 2
+    {
+        public bool IsValid = true;
+        public string SortNumberDisplaySequence;
+        //public string ProductName;
+        //public string MixingEquipment;
+        //public string MinimumBurnerCapacity;
+        //public string MaximiumBurnerCapacity;
+        //public string MaximiumGasFlowPressure;
+
+        public HeatingValueAssembly() { }
+
+        public void Register(RecordSet record)
+        {
+
+            // The following list is copied from VDI 3805 , Part 1, Heating value assemblies
+            // Do not add new attributes to the list, please follow the standard
+            // The Copyright is at VDI Verein Deutscher Ingeniere
+            // Please purchase a copy of the VDI 3805 before using this code in your application
+            SortNumberDisplaySequence = record.Fields[3];
+            //ProductName = record.Fields[4];
+            //MixingEquipment = record.Fields[5];
+            //MinimumBurnerCapacity = record.Fields[6];
+            //MaximiumBurnerCapacity = record.Fields[7];
+            //MaximiumGasFlowPressure = record.Fields[8];
+        }
+    }
+
     public class HeatGenerator : ProductElementData_700  //VDI 3805 Part 3
     {
         public bool IsValid = true;
 
-        public enum ModelOfHeatExchangerEnum { StandardKessel, NiedertemperaturKessel, BrennwertKessel, StandardKombiKessel, NiedertemperaturKombiKessel };
-        public ModelOfHeatExchangerEnum ModelOfHeatExchanger { get; set; }
+        //public enum ModelOfHeatExchangerEnum { StandardKessel, NiedertemperaturKessel, BrennwertKessel, StandardKombiKessel, NiedertemperaturKombiKessel };
+        //public ModelOfHeatExchangerEnum ModelOfHeatExchanger { get; set; }
 
         public string SortNumberDisplaySequence;
         public string ProductRange;
@@ -36,7 +64,6 @@ namespace VDI3805
         public string HeatingCirculatingPumpRegulated;
         public string AirConnection;
         public string ExhaustConnection;
-
 
         public HeatGenerator() { }
 
@@ -123,6 +150,203 @@ namespace VDI3805
             //enumDesignationForDesignOfHeatExchanger.Add(new EnumValue("2", "Zug-Kessel Flammumkehr", ""));
             //enumDesignationForDesignOfHeatExchanger.Add(new EnumValue("3", "Zug-Kessel", ""));
             //enumDesignationForDesignOfHeatExchanger.Add(new EnumValue("999", "Sonstige", ""));
+        }
+    }
+
+    public class Pump : ProductElementData_700  //VDI 3805 Part 4
+    {
+        public bool IsValid = true;
+
+        public string SortNumberDisplaySequence;
+        //public string ProductRange;
+        //public string ProductName;
+        //public string NominalPower;
+        //public string TotalNetMass;
+
+
+        public Pump() { }
+
+        public void Register(RecordSet record)
+        {
+
+            // The following list is copied from VDI 3805 , Part 4, Pumps
+            // Do not add new attributes to the list, please follow the standard
+            // The Copyright is at VDI Verein Deutscher Ingeniere
+            // Please purchase a copy of the VDI 3805 before using this code in your application
+            SortNumberDisplaySequence = record.Fields[3];
+            //ProductRange = record.Fields[4];
+            //ProductName = record.Fields[5];
+            //NominalPower = record.Fields[6];
+            //TotalNetMass = record.Fields[7];
+
+        }
+    }
+ 
+    public class AirOpening : ProductElementData_700  //VDI 3805 Part 5
+    {
+        public bool IsValid = true;
+
+        public string SortNumberDisplaySequence;
+        //public string ProductRange;
+        //public string ProductName;
+        //public string NominalPower;
+        //public string TotalNetMass;
+
+
+        public AirOpening() { }
+
+        public void Register(RecordSet record)
+        {
+
+            // The following list is copied from VDI 3805 , Part 5, Air openings
+            // Do not add new attributes to the list, please follow the standard
+            // The Copyright is at VDI Verein Deutscher Ingeniere
+            // Please purchase a copy of the VDI 3805 before using this code in your application
+            SortNumberDisplaySequence = record.Fields[3];
+            //ProductRange = record.Fields[4];
+            //ProductName = record.Fields[5];
+            //NominalPower = record.Fields[6];
+            //TotalNetMass = record.Fields[7];
+
+        }
+    }
+
+    public class Radiator : ProductElementData_700  //VDI 3805 Part 6
+    {
+        public bool IsValid = true;
+
+        public string SortNumberDisplaySequence;
+        public string OverallHeight;
+        public string OverallDepth;
+        public string Type;
+        public string RegistrationNumber;
+        public string CodingForOutputData;
+        public string SectionLength;
+        public string DifferenceLengthPerRadiator;
+        public string IneffectiveLengthPerRadiator;
+        public string ReducedOutputOfIneffectiveLength;
+        public string RadiationProportion;
+
+        public Radiator() { }
+
+        public void Register(RecordSet record)
+        {
+
+            // The following list is copied from VDI 3805 , Part 6, Radiators
+            // Do not add new attributes to the list, please follow the standard
+            // The Copyright is at VDI Verein Deutscher Ingeniere
+            // Please purchase a copy of the VDI 3805 before using this code in your application
+            SortNumberDisplaySequence = record.Fields[3];
+            OverallHeight = record.Fields[4];
+            OverallDepth = record.Fields[5];
+            Type = record.Fields[6];
+            RegistrationNumber = record.Fields[7];
+            CodingForOutputData = record.Fields[8];
+            SectionLength = record.Fields[9];
+            DifferenceLengthPerRadiator = record.Fields[10];
+            IneffectiveLengthPerRadiator = record.Fields[11];
+            ReducedOutputOfIneffectiveLength = record.Fields[12];
+            RadiationProportion = record.Fields[13];
+        }
+    }
+
+    public class Fan : ProductElementData_700  //VDI 3805 Part 7
+    {
+        public bool IsValid = true;
+
+        public string SortNumberDisplaySequence;
+        //public string OverallHeight;
+        //public string OverallDepth;
+        //public string Type;
+        //public string RegistrationNumber;
+        //public string CodingForOutputData;
+        //public string SectionLength;
+        //public string DifferenceLengthPerRadiator;
+        //public string IneffectiveLengthPerRadiator;
+        //public string ReducedOutputOfIneffectiveLength;
+        //public string RadiationProportion;
+
+        public Fan() { }
+
+        public void Register(RecordSet record)
+        {
+
+            // The following list is copied from VDI 3805 , Part 7, Fans
+            // Do not add new attributes to the list, please follow the standard
+            // The Copyright is at VDI Verein Deutscher Ingeniere
+            // Please purchase a copy of the VDI 3805 before using this code in your application
+            SortNumberDisplaySequence = record.Fields[3];
+            //OverallHeight = record.Fields[4];
+            //OverallDepth = record.Fields[5];
+            //Type = record.Fields[6];
+            //RegistrationNumber = record.Fields[7];
+            //CodingForOutputData = record.Fields[8];
+            //SectionLength = record.Fields[9];
+            //DifferenceLengthPerRadiator = record.Fields[10];
+            //IneffectiveLengthPerRadiator = record.Fields[11];
+            //ReducedOutputOfIneffectiveLength = record.Fields[12];
+            //RadiationProportion = record.Fields[13];
+        }
+    }
+
+    public class Burner : ProductElementData_700  //VDI 3805 Part 8
+    {
+        public bool IsValid = true;
+
+        public string SortNumberDisplaySequence;
+        public string ProductName;
+        public string MixingEquipment;
+        public string MinimumBurnerCapacity;
+        public string MaximiumBurnerCapacity;
+        public string MaximiumGasFlowPressure;
+
+        public Burner() { }
+
+        public void Register(RecordSet record)
+        {
+
+            // The following list is copied from VDI 3805 , Part 6, Radiators
+            // Do not add new attributes to the list, please follow the standard
+            // The Copyright is at VDI Verein Deutscher Ingeniere
+            // Please purchase a copy of the VDI 3805 before using this code in your application
+            SortNumberDisplaySequence = record.Fields[3];
+            ProductName = record.Fields[4];
+            MixingEquipment = record.Fields[5];
+            MinimumBurnerCapacity = record.Fields[6];
+            MaximiumBurnerCapacity = record.Fields[7];
+            MaximiumGasFlowPressure = record.Fields[8];
+        }
+    }
+
+    public class ModularVentilationEquipment : ProductElementData_700  //VDI 3805 Part 9
+    {
+        public bool IsValid = true;
+
+        public enum ModelOfHeatExchangerEnum { StandardKessel, NiedertemperaturKessel, BrennwertKessel, StandardKombiKessel, NiedertemperaturKombiKessel };
+        public ModelOfHeatExchangerEnum ModelOfHeatExchanger { get; set; }
+
+        public string SortNumberDisplaySequence;
+        //public string ProductName;
+        //public string MixingEquipment;
+        //public string MinimumBurnerCapacity;
+        //public string MaximiumBurnerCapacity;
+        //public string MaximiumGasFlowPressure;
+
+        public ModularVentilationEquipment() { }
+
+        public void Register(RecordSet record)
+        {
+
+            // The following list is copied from VDI 3805 , Part 6, Radiators
+            // Do not add new attributes to the list, please follow the standard
+            // The Copyright is at VDI Verein Deutscher Ingeniere
+            // Please purchase a copy of the VDI 3805 before using this code in your application
+            SortNumberDisplaySequence = record.Fields[3];
+            //ProductName = record.Fields[4];
+            //MixingEquipment = record.Fields[5];
+            //MinimumBurnerCapacity = record.Fields[6];
+            //MaximiumBurnerCapacity = record.Fields[7];
+            //MaximiumGasFlowPressure = record.Fields[8];
         }
     }
 }

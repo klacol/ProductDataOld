@@ -94,6 +94,9 @@
     <None Include="Samples\PART03_Broetje_GFX.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Samples\PART06_Zehnder_GFX.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CafmConnect\CafmConnect.csproj">

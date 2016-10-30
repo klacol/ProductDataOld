@@ -73,7 +73,7 @@ namespace VDI3805
                     }
 
             RegisterFilename(DataFileName);
-            LeadData_010 = new LeadData_010(dataSets);
+            LeadData_010 = new LeadData_010(dataSets, VDI3805PartNumber);
         }
 
         private void RegisterFilename(string dataFileName)
@@ -97,7 +97,7 @@ namespace VDI3805
             string[] fileNameParts = dataFileName.Substring(0, dataFileName.Length - 4).Split('_');
 
             Filename = dataFileName;
-            VDI3805PartNumber = fileNameParts[0];
+            VDI3805PartNumber = fileNameParts[0].ToUpper();
             ManufacturerName = fileNameParts[1];
             CountryCode = fileNameParts[2];
 
@@ -145,10 +145,10 @@ namespace VDI3805
             Dictionary<string, string> mapping = new Dictionary<string, string>();
 
             mapping.Add("PART02", "422.82");    //Heizungsarmaturen
-            mapping.Add("PART03", "421.10");    //Wärmeerzeuger
+            mapping.Add("PART03", "421.10");    //HeatExchanger / Wärmeerzeuger
             mapping.Add("PART04","");           //Pumpen
             mapping.Add("PART05", "");          //Luftdurchlässe
-            mapping.Add("PART06", "");          //Heizkörper
+            mapping.Add("PART06", "423.17");    //Radiators / Heizkörper
             mapping.Add("PART07", "");          //Ventilatoren
             mapping.Add("PART08", "");          //Brenner
             mapping.Add("PART09", "");          //Modullüftungsgeräte
