@@ -31,7 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buttonVDI3805Read = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxVdiFile = new System.Windows.Forms.TextBox();
             this.buttonCafmConnectCreate = new System.Windows.Forms.Button();
             this.linkLabelVDI3085 = new System.Windows.Forms.LinkLabel();
             this.labelCounter = new System.Windows.Forms.Label();
@@ -41,8 +41,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.textBoxCafmConnectFile = new System.Windows.Forms.TextBox();
+            this.buttonCreateCcFileFromVDI = new System.Windows.Forms.Button();
+            this.buttonOpenFolder = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -53,7 +54,6 @@
             this.label1.Size = new System.Drawing.Size(216, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Converter VDI3805 to CAFM-Connect (IFC4)";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // buttonVDI3805Read
             // 
@@ -65,19 +65,19 @@
             this.buttonVDI3805Read.UseVisualStyleBackColor = true;
             this.buttonVDI3805Read.Click += new System.EventHandler(this.buttonVDI3805Read_Click);
             // 
-            // openFileDialog1
+            // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             this.openFileDialog.Filter = "VDI3805(*.zip)|*.zip";
             // 
-            // textBox1
+            // textBoxVdiFile
             // 
-            this.textBox1.Location = new System.Drawing.Point(29, 135);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(396, 260);
-            this.textBox1.TabIndex = 3;
+            this.textBoxVdiFile.Location = new System.Drawing.Point(29, 135);
+            this.textBoxVdiFile.Multiline = true;
+            this.textBoxVdiFile.Name = "textBoxVdiFile";
+            this.textBoxVdiFile.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxVdiFile.Size = new System.Drawing.Size(396, 260);
+            this.textBoxVdiFile.TabIndex = 3;
             // 
             // buttonCafmConnectCreate
             // 
@@ -125,7 +125,6 @@
             this.textBox2.Size = new System.Drawing.Size(47, 20);
             this.textBox2.TabIndex = 12;
             this.textBox2.Text = "100";
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label2
             // 
@@ -164,32 +163,43 @@
             this.label4.TabIndex = 16;
             this.label4.Text = "Generate Variants:";
             // 
-            // textBox3
+            // textBoxCafmConnectFile
             // 
-            this.textBox3.Location = new System.Drawing.Point(490, 135);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox3.Size = new System.Drawing.Size(489, 260);
-            this.textBox3.TabIndex = 17;
+            this.textBoxCafmConnectFile.Location = new System.Drawing.Point(528, 135);
+            this.textBoxCafmConnectFile.Multiline = true;
+            this.textBoxCafmConnectFile.Name = "textBoxCafmConnectFile";
+            this.textBoxCafmConnectFile.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxCafmConnectFile.Size = new System.Drawing.Size(451, 260);
+            this.textBoxCafmConnectFile.TabIndex = 17;
             // 
-            // button1
+            // buttonCreateCcFileFromVDI
             // 
-            this.button1.Location = new System.Drawing.Point(432, 270);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(52, 23);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "==>";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonCreateCcFileFromVDI.Location = new System.Drawing.Point(431, 218);
+            this.buttonCreateCcFileFromVDI.Name = "buttonCreateCcFileFromVDI";
+            this.buttonCreateCcFileFromVDI.Size = new System.Drawing.Size(90, 92);
+            this.buttonCreateCcFileFromVDI.TabIndex = 18;
+            this.buttonCreateCcFileFromVDI.Text = "Create CAFM-Connect ==>";
+            this.buttonCreateCcFileFromVDI.UseVisualStyleBackColor = true;
+            this.buttonCreateCcFileFromVDI.Click += new System.EventHandler(this.buttonCreateCcFileFromVDI_Click);
+            // 
+            // buttonOpenFolder
+            // 
+            this.buttonOpenFolder.Location = new System.Drawing.Point(156, 104);
+            this.buttonOpenFolder.Name = "buttonOpenFolder";
+            this.buttonOpenFolder.Size = new System.Drawing.Size(29, 23);
+            this.buttonOpenFolder.TabIndex = 19;
+            this.buttonOpenFolder.Text = "O";
+            this.buttonOpenFolder.UseVisualStyleBackColor = true;
+            this.buttonOpenFolder.Click += new System.EventHandler(this.buttonOpenFolder_Click);
             // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1029, 395);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.buttonOpenFolder);
+            this.Controls.Add(this.buttonCreateCcFileFromVDI);
+            this.Controls.Add(this.textBoxCafmConnectFile);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label3);
@@ -199,12 +209,11 @@
             this.Controls.Add(this.labelCounter);
             this.Controls.Add(this.linkLabelVDI3085);
             this.Controls.Add(this.buttonCafmConnectCreate);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxVdiFile);
             this.Controls.Add(this.buttonVDI3805Read);
             this.Controls.Add(this.label1);
             this.Name = "Form";
             this.Text = "CafmConnectObjects";
-            this.Load += new System.EventHandler(this.Form_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -215,7 +224,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonVDI3805Read;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxVdiFile;
         private System.Windows.Forms.Button buttonCafmConnectCreate;
         private System.Windows.Forms.LinkLabel linkLabelVDI3085;
         private System.Windows.Forms.Label labelCounter;
@@ -225,8 +234,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBoxCafmConnectFile;
+        private System.Windows.Forms.Button buttonCreateCcFileFromVDI;
+        private System.Windows.Forms.Button buttonOpenFolder;
     }
 }
 

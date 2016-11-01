@@ -138,20 +138,20 @@ namespace VDI3805
             return stringWriter.ToString();
         }
 
-        public string GetCclassification(string productDesignation)
+        public string GetCclassification()
         {
             string Cclassification = string.Empty;
 
             Dictionary<string, string> mapping = new Dictionary<string, string>();
 
-            mapping.Add("PART02", "422.82");    //Heizungsarmaturen
-            mapping.Add("PART03", "421.10");    //HeatExchanger / Wärmeerzeuger
-            mapping.Add("PART04","");           //Pumpen
-            mapping.Add("PART05", "");          //Luftdurchlässe
+            mapping.Add("PART02", "422.82");    //HeatingValueAssemblies / Heizungsarmaturen
+            mapping.Add("PART03", "421.10");    //HeatGenerator / Wärmeerzeuger
+            mapping.Add("PART04","");           //Pumps / Pumpen
+            mapping.Add("PART05", "");          //AirOpenings / Luftdurchlässe
             mapping.Add("PART06", "423.17");    //Radiators / Heizkörper
-            mapping.Add("PART07", "");          //Ventilatoren
-            mapping.Add("PART08", "");          //Brenner
-            mapping.Add("PART09", "");          //Modullüftungsgeräte
+            mapping.Add("PART07", "");          //Fans / Ventilatoren
+            mapping.Add("PART08", "");          //Burners / Brenner
+            mapping.Add("PART09", "");          //ModularVentilationEquipments / Modullüftungsgeräte
             mapping.Add("PART10", "");          //Luftfilter
             mapping.Add("PART11", "");          //Wärmetauscher Fluid/ Wasserdampf - Luft
             mapping.Add("PART14", "");          //RLT - Schalldämpfer(passiv)

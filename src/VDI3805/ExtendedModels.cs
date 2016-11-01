@@ -36,7 +36,6 @@ namespace VDI3805
 
     public class HeatGenerator : ProductElementData_700  //VDI 3805 Part 3
     {
-        public bool IsValid = true;
 
         //public enum ModelOfHeatExchangerEnum { StandardKessel, NiedertemperaturKessel, BrennwertKessel, StandardKombiKessel, NiedertemperaturKombiKessel };
         //public ModelOfHeatExchangerEnum ModelOfHeatExchanger { get; set; }
@@ -213,7 +212,6 @@ namespace VDI3805
 
     public class Radiator : ProductElementData_700  //VDI 3805 Part 6
     {
-        public bool IsValid = true;
 
         public string SortNumberDisplaySequence;
         public string OverallHeight;

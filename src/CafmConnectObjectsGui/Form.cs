@@ -31,11 +31,9 @@ namespace CafmConnectObjectsGui
             linkLabelVDI3085.Text = string.Empty;
             labelCounter.Text = string.Empty;
             labelStopwatch.Text = string.Empty;
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
+            buttonOpenFolder.Visible = false;
+            buttonCreateCcFileFromVDI.Visible = false;
+            textBoxCafmConnectFile.Visible = false;
 
         }
 
@@ -52,12 +50,12 @@ namespace CafmConnectObjectsGui
                 string filename = openFileDialog.FileName;
                 workingFolder = Path.GetDirectoryName(filename);
                 //filename = @"samples\PART03_Broetje_GFX.zip";
-                textBox1.Text = "Reading and analyzing the VDI3805 file, this can take a while, please wait...";
-                textBox1.Refresh();
+                textBoxVdiFile.Text = "Reading and analyzing the VDI3805 file, this can take a while, please wait...";
+                textBoxVdiFile.Refresh();
 
                 vdi3805 = new VDI3805.VDI3805(filename);
-                textBox1.Text += Environment.NewLine + "Reading of file finished...";
-                textBox1.Refresh();
+                textBoxVdiFile.Text += Environment.NewLine + "Reading of file finished...";
+                textBoxVdiFile.Refresh();
 
                 string fileContentAsXml = vdi3805.ToXml();
                 fileNameXml = filename.Replace("zip", "xml");
@@ -69,11 +67,13 @@ namespace CafmConnectObjectsGui
                 linkLabelVDI3085.Enabled=true;
                 linkLabelVDI3085.Refresh();
                 var lineCount = File.ReadLines(fileNameXml).Count();
-                textBox1.Text += Environment.NewLine + "Intermediate XML file saved sucessufully on disk (" + lineCount.ToString()+" Lines)";
-                textBox1.Text += Environment.NewLine + "Loading the file to show the first 10.000 Lines";
-                textBox1.Refresh();
+                textBoxVdiFile.Text += Environment.NewLine + "Intermediate XML file saved sucessufully on disk (" + lineCount.ToString()+" Lines)";
+                textBoxVdiFile.Text += Environment.NewLine + "Loading the file...";
+                textBoxVdiFile.Refresh();
 
-                textBox1.Text = fileContentAsXml;
+                textBoxVdiFile.Text = fileContentAsXml;
+                buttonCreateCcFileFromVDI.Visible = true;
+                textBoxCafmConnectFile.Visible = true;
             }           
         }
 
@@ -87,8 +87,8 @@ namespace CafmConnectObjectsGui
         private void buttonCafmConnectCreate_Click(object sender, EventArgs e)
         {
             linkLabel1.Text = string.Empty;
-            textBox3.Text = "Please wait...";
-            textBox3.Refresh();
+            textBoxCafmConnectFile.Text = "Please wait...";
+            textBoxCafmConnectFile.Refresh();
             int maxVariants = Convert.ToInt16(textBox2.Text);
 
             string fileName = Path.GetTempPath()+maxVariants.ToString()+".ifczip";
@@ -110,7 +110,7 @@ namespace CafmConnectObjectsGui
                 product.Attributes.Add(new CcManufacturerProductDetail("Tragkraft in Personen", "Tragkraft in Personen", "5"));
                 product.Attributes.Add(new CcManufacturerProductDetail("Tragkraft", "Tragkraft", (i*2).ToString()));
 
-                if (siteGuid != null) ws.AddNewProduct(key, siteGuid, "461", product);
+                if (siteGuid != null) ws.AddNewProduct(key, siteGuid, "461", product, product.Description);
 
                 labelCounter.Text = i.ToString();
                 labelCounter.Refresh();
@@ -124,12 +124,7 @@ namespace CafmConnectObjectsGui
             sw.Stop();
 
             linkLabel1.Text = fileName;
-            textBox3.Text = ws.GetModelOfCcFile(fileName);
-
-        }
-
-        private void Form_Load(object sender, EventArgs e)
-        {
+            textBoxCafmConnectFile.Text = ws.GetModelOfCcFile(fileName);
 
         }
 
@@ -138,19 +133,14 @@ namespace CafmConnectObjectsGui
             System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void buttonCreateCcFileFromVDI_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (this.textBox1.Text == string.Empty)
-                textBox3.Text = "Please read first the VDI 3805 file. Thank you.";
+            if (this.textBoxVdiFile.Text == string.Empty)
+                textBoxCafmConnectFile.Text = "Please read first the VDI 3805 file. Thank you.";
             else
             {
-                textBox3.Text = "Please wait...";
-                textBox3.Refresh();
+                textBoxCafmConnectFile.Text = "Please wait...";
+                textBoxCafmConnectFile.Refresh();
                 linkLabel1.Text = string.Empty;
                 int maxVariants = Convert.ToInt16(textBox2.Text);
 
@@ -166,8 +156,15 @@ namespace CafmConnectObjectsGui
                 sw.Stop();
 
                 linkLabel1.Text = fileName;
-                textBox3.Text = ws.GetModelOfCcFile(fileName);
+                textBoxCafmConnectFile.Text = ws.GetModelOfCcFile(fileName);
+                buttonOpenFolder.Visible = true;
+
             }
+        }
+
+        private void buttonOpenFolder_Click(object sender, EventArgs e)
+        {
+            Process.Start(workingFolder);
         }
     }
 }

@@ -292,8 +292,11 @@ namespace VDI3805
                                                                                                                                                    .Select(y => y.ProductvariantD_500).ToArray());
                 ProductMainGroup2_110.FunctionsDeclaration_600s = new FunctionsDeclaration_600().Register(recordSets);
 
-                ProductMainGroup2_110.ProductElementData_700s = new ProductElementData_700().Register(PartNumber, recordSets);
+                ProductMainGroup2_110.ProductElementData_700s = new ProductElementData_700().Register(PartNumber, recordSets, BsNumbers.Where(x => x.Productmaingroup2_110 == ProductMainGroup2_110.Index)
+                                                                                                                                                   .Select(y => y.Productelementdata_700).ToArray());
+
                 ProductMainGroup2_110.AccessoryGroup_830s = new AccessoryGroup_830().Register(recordSets);
+
                 ProductMainGroup2s_110.Add(ProductMainGroup2_110);
             }
 
@@ -1289,7 +1292,7 @@ namespace VDI3805
 
         public ProductElementData_700() { }
 
-        public List<ProductElementData_700> Register(string partNumber,List<RecordSet> recordSets)
+        public List<ProductElementData_700> Register(string partNumber,List<RecordSet> recordSets, string[] indexFilter)
         {
             List<ProductElementData_700> ProductElementDatas_700 = new List<ProductElementData_700>();
             foreach (RecordSet dataSet in recordSets.Where(x => x.RecordType == "700").ToList())

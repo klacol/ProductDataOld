@@ -69,8 +69,6 @@ namespace CafmConnect
             string tempModelFilename = InitializeCcFile();
             Document doc = null;
 
-            string a = "1";
-
             if (!Current.Documents.ContainsKey(tempModelFilename))
             {
                 doc = Ifc4.Workspace.CurrentWorkspace.OpenDocument(tempModelFilename);
@@ -86,7 +84,7 @@ namespace CafmConnect
 
         public string CreateCcFileFromVDI3805(VDI3805.VDI3805 vdi3805)
         {
-            string tempModelFilename = InitializeCcFile();
+            string tempModelFilename = InitializeCcFile("CAFM-ConnectFacilitiesViewTemplateVdi3805.ifcxml");
             Document doc = null;
 
             if (!Current.Documents.ContainsKey(tempModelFilename))
@@ -99,24 +97,61 @@ namespace CafmConnect
                 Current.Documents.Add(tempModelFilename, doc);
             }
             string siteGuid = AddNewSite(tempModelFilename, vdi3805.ManufacturerName,vdi3805.ManufacturerName,vdi3805.ManufacturerName2,vdi3805.ManufacturerText, vdi3805.LeadData_010.IssueMonth, vdi3805.CountryCode);
-            foreach (ProductMainGroup1_100 pmg in vdi3805.LeadData_010.ProductMainGroup1_100s)
+            string code = vdi3805.GetCclassification();
+
+            foreach (ProductMainGroup1_100 pmg100 in vdi3805.LeadData_010.ProductMainGroup1_100s)
             {
-                string code = vdi3805.GetCclassification(pmg.ProductDesignation);
-                CafmConnect.Manufacturer.CcManufacturerProduct product = new CcManufacturerProduct(code);
-                product.Description = pmg.ProductDesignation;
-                product.Name = pmg.ProductDesignation;
-                product.Attributes.Add(new CcManufacturerProductDetail("Beschreibung", "Beschreibung", pmg.ProductDesignation));
+                
+                foreach (ProductMainGroup2_110 pmg110 in pmg100.ProductMainGroup2_110s)
+                {
 
-                //product.Attributes.Add(new CcManufacturerProductDetail("Beschreibung", "Beschreibung", pmg.ProductMainGroup2_110s.FirstOrDefault().ProductElementData_700s.FirstOrDefault().HeatGenerators.FirstOrDefault().ProductName.ToString()));
+                    foreach (ProductElementData_700 ped700 in pmg110.ProductElementData_700s)
+                    {
+                        CafmConnect.Manufacturer.CcManufacturerProduct product = new CcManufacturerProduct(code);
+
+                        switch (vdi3805.VDI3805PartNumber)
+                        {
+                            case "PART02":
+                                break;
+                            case "PART03":
+                                product.Description = ped700.HeatGenerator.ProductName;
+                                product.Name = ped700.HeatGenerator.ProductRange;
+                                product.Attributes.Add(new CcManufacturerProductDetail("Beschreibung", "Beschreibung", pmg100.ProductDesignation));
+
+                                FieldInfo[] fields = ped700.HeatGenerator.GetType().GetFields();
+                                foreach (var field in fields)
+                                {
+                                    string value;
+                                    if (field.GetValue(ped700.HeatGenerator) != null)
+                                        value = field.GetValue(ped700.HeatGenerator).ToString();
+                                    else value = string.Empty;
+                                    product.Attributes.Add(new CcManufacturerProductDetail(field.Name,field.Name,value));
+                                }
+
+                                break;
+                            case "PART04":
+                                break;
+                            case "PART05":
+                                break;
+                            case "PART06":
+                                break;
+                            case "PART07":
+                                break;
+                            case "PART08":
+                                break;
+                            case "PART09":
+                                break;
+                        }
 
 
+                        //product.Attributes.Add(new CcManufacturerProductDetail("Beschreibung", "Beschreibung", pmg.ProductMainGroup2_110s.FirstOrDefault().ProductElementData_700s.FirstOrDefault().HeatGenerators.FirstOrDefault().ProductName.ToString()));
+                        //product.Attributes.Add(new CcManufacturerProductDetail("Anzahl Haltestellen", "Anzahl Haltestellen", "10"));
+                        //product.Attributes.Add(new CcManufacturerProductDetail("Tragkraft in Personen", "Tragkraft in Personen", "5"));
+                        //product.Attributes.Add(new CcManufacturerProductDetail("Tragkraft", "Tragkraft", (i * 2).ToString()));
 
-                //product.Attributes.Add(new CcManufacturerProductDetail("Anzahl Haltestellen", "Anzahl Haltestellen", "10"));
-                //product.Attributes.Add(new CcManufacturerProductDetail("Tragkraft in Personen", "Tragkraft in Personen", "5"));
-                //product.Attributes.Add(new CcManufacturerProductDetail("Tragkraft", "Tragkraft", (i * 2).ToString()));
-
-                if (siteGuid != null) AddNewProduct(tempModelFilename, siteGuid, code, product);
-
+                        if (siteGuid != null) AddNewProduct(tempModelFilename, siteGuid, code, product,pmg100.ProductDesignation);
+                    }
+                }
             }
 
             return tempModelFilename;
@@ -242,7 +277,7 @@ namespace CafmConnect
             
         }
 
-        public void AddNewProduct(string currentFilename, string siteGuid, string classificationCode, CcManufacturerProduct product)
+        public void AddNewProduct(string currentFilename, string siteGuid, string classificationCode, CcManufacturerProduct product, string system)
         {
             if (Current.Documents.ContainsKey(currentFilename))
             {
@@ -257,13 +292,15 @@ namespace CafmConnect
                 var filteredIfcClassificationReference = m_TempAllIfcClassificationReferenceCollection.FirstOrDefault(item => item.Identification == product.Code);
                 // ---------------------------------------
 
-                Ifc4.CcFacility newSystem = Current.Documents[currentFilename].Project.Facilities.Where(x => x.IfcSystem.Name == product.Code).FirstOrDefault();
+                Ifc4.CcFacility newSystem = Current.Documents[currentFilename].Project.Facilities.Where(x => x.IfcSystem.Name == product.Code
+                                                                                                        && x.IfcSystem.Description == system)
+                                                                                                 .FirstOrDefault();
                 if (newSystem == null)
                 { 
                     newSystem = Current.Documents[currentFilename].Project.Facilities.AddNewSystem(Current.Documents[currentFilename].Project);
                     newSystem.IfcSystem.GlobalId = Ifc4.GlobalId.ConvertToIfcGuid(Guid.NewGuid());
                     newSystem.IfcSystem.Name = product.Code;
-                    newSystem.IfcSystem.Description = product.Description;
+                    newSystem.IfcSystem.Description = system;
                 }
                 CcFacility newFacility = newSystem.Facilities.AddNewFacility();
                 newFacility.ObjectTypeId = filteredIfcClassificationReference.Id; // z.B "i2139"
@@ -334,7 +371,7 @@ namespace CafmConnect
             else return value;
         }
 
-        private string InitializeCcFile()
+        private string InitializeCcFile(string templateFile= "CAFM-ConnectFacilitiesViewTemplate.ifcxml")
         {
            // ------------------------------------------------------
            // Please work every time with the catalogue template file
@@ -345,7 +382,7 @@ namespace CafmConnect
            string tempName = Guid.NewGuid().ToString() + ".ifcxml";
 
            string tempModelFilename = Path.Combine(tempPath, tempName);
-           using (var resource = Assembly.GetExecutingAssembly().GetManifestResourceStream("CafmConnect.Catalogue.CAFM-ConnectFacilitiesViewTemplate.ifcxml"))
+           using (var resource = Assembly.GetExecutingAssembly().GetManifestResourceStream("CafmConnect.Catalogue."+templateFile))
             {
                 using (var file = new FileStream(tempModelFilename, FileMode.Create, FileAccess.Write))
                 {
