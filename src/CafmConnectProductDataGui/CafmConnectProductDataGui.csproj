@@ -7,8 +7,8 @@
     <ProjectGuid>{885450FA-1545-45E3-985C-0FB76C279A65}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CafmConnectObjectsGui</RootNamespace>
-    <AssemblyName>CafmConnectObjectsGui</AssemblyName>
+    <RootNamespace>CafmConnectProductDataGui</RootNamespace>
+    <AssemblyName>CafmConnectProductDataGui</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

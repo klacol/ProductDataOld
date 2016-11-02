@@ -7,12 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VDI3805", "VDI3805\VDI3805.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CafmConnect", "CafmConnect\CafmConnect.csproj", "{60FAB85F-D834-42D2-8F0A-D1D798B9A027}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CafmConnectObjectsGui", "CafmConnectObjectsGui\CafmConnectObjectsGui.csproj", "{885450FA-1545-45E3-985C-0FB76C279A65}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CafmConnectProductDataGui", "CafmConnectProductDataGui\CafmConnectProductDataGui.csproj", "{885450FA-1545-45E3-985C-0FB76C279A65}"
 EndProject
 Global
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
