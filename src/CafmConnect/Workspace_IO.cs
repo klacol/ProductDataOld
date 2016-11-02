@@ -16,9 +16,11 @@ namespace CafmConnect
         Dictionary<string, string> m_ifc4TextDocuments;
         static Workspace m_current = null;
         const string m_extension = ".ifcxml";
+        public string LastAction = string.Empty;
 
         private List<IfcClassificationReference> m_TempAllIfcClassificationReferenceCollection = null;
         private List<IfcClassificationReference> m_TempCatalogueFilteredIfcClassificationReferenceCollection = null;
+        private IfcClassificationReference m_filteredIfcClassificationReference = null;
 
         public Workspace()
         {
@@ -77,6 +79,11 @@ namespace CafmConnect
                 doc.IfcXmlDocument.Header.OriginatingSystem = originatingSystem;
                 doc.IfcXmlDocument.Header.Authorization = authorization;
                 Current.Documents.Add(tempModelFilename, doc);
+
+
+                string catalogueName = "CAFMConnectCatalogueOfObjectTypes";
+                if (m_TempAllIfcClassificationReferenceCollection == null)
+                    m_TempAllIfcClassificationReferenceCollection = GetIfcClassificationReferenceCollectionFromCatalogue(tempModelFilename, catalogueName);
             }
 
             return tempModelFilename;
@@ -84,6 +91,8 @@ namespace CafmConnect
 
         public string CreateCcFileFromVDI3805(VDI3805.VDI3805 vdi3805)
         {
+            EventHandler handler = eventHandler;
+            
             string tempModelFilename = InitializeCcFile("CAFM-ConnectFacilitiesViewTemplateVdi3805.ifcxml");
             Document doc = null;
 
@@ -95,15 +104,27 @@ namespace CafmConnect
                 doc.IfcXmlDocument.Header.OriginatingSystem = vdi3805.Filename;
                 doc.IfcXmlDocument.Header.Authorization = vdi3805.ManufacturerUrl;
                 Current.Documents.Add(tempModelFilename, doc);
+
+                string catalogueName = "CAFMConnectCatalogueOfObjectTypes";
+                if (m_TempAllIfcClassificationReferenceCollection == null)
+                    m_TempAllIfcClassificationReferenceCollection = GetIfcClassificationReferenceCollectionFromCatalogue(tempModelFilename, catalogueName);
+
+                m_filteredIfcClassificationReference = m_TempAllIfcClassificationReferenceCollection.FirstOrDefault(item => item.Identification == vdi3805.GetCclassification());
+
+
             }
             string siteGuid = AddNewSite(tempModelFilename, vdi3805.ManufacturerName,vdi3805.ManufacturerName,vdi3805.ManufacturerName2,vdi3805.ManufacturerText, vdi3805.LeadData_010.IssueMonth, vdi3805.CountryCode);
             string code = vdi3805.GetCclassification();
 
             foreach (ProductMainGroup1_100 pmg100 in vdi3805.LeadData_010.ProductMainGroup1_100s)
             {
-                
+                LastAction = pmg100.ProductDesignation;
+                handler?.Invoke(this, EventArgs.Empty);
+
                 foreach (ProductMainGroup2_110 pmg110 in pmg100.ProductMainGroup2_110s)
                 {
+                    LastAction = pmg110.ProductDesignation;
+                    handler?.Invoke(this, EventArgs.Empty);
 
                     foreach (ProductElementData_700 ped700 in pmg110.ProductElementData_700s)
                     {
@@ -127,6 +148,9 @@ namespace CafmConnect
                                     else value = string.Empty;
                                     product.Attributes.Add(new CcManufacturerProductDetail(field.Name,field.Name,value));
                                 }
+
+                                LastAction = ped700.HeatGenerator.ProductName;
+                                handler?.Invoke(this, EventArgs.Empty);
 
                                 break;
                             case "PART04":
@@ -281,17 +305,7 @@ namespace CafmConnect
         {
             if (Current.Documents.ContainsKey(currentFilename))
             {
-
-                // ---------------------------------------
-                // z.B. 
-                string catalogueName = "CAFMConnectCatalogueOfObjectTypes";
-
-                if (m_TempAllIfcClassificationReferenceCollection == null)
-                m_TempAllIfcClassificationReferenceCollection = GetIfcClassificationReferenceCollectionFromCatalogue(currentFilename,catalogueName);
                 
-                var filteredIfcClassificationReference = m_TempAllIfcClassificationReferenceCollection.FirstOrDefault(item => item.Identification == product.Code);
-                // ---------------------------------------
-
                 Ifc4.CcFacility newSystem = Current.Documents[currentFilename].Project.Facilities.Where(x => x.IfcSystem.Name == product.Code
                                                                                                         && x.IfcSystem.Description == system)
                                                                                                  .FirstOrDefault();
@@ -303,7 +317,7 @@ namespace CafmConnect
                     newSystem.IfcSystem.Description = system;
                 }
                 CcFacility newFacility = newSystem.Facilities.AddNewFacility();
-                newFacility.ObjectTypeId = filteredIfcClassificationReference.Id; // z.B "i2139"
+                newFacility.ObjectTypeId = m_filteredIfcClassificationReference.Id; // z.B "i2139"
                 newFacility.Number = product.Name;
                 newFacility.IfcObjectDefinition.Name = product.Code;
                 newFacility.Description = product.Description;
@@ -390,7 +404,7 @@ namespace CafmConnect
                 }
             }
 
-           return tempModelFilename;
+            return tempModelFilename;
         }
 
         public string GetModelOfCcFile(string dataFileName)
@@ -410,5 +424,11 @@ namespace CafmConnect
                     }
             return content;
         }
+
+
+
+
+        public event EventHandler eventHandler;
+
     }
 }

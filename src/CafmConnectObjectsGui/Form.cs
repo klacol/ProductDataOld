@@ -87,7 +87,9 @@ namespace CafmConnectObjectsGui
         private void buttonCafmConnectCreate_Click(object sender, EventArgs e)
         {
             linkLabel1.Text = string.Empty;
-            textBoxCafmConnectFile.Text = "Please wait...";
+            textBoxCafmConnectFile.Text = "Please wait, this takes a while, sometimes several minutes.";
+            textBoxCafmConnectFile.Text += Environment.NewLine + "We work hard to optimize the code, to make this happen faster...";
+            textBoxCafmConnectFile.Text += Environment.NewLine + "When the file is created, please open it with the CAFM-Conenct Editor.";
             textBoxCafmConnectFile.Refresh();
             int maxVariants = Convert.ToInt16(textBox2.Text);
 
@@ -139,24 +141,46 @@ namespace CafmConnectObjectsGui
                 textBoxCafmConnectFile.Text = "Please read first the VDI 3805 file. Thank you.";
             else
             {
-                textBoxCafmConnectFile.Text = "Please wait...";
+
+                int numberOfProductMainGroup100 = vdi3805.LeadData_010.ProductMainGroup1_100s.Count();
+                int numberOfProductMainGroup110 = 0;
+                int numberOfProductElementData700 = 0;
+                foreach (ProductMainGroup1_100 pmg100 in vdi3805.LeadData_010.ProductMainGroup1_100s)
+                { 
+                    numberOfProductMainGroup110 += pmg100.ProductMainGroup2_110s.Count();
+                    foreach (ProductMainGroup2_110 pmg110 in pmg100.ProductMainGroup2_110s)
+                    {
+                        numberOfProductElementData700 += pmg110.ProductElementData_700s.Count();
+                    }
+                }
+                textBoxCafmConnectFile.Text += Environment.NewLine + "----------------------------------------------------------------";
+                textBoxCafmConnectFile.Text += Environment.NewLine + "ProductMainGroup (100):" + vdi3805.LeadData_010.ProductMainGroup1_100s.Count();
+                textBoxCafmConnectFile.Text += Environment.NewLine + "ProductMainGroup (110):" + numberOfProductMainGroup110;
+                textBoxCafmConnectFile.Text += Environment.NewLine + "ProductElementData (700):" + numberOfProductElementData700;
+                textBoxCafmConnectFile.Text += Environment.NewLine + "Please wait, this takes a while, sometimes several minutes.";
+                textBoxCafmConnectFile.Text += Environment.NewLine + "We work hard to optimize the code, to make this happen faster...";
+
+                textBoxCafmConnectFile.Text += Environment.NewLine + "When the file is created, please open it with the CAFM-Connect Editor.";
+                textBoxCafmConnectFile.Text += Environment.NewLine + "----------------------------------------------------------------";
+
+                vdi3805.LeadData_010.ProductMainGroup1_100s.Count();
+                textBoxCafmConnectFile.Refresh();
+
                 textBoxCafmConnectFile.Refresh();
                 linkLabel1.Text = string.Empty;
                 int maxVariants = Convert.ToInt16(textBox2.Text);
 
                 string fileName = Path.Combine(workingFolder,Path.GetFileNameWithoutExtension(vdi3805.Filename))+".ifczip";
 
-                Stopwatch sw = new Stopwatch();
-                sw.Start();
-
                 CafmConnect.Workspace ws = new Workspace();
+                ws.eventHandler += new EventHandler(AddInfoToTextBoxCafmConnectFile);
                 string key = ws.CreateCcFileFromVDI3805(vdi3805);
 
                 ws.SaveCcFileAs(key, fileName, true, true);
-                sw.Stop();
 
                 linkLabel1.Text = fileName;
-                textBoxCafmConnectFile.Text = ws.GetModelOfCcFile(fileName);
+                textBoxCafmConnectFile.Text += Environment.NewLine + "----------------------------------------------------------------";
+                textBoxCafmConnectFile.Text += Environment.NewLine + ws.GetModelOfCcFile(fileName);
                 buttonOpenFolder.Visible = true;
 
             }
@@ -165,6 +189,15 @@ namespace CafmConnectObjectsGui
         private void buttonOpenFolder_Click(object sender, EventArgs e)
         {
             Process.Start(workingFolder);
+        }
+
+
+        private void AddInfoToTextBoxCafmConnectFile(object s, EventArgs e)
+        {
+            var ws = s as CafmConnect.Workspace;
+
+            textBoxCafmConnectFile.AppendText(ws.LastAction+Environment.NewLine);
+           
         }
     }
 }

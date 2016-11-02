@@ -90,6 +90,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Samples\PART03_Broetje_200406_20160324_Katalog.ifczip" />
     <None Include="Samples\PART03_Broetje_200406_20160324_Katalog.VDI" />
     <None Include="Samples\PART03_Broetje_GFX.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
