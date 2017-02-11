@@ -7,8 +7,8 @@
 		<organization>CAFM-Connect</organization>
 		<preprocessor_version>.NET API etask.ifc</preprocessor_version>
 		<originating_system>.NET API etask.ifc</originating_system>
-		<authorization>file created with .NET API etask.ifc</authorization>
-		<documentation>PropertyCatalogView</documentation>
+		<authorization>file created with IFC.NET</authorization>
+		<documentation>ProductDataTemplate</documentation>
 	</header>
 	<IfcProject id="i100" GlobalId="3W_wCy4R58hgkAO0WsiUkm">
 		<UnitsInContext>
@@ -104,7 +104,100 @@
 			</Units>
 		</UnitsInContext>
 	</IfcProject>
-	<IfcClassification id="i9998765" Edition="Version 2.5.6" EditionDate="2015-08-17T06:45:03" Name="DIN SPEC 91400" Description="DIN SPEC 91400" Source="http://dinspec/xyz"/>
+	
+<!-- CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE -CPR - SAMPLE - CPR - SAMPLE - -->	
+
+<!-- Step 1: Define a classification of all Testmethods in a one dimensinal hierarchy as IfcClassification -That can be generated/imported from a PSet, the bSDD, IfcDoc or elsewhere - -->	
+
+<IfcClassification id="i9698765" Edition="Version 2.5.6" EditionDate="2016-12-11T12:21:03" Name="Catalogue of EU CPR Rules" Description="Catalogue of EU CPR Rules" Source="bSDD" Location="http://bsdd.buildingsmart.org/#concept/browse/{GlobalId}" />
+<IfcRelAssociatesClassification id="i9698766" GlobalId="1fbJ0AXVj7qQIdiMHqoMyI">
+	<RelatedObjects>
+		<IfcProject ref="i100" xsi:nil="true"/>
+	</RelatedObjects>
+	<RelatingClassification>
+		<IfcClassification ref="i9698765" xsi:nil="true"/>
+	</RelatingClassification>
+</IfcRelAssociatesClassification>
+<IfcClassificationReference id="i9698767" Identification="R1" Name="Rule 1 in hamonized european rules" Sort="0">
+	<HasReferences>
+		<IfcClassificationReference id="i9698768" Identification="R1.T1" Name="Testmethod 1"  Description="Description of Testmethod 1" Sort="0"/>
+	</HasReferences>
+</IfcClassificationReference>
+
+
+<!-- Step 2: Define a PropertySetTemplate , That can be generated/imported from a PSet, the bSDD, IfcDoc or elsewhere - -->
+<IfcPropertySetTemplate id="i33467" GlobalId="2e_rZByaj3v9TmNwzXRpFy" Name="Unique Product identification code" Description="Sample Property for a Unique Product identification code" ApplicableEntity="IfcPipeSegment" TemplateType="pset_typedrivenonly" pos="1">
+<HasPropertyTemplates>
+	<IfcSimplePropertyTemplate id="i33668" GlobalId="26JruP9Sj6_QQl9T2nuNCN" Name="Unique Product identification code" Description="Description of Property" TemplateType="p_enumeratedvalue" PrimaryMeasureType="IfcText" pos="1"/>
+	<IfcSimplePropertyTemplate id="i33669" GlobalId="26JruP9Sj6_QQl9T2nuNCQ" Name="Type according Articel 11-4" Description="Description of Property" TemplateType="p_enumeratedvalue" PrimaryMeasureType="IfcText" pos="2"/>	
+    <IfcSimplePropertyTemplate id="i33670" GlobalId="2gWUvQ3HT2FfUkpq4QgzE3" Name="Name of Property3" Description="Description of Property3" TemplateType="p_enumeratedvalue" PrimaryMeasureType="IfcText" pos="3">
+		<Enumerators>
+			<EnumerationValues>
+				<IfcLabel-wrapper pos="0">EnumValue1</IfcLabel-wrapper>
+				<IfcLabel-wrapper pos="1">EnumValue2</IfcLabel-wrapper>
+			</EnumerationValues>
+		</Enumerators>
+		</IfcSimplePropertyTemplate>
+		<IfcSimplePropertyTemplate id="i33672" GlobalId="23KsS0qS4HuO00025QrE$V" Name="Name of Property4" Description="Description of Property4 with a datatype real and a complex unit" TemplateType="p_singlevalue" PrimaryMeasureType="IfcReal" SecondaryMeasureType="What comes in here? Can this also be useful?" AccessState="readonly" Expression="The expression used to store additional information for the property template depending on the PropertyType." path="What is this for"  pos="4">
+			<PrimaryUnit>
+				<IfcDerivedUnit id="i21114" UnitType="volumetricflowrateunit">
+					<Elements>
+						<IfcDerivedUnitElement id="i21115" Exponent="3">
+							<Unit xsi:type="IfcSIUnit" UnitType="lengthunit"/>
+						</IfcDerivedUnitElement>
+						<IfcDerivedUnitElement id="i21116" Exponent="-1">
+							<Unit xsi:type="IfcConversionBasedUnit" Name="Hour" UnitType="timeunit">
+								<ConversionFactor>
+									<ValueComponent>
+										<IfcTimeMeasure-wrapper>3600.</IfcTimeMeasure-wrapper>
+									</ValueComponent>
+									<UnitComponent>
+										<IfcSIUnit UnitType="timeunit"/>
+									</UnitComponent>
+								</ConversionFactor>
+							</Unit>
+						</IfcDerivedUnitElement>
+					</Elements>
+				</IfcDerivedUnit>
+			</PrimaryUnit>
+		</IfcSimplePropertyTemplate>
+		<IfcSimplePropertyTemplate id="i33673" GlobalId="3_JUGwsmP7GhDPKN50ZDn6" Name="Name of Property5" Description="Description of Property5" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="5"/>
+	</HasPropertyTemplates>
+</IfcPropertySetTemplate>
+
+<!-- Step 3: Relate the PropertySetTemplate to  the classification node, that specifies the test method for all Properties in this PropertySet- -->
+<!-- If there is no thestmethod for this propertyset, do not insert this reference  -->
+<IfcRelAssociatesClassification id="i33520" GlobalId="2mVNBe4$L75ejegqXTQllf" Name="Set a reference  from a PropertySetTemplate to Testmethod 1">
+	<RelatedObjects>
+		<IfcPropertySetTemplate ref="i33670" xsi:nil="true"/>
+	</RelatedObjects>
+	<RelatingClassification>
+		<IfcClassificationReference ref="i9698768" xsi:nil="true"/>
+	</RelatingClassification>
+</IfcRelAssociatesClassification>
+
+<!-- Step 4: Or Relate the individual PropertyTemplate to  the classification node, that specifies the test method , this could be more flexible if the testmethods differ for a single product -->
+<!-- If there is no thestmethod for this property, do not insert this reference  -->
+<IfcRelAssociatesClassification id="i33521" GlobalId="2mVNBe4$L75ejegqXTQllf" Name="Set a reference  from a PropertyTemplate to Testmethod 1">
+	<RelatedObjects>
+		<IfcSimplePropertyTemplate ref="i33672" xsi:nil="true"/>
+	</RelatedObjects>
+	<RelatingClassification>
+		<IfcClassificationReference ref="i9698768" xsi:nil="true"/>
+	</RelatingClassification>
+</IfcRelAssociatesClassification>
+
+<!--  Step 5: Go to "Start DATA" at the end of the file and insert the instances - the data itself based on this product data template-->
+
+<!--  People can chose, if they transport the template every time alongside with the data to ensure, that the data stays valid according to the snapshot of the template at the time of creation (template embedding)-->
+<!--  or if they transport the template and the data in separate files -->	
+<!--  The data must rely on a template, the template can rely on a dictionary; if the template relies on a dictionary the template shoul make clear on which dictionary it relies on; -->
+<!--  and if the template relies on a dictionary, all GUID's from the dictionry must be stored also in the template to ensure the updatability of the template and the migratability of the data --> 
+<!-- See http://jira.buildingsmart.org/browse/IFR-1072 for the last remark -->
+	
+<!-- CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE -CPR - SAMPLE - CPR - SAMPLE - -->	
+	
+	
 	<IfcClassification id="i126" Edition="Version 1.06.02" EditionDate="2015-08-17T06:45:03" Name="CAFM-Connect Katalog 2014" Description="CAFMConnectCatalogueOfObjectTypes" Source="http://www.cafm-connect.org/CAFMConnectCatalogueOfObjectTypes"/>
 	<IfcRelAssociatesClassification id="i127" GlobalId="1fbJ0AXVj7qQIdiMHqoMyI" Name="CAFM-Connect Katalog 2014 zu IfcClassification">
 		<RelatedObjects>
@@ -814,11 +907,11 @@
 	</IfcRelAssociatesClassification>
 	<IfcClassificationReference id="i8128" Identification="EN54-12:2002" Name="Fire detection and fire alarm systems. Smoke detectors. Line detectors using an optical light beam" Description="BS EN 54-12:2002 specifies requirements, test methods and performance criteria for line smoke detectorsutilising the attenuation and/or changes in attenuation of an optical beam, for use in fire detection systems installed in buildings." Location="" Sort="0">
 		<HasReferences>
-			<IfcClassificationReference id="i8132" Identification="EN54-12:2002#TEST01" Name="Testingprocedure 1" Sort="0"/>
-			<IfcClassificationReference id="i8144" Identification="EN54-12:2002#TEST02" Name="Testingprocedure 2" Sort="1"/>
-			<IfcClassificationReference id="i8152" Identification="EN54-12:2002#TEST03" Name="Testingprocedure 3" Sort="2">
+			<IfcClassificationReference id="i8132" GlobalId="1fbJ0AXVj7qQIdiMHqoMxI" Identification="EN54-12:2002#TEST01" Name="Testingprocedure 1" Description="Description of Testingprocedure 1" Sort="0"/>
+			<IfcClassificationReference id="i8144" GlobalId="1fbJ0AXVj7qQIdiMHqoMyI" Identification="EN54-12:2002#TEST02" Name="Testingprocedure 2" Description="Description of Testingprocedure 2" Sort="1"/>
+			<IfcClassificationReference id="i8152" GlobalId="1fbJ0AXVj7qQIdiMHqoMgI" Identification="EN54-12:2002#TEST03" Name="Testingprocedure 3" Description="Description of Testingprocedure 3" Sort="2">
 				<HasReferences>
-					<IfcClassificationReference id="i8156" Identification="EN54-12:2002#TEST03.01" Name="Testingprocedure 3.1" Sort="0"/>
+					<IfcClassificationReference id="i8156"  GlobalId="1fbJ0AXVj7qQIdiMHqodgI"  Identification="EN54-12:2002#TEST03.01" Name="Testingprocedure 3.1" Description="Description of Testingprocedure 3.1" Sort="0"/>
 				</HasReferences>
 			</IfcClassificationReference>
 		</HasReferences>
@@ -826,6 +919,22 @@
 	<IfcPropertySetTemplate id="i133" GlobalId="1cbJaB0Uf0f8QbEnIhzd8b" Name="Außenwände, -türen, -tore und -fenster" Description="Wände und Stützen, die dem Außenklima ausgesetzt sind bzw. an das Erdreich oder an andere Bauwerke grenzen" ApplicableEntity="IfcBuildingElementProxy">
 		<HasPropertyTemplates>
 			<IfcSimplePropertyTemplate id="i134" GlobalId="10x58_dMjCtv6QMVLNUbjT" Name="Beschreibung" Description="Freitextfeld zur allgemeinen Beschreibung von Objektinformationen" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="0"/>
+		</HasPropertyTemplates>
+	</IfcPropertySetTemplate>
+	<IfcPropertySetTemplate id="i6133" GlobalId="1cbJaB0Uf0f8QbEnIhzd8b" Name="Propertty attributes CEN TC 442">
+		<HasPropertyTemplates>
+			<IfcSimplePropertyTemplate id="i6134" GlobalId="10x58_dMjCtv6QMVLNUbjT" Name="GloballyUniqueIdentifier" Description="globally unique identifier generated	using an algorithm	in	conformity	with	standard ISO	12006-3 sub clause 4.3.2. It is represented by 22	alphanumerical characters" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="0"/>
+			<IfcSimplePropertyTemplate id="i6160" GlobalId="0TsTShWprBqBATZkBjo22i" Name="Status" Description=" Status of the property during its life cycle." TemplateType="p_enumeratedvalue" PrimaryMeasureType="IfcText" pos="2">
+				<Enumerators>
+					<EnumerationValues>
+						<IfcLabel-wrapper pos="0">Active</IfcLabel-wrapper>
+						<IfcLabel-wrapper pos="1">Inactive</IfcLabel-wrapper>
+					</EnumerationValues>
+				</Enumerators>
+			</IfcSimplePropertyTemplate>
+			<IfcSimplePropertyTemplate id="i6135" GlobalId="10x58_dMACtv6QMVLNUbjT" Name="Date	of	creation" Description="Date of validation of the property creation request" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="0"/>
+			<IfcSimplePropertyTemplate id="i6136" GlobalId="10x58_dMjHtv6QMVLNUbjT" Name="Date of validation" Description="Date as of which the property	becomes usable" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="0"/>
+			<IfcSimplePropertyTemplate id="i6137" GlobalId="10x58_dMjKtv6QMVLNUbjT" Name="Date of deactivation" Description="Date as of	which the property becomes obsolete.	The	property is maintained in the dictionary.	" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="0"/>
 		</HasPropertyTemplates>
 	</IfcPropertySetTemplate>
 	<IfcRelAssociatesClassification id="i135" GlobalId="2lY9YHUmf58RM8IcAyLZd1" Name="330 - Außenwände, -türen, -tore und -fenster zu IfcClassificationReference">
@@ -4888,7 +4997,7 @@
 	<IfcPropertySetTemplate id="i1410" GlobalId="3fKpVRMbX4dhn3PYGRTzwN" Name="Absperr- und Abgleichelemente" Description="" ApplicableEntity="IfcDamper">
 		<HasPropertyTemplates>
 			<IfcSimplePropertyTemplate id="i1411" GlobalId="2rUQ_VNaz4dPkZdDTSevMm" Name="Beschreibung" Description="Freitextfeld zur allgemeinen Beschreibung von Objektinformationen" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="0"/>
-			<IfcSimplePropertyTemplate id="i1412" GlobalId="0c7384QU935gsvHk4_oOce" Name="Hersteller" Description="" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="1"/>
+			<IfcSimplePropertyTemplate id="i1412" GlobalId="0c7384QU935gsvHk4_oOce" Name="Hersteller" Description="" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="1" AccessState="locked" />
 		</HasPropertyTemplates>
 	</IfcPropertySetTemplate>
 	<IfcRelAssociatesClassification id="i1413" GlobalId="3pZlFjoJvB2B3WVmeh_$J4" Name="430.57 - Absperr- und Abgleichelemente zu IfcClassificationReference">
@@ -12005,14 +12114,16 @@
 		</HasReferences>
 	</IfcClassificationReference>
 	<!--  Ende Katalog Raumnutzungsarten-->
-	<!--  Start DATEN-->
+	
+	
+	<!--  Start DATA-->
 	<!--  Sample element with included propertyset-->
 	<IfcAlarm id="i6886" GlobalId="26JruP9Sj6_QQl9T2nuNCN" Name="430.41" Description="Bosch Fireray 50/100RV Linear Smoke Detectors" Tag="78463" PredefinedType="userdefined" ObjectType="i9999">
 		<IsDefinedBy>
 			<IfcRelDefinesByProperties id="i6896976">
 				<RelatedObjects xsi:type="IfcAlarm" ref="i6886" xsi:nil="true"/>
 				<RelatingPropertyDefinition>
-					<IfcPropertySet ref="i2222">
+					<IfcPropertySet ref="i33467">
 						<HasProperties>
 							<IfcComplexProperty>
 								<HasProperties>
@@ -12026,6 +12137,11 @@
 											<IfcLabel-wrapper>Fireray 50 RV and Fireray 100RV</IfcLabel-wrapper>
 										</NominalValue>
 									</IfcPropertySingleValue>
+									<IfcPropertySingleValue id="i71303" Name="Name of Property3" GlobalId="26JruP9Sj6_QQl9T2suNCN" >
+										<NominalValue>
+											<IfcLabel-wrapper>3456</IfcLabel-wrapper>
+										</NominalValue>
+									</IfcPropertySingleValue>								
 								</HasProperties>
 							</IfcComplexProperty>
 						</HasProperties>
@@ -12036,15 +12152,15 @@
 	</IfcAlarm>
 	<IfcAlarmType id="i9999" GlobalId="26JruP9Sj6_QQl9T2nuNCN" Name="Fireray Type 1" Description="Description of Fireray Type 1" PredefinedType="userdefined"/>
 	<!--  Sample reference to classification DINSPEC 91400 outside of XML structure of the element-->
-	<IfcRelAssociatesClassification id="i12799999999999" GlobalId="1fbJ0AXVj7qQIdiMHqoMyI" Name="CAFM-Connect Katalog 2014 zu PropertySet">
+	<IfcRelAssociatesClassification id="i12799999999999" GlobalId="1fbJ0AXVj7qQIdiMHqoMyI" Name="PSet2CPR">
 		<RelatedObjects>
 			<IfcAlarm ref="i6886"/>
 		</RelatedObjects>
 		<RelatingClassification>
-			<IfcClassification ref="i9998765" xsi:nil="true"/>
+			<IfcClassification ref="i9698768" xsi:nil="true"/>
 		</RelatingClassification>
 	</IfcRelAssociatesClassification>
-	  <IfcDocumentInformation id="i6690" Identification="d96295cf779240e9a204105627ec00be" Name="Data_sheet_enUS_1281214987.pdf" Location="Documents\Data_sheet_enUS_1281214987.pdf" CreationTime="25.10.2016 09:47:48" LastRevisionTime="25.10.2016 09:47:52" ElectronicFormat="application/pdf" />
+  <IfcDocumentInformation id="i6690" Identification="d96295cf779240e9a204105627ec00be" Name="Data_sheet_enUS_1281214987.pdf" Location="Documents\Data_sheet_enUS_1281214987.pdf" CreationTime="25.10.2016 09:47:48" LastRevisionTime="25.10.2016 09:47:52" ElectronicFormat="application/pdf" />
   <IfcRelAssociatesDocument GlobalId="3EGlhekFT4z96nW7gmGyfS">
     <RelatedObjects>
       <IfcAlarm xsi:nil="true" ref="i6886" />

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ifc="http://www.buildingsmart-tech.org/ifcXML/IFC4/final" targetNamespace="http://www.buildingsmart-tech.org/ifcXML/IFC4/final" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<!-- created with IFCDOC 10.7 at buildingsmart-tech.org -->
-	<!--
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ifc="http://www.buildingsmart-tech.org/ifcXML/IFC4/Add2" targetNamespace="http://www.buildingsmart-tech.org/ifcXML/IFC4/Add2" elementFormDefault="qualified" attributeFormDefault="unqualified" >
+<!-- created with IFCDOC 10.7 at buildingsmart-tech.org -->
+
+<!--
 Copyright by:
-buildingSMART International Limited, 1996-2014
+buildingSMART International Limited, 1996-2016
 
 Any technical documentation made available by buildingSMART International Limited
 is the copyrighted work of buildingSMART International Limited and is owned by the 
@@ -21,11 +22,12 @@ buildingSMART International Limited shall not be liable for errors contained the
 for incidental consequential damages in connection with the furnishing, performance or use 
 of the material. The information contained in this document is subject to change without notice.
 -->
+
 	<!-- root element declaration (for SCHEMA definitions) -->
 	<xs:element name="uos" type="ifc:uos" abstract="true"/>
-	<xs:simpleType name="Seq-anyURI">
-		<xs:list itemType="xs:anyURI"/>
-	</xs:simpleType>
+    <xs:simpleType name="Seq-anyURI">
+        <xs:list itemType="xs:anyURI"/>
+    </xs:simpleType>
 	<xs:complexType name="uos" abstract="true">
 		<xs:sequence>
 			<xs:element name="header" minOccurs="0">
@@ -2853,7 +2855,6 @@ of the material. The information contained in this document is subject to change
 				<xs:attribute name="Location" type="ifc:IfcURIReference" use="optional"/>
 				<xs:attribute name="Identification" type="ifc:IfcIdentifier" use="optional"/>
 				<xs:attribute name="Name" type="ifc:IfcLabel" use="optional"/>
-				<xs:attribute name="GlobalId" type="ifc:IfcGloballyUniqueId" use="optional"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -3646,7 +3647,7 @@ of the material. The information contained in this document is subject to change
 					<xs:element name="InnerCoordIndices" minOccurs="0">
 						<xs:complexType>
 							<xs:sequence>
-								<xs:element name="Seq-IfcPositiveInteger-wrapper" type="ifc:Seq-IfcPositiveInteger" maxOccurs="unbounded"/>
+								<xs:element name="Seq-IfcPositiveInteger-wrapper" type="ifc:Seq-IfcPositiveInteger" maxOccurs="unbounded" />
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
@@ -5480,7 +5481,6 @@ of the material. The information contained in this document is subject to change
 			<xs:extension base="ifc:IfcPropertyAbstraction">
 				<xs:attribute name="Name" type="ifc:IfcIdentifier" use="optional"/>
 				<xs:attribute name="Description" type="ifc:IfcText" use="optional"/>
-        <xs:attribute name="GlobalId" type="ifc:IfcGloballyUniqueId" use="optional"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -5566,7 +5566,6 @@ of the material. The information contained in this document is subject to change
 							<xs:attribute ref="ifc:itemType" fixed="ifc:IfcValue"/>
 							<xs:attribute ref="ifc:cType" fixed="list-unique"/>
 							<xs:attribute ref="ifc:arraySize" use="optional"/>
-							<xs:attribute name="GlobalId" type="ifc:IfcGloballyUniqueId" use="optional"/>
 						</xs:complexType>
 					</xs:element>
 					<xs:element name="Unit" nillable="true" minOccurs="0">
@@ -5575,7 +5574,6 @@ of the material. The information contained in this document is subject to change
 						</xs:complexType>
 					</xs:element>
 				</xs:sequence>
-				<xs:attribute name="GlobalId" type="ifc:IfcGloballyUniqueId" use="optional"/>
 				<xs:attribute name="Name" type="ifc:IfcLabel" use="optional"/>
 			</xs:extension>
 		</xs:complexContent>
@@ -6651,7 +6649,6 @@ of the material. The information contained in this document is subject to change
 		<xs:complexContent>
 			<xs:extension base="ifc:IfcRelDefines">
 				<xs:sequence>
-				    <xs:element name="RelatedObjects" type="ifc:IfcObjectDefinition" nillable="true" maxOccurs="1"/>
 					<xs:element name="RelatingPropertyDefinition">
 						<xs:complexType>
 							<xs:group ref="ifc:IfcPropertySetDefinitionSelect"/>
@@ -9622,7 +9619,6 @@ of the material. The information contained in this document is subject to change
 		<xs:choice>
 			<xs:element ref="ifc:IfcCompositeCurveOnSurface"/>
 			<xs:element ref="ifc:IfcPcurve"/>
-			<xs:element ref="ifc:IfcSurfaceCurve"/>
 		</xs:choice>
 	</xs:group>
 	<xs:group name="IfcCurveOrEdgeCurve">
@@ -12764,7 +12760,8 @@ of the material. The information contained in this document is subject to change
 	</xs:simpleType>
 	<xs:complexType name="IfcBinary">
 		<xs:simpleContent>
-			<xs:extension base="ifc:hexBinary"/>
+			<xs:extension base="ifc:hexBinary">
+			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
 	<xs:simpleType name="IfcBoolean">
@@ -13258,14 +13255,14 @@ of the material. The information contained in this document is subject to change
 			<xs:enumeration value="unknown"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="Seq-IfcPositiveInteger">
-		<xs:restriction>
-			<xs:simpleType>
-				<xs:list itemType="ifc:IfcPositiveInteger"/>
-			</xs:simpleType>
-			<xs:minLength value="3"/>
-		</xs:restriction>
-	</xs:simpleType>
+    <xs:simpleType name="Seq-IfcPositiveInteger">
+        <xs:restriction>
+            <xs:simpleType>
+                <xs:list itemType="ifc:IfcPositiveInteger"/>
+            </xs:simpleType>
+            <xs:minLength value="3"/>
+        </xs:restriction>
+    </xs:simpleType>
 	<!-- base global wrapper declaration for atomic simple types (for embeded base schema definitions) -->
 	<xs:element name="IfcAbsorbedDoseMeasure-wrapper" nillable="true">
 		<xs:complexType>
@@ -13622,7 +13619,6 @@ of the material. The information contained in this document is subject to change
 		<xs:complexType>
 			<xs:simpleContent>
 				<xs:extension base="ifc:IfcLabel">
-					<xs:attribute name="GlobalId" type="ifc:IfcGloballyUniqueId" use="optional"/>
 					<xs:attributeGroup ref="ifc:instanceAttributes"/>
 				</xs:extension>
 			</xs:simpleContent>
