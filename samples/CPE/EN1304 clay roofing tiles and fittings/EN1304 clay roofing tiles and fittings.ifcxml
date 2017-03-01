@@ -3,10 +3,10 @@
 	<header>
 		<name>Sample DoP file</name>
 		<time_stamp>2017-02-28T17:45:03</time_stamp>
-		<author>KLaus Aengenvoort</author>
+		<author>Klaus Aengenvoort</author>
 		<organization>CEN WG4</organization>
 		<preprocessor_version>yet manually created</preprocessor_version>
-		<originating_system>yet manually created</originating_system>
+		<originating_system>DoPCreator</originating_system>
 		<authorization>Espen Schulze, CO-Builder</authorization>
 		<documentation>ProductDataTemplate</documentation>
 	</header>
@@ -20,7 +20,7 @@
 				<!-- mm - Millimeter -->
 				<IfcSIUnit id="i103" UnitType="lengthunit" Prefix="milli" Name="metre"/>
 				<!-- m² - Quadratmeter -->
-				<IfcSIUnit id="i104" UnitType="areaunit" Name="square_metre"/>
+				<IfcSIUnit id="i104"  UnitType="areaunit" Name="square_metre"/>
 				<!-- m³ - Kubikmeter -->
 				<IfcSIUnit id="i105" UnitType="volumeunit" Name="cubic_metre"/>
 				<!-- V - Volt -->
@@ -84,6 +84,17 @@
 						</IfcDerivedUnitElement>
 					</Elements>
 				</IfcDerivedUnit>
+				<!-- kg/m² - Kilogram per squaremeter  Flächenlast -->
+				<IfcDerivedUnit id="i7124" UnitType="areadensityunit">
+					<Elements>
+						<IfcDerivedUnitElement id="i7125" Exponent="1">
+							<Unit xsi:type="IfcSIUnit" UnitType="massunit"/>
+						</IfcDerivedUnitElement>
+						<IfcDerivedUnitElement id="i7126" Exponent="-2">
+							<Unit xsi:type="IfcSIUnit" UnitType="lengthunit"/>
+						</IfcDerivedUnitElement>
+					</Elements>
+				</IfcDerivedUnit>
 				<!-- W - Leistung -->
 				<IfcSIUnit id="i120" UnitType="powerunit" Name="watt"/>
 				<!-- kW - Kilowatt -->
@@ -105,7 +116,7 @@
 		</UnitsInContext>
 	</IfcProject>
 	<!-- CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE -CPR - SAMPLE - CPR - SAMPLE - -->
-	<!-- Step 1: Define a classification of all Testmethods in a one dimensinal hierarchy as IfcClassification -That can be generated/imported from a PSet, the bSDD, IfcDoc or elsewhere - -->
+	<!-- Step 1: Define a classification of all Testmethods in a one dimensinal hierarchy as an IfcClassification -That can be generated/imported from a PSet, the bSDD, IfcDoc or elsewhere - -->
 	<IfcClassification id="i9698765" Edition="Version 2.5.6" EditionDate="2016-12-11T12:21:03" Name="Catalogue of EU CPR Rules" Description="Catalogue of EU CPR Rules" Source="bSDD" Location="http://bsdd.buildingsmart.org/#concept/browse/{GlobalId}"/>
 	<IfcRelAssociatesClassification id="i9698766" GlobalId="1fbJ0AXVj7qQIdiMHqoMyI">
 		<RelatedObjects>
@@ -137,9 +148,9 @@
 		</HasReferences>
 	</IfcClassificationReference>
 	<!-- Step 2: Define a PropertySetTemplate , That can be generated/imported from a PSet, the bSDD, IfcDoc or elsewhere - -->
-	<IfcPropertySetTemplate id="i33467" GlobalId="2e_rZByaj3v9TmNwzXRpFy" Name="Mechanical resistance" Description="" ApplicableEntity="IfcPipeSegment" TemplateType="pset_typedrivenonly" pos="1">
+	<IfcPropertySetTemplate id="i33467" GlobalId="2e_rZByaj3v9TmNwzXRpFy" Name="Mechanical resistance" Description="" ApplicableEntity="IfcRoof" TemplateType="pset_typedrivenonly" pos="1">
 		<HasPropertyTemplates>
-			<IfcSimplePropertyTemplate id="i33670" GlobalId="2gWUvQ3HT2FfUkpq4QgzE3" Name="flexural strength" Description="flexural strength according to EN 538" TemplateType="p_enumeratedvalue" PrimaryMeasureType="IfcText" pos="0">
+			<IfcSimplePropertyTemplate id="i33670" GlobalId="2gWUvQ3HT2FfUkpq4QgzE3" Name="flexural strength" Description="flexural strength in general (no mixing of references to the measure standard!)" TemplateType="p_enumeratedvalue" PrimaryMeasureType="IfcText" pos="0">
 				<Enumerators>
 					<EnumerationValues>
 						<IfcLabel-wrapper pos="0">pass</IfcLabel-wrapper>
@@ -192,7 +203,7 @@
 			<IfcClassificationReference ref="i9698772" xsi:nil="true"/>
 		</RelatingClassification>
 	</IfcRelAssociatesClassification>
-	<!-- Step 4b: Relate the PropertySetTemplate to  the classification node, that specifies the "essentiallallity" -->
+	<!-- Step 4b: Relate the PropertyTemplate to  the classification node, that specifies the "essentiallity" -->
 	<IfcRelAssociatesClassification id="i233521" GlobalId="2mVNBe4$L75ejegqXTQllf" Name="Reference from property flexural strength to EssentialCharacteristic">
 		<RelatedObjects>
 			<IfcSimplePropertyTemplate ref="i33670" xsi:nil="true"/>
