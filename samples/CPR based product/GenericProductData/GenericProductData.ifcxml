@@ -417,17 +417,17 @@
 	</IfcPropertySetTemplate>
 	<IfcPropertySetTemplate id="i999942" GlobalId="1cbJaB0Uf0f8QbEnIhzd8b" Name="Discussion on methods of measurement and properties" Description="" ApplicableEntity="IfcWall">
 		<HasPropertyTemplates>
-			<IfcSimplePropertyTemplate id="i999943" GlobalId="10x58_dMjCtv6QMVLNUbj0" Name="Heat transmission (U-Value)" Description="This is an example of the ONE CLASSIFIED PROPERTY FOR ALL TESTMETHODS solution. See Step 4 in this example!!!" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLengthMeasure" pos="10">
+			<IfcSimplePropertyTemplate id="i999943" GlobalId="10x58_dMjCtv6QMVLNUbj0" Name="Heat transmission (U-Value)" Description="This is an example of the ONE CLASSIFIED PROPERTYTEMPLATE FOR ALL TESTMETHODS WITH THE SAME UNIT solution. See Step 4 in this example!!!" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLengthMeasure" pos="10">
 				<PrimaryUnit>
 					<IfcSIUnit id="i999944" UnitType="userdefined"/>
 				</PrimaryUnit>
 			</IfcSimplePropertyTemplate>
-			<IfcSimplePropertyTemplate id="i999945" GlobalId="10x58_dMjCtv6QMVLNUbjA" Name="Heat transmission according to TBM" Description="This is an example of the ONE PROPERTY PER TESTMETHOD solution" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLengthMeasure" pos="11">
+			<IfcSimplePropertyTemplate id="i999945" GlobalId="10x58_dMjCtv6QMVLNUbjA" Name="Heat transmission according to TBM" Description="This is an example of the ONE PROPERTYTEMPLATE PER TESTMETHOD solution" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLengthMeasure" pos="11">
 				<PrimaryUnit>
 					<IfcSIUnit id="i999946" UnitType="userdefined"/>
 				</PrimaryUnit>
 			</IfcSimplePropertyTemplate>
-			<IfcSimplePropertyTemplate id="i999947" GlobalId="10x58_dMjCtv6QMVLNUbjB" Name="Heat transmission according to HFM " Description="This is an example of the ONE PROPERTY PER TESTMETHOD solution" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLengthMeasure" pos="12">
+			<IfcSimplePropertyTemplate id="i999947" GlobalId="10x58_dMjCtv6QMVLNUbjB" Name="Heat transmission according to HFM " Description="This is an example of the ONE PROPERTYTEMPLATE PER TESTMETHOD solution" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLengthMeasure" pos="12">
 				<PrimaryUnit>
 					<IfcSIUnit id="i999948" UnitType="userdefined"/>
 				</PrimaryUnit>
