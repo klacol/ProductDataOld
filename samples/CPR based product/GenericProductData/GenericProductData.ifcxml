@@ -130,14 +130,14 @@
 						</IfcDerivedUnitElement>
 						<IfcDerivedUnitElement Exponent="-1">
 							<Unit xsi:type="IfcSIUnit" UnitType="pressureunit"/>
-						</IfcDerivedUnitElement>						
+						</IfcDerivedUnitElement>
 					</Elements>
 				</IfcDerivedUnit>
 			</Units>
 		</UnitsInContext>
 	</IfcProjectLibrary>
 	<!-- CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE -CPR - SAMPLE - CPR - SAMPLE - -->
-	<!-- Step 1: Define a classification of all Testmethods in a one dimensinal hierarchy as IfcClassification -That can be generated/imported from a PSet, the bSDD, IfcDoc or elsewhere - -->
+	<!-- Step 1: Define a classification of all Testmethods in a one dimensinal hierarchy as IfcClassification -That can be generated/imported from a the bSDD, IfcDoc or elsewhere - -->
 	<IfcClassification id="i9698765" Edition="Version 2.5.6" EditionDate="2016-12-11T12:21:03" Name="Catalogue of EU CPR Rules" Description="Catalogue of EU CPR Rules" Source="bSDD" Location="http://bsdd.buildingsmart.org/#concept/browse/{GlobalId}"/>
 	<IfcRelAssociatesClassification id="i9698766" GlobalId="1fbJ0AXVj7qQIdiMHqoMyI">
 		<RelatedObjects>
@@ -149,26 +149,26 @@
 	</IfcRelAssociatesClassification>
 	<IfcClassificationReference id="i96987669" Identification="R" Name="Catalogue of EU CPR Rules" Sort="0">
 		<HasReferences>
-			<IfcClassificationReference id="i9698767" Identification="R1" Name="Rule 1 in hamonized european rules" Sort="0">
-					<HasReferences>
-						<IfcClassificationReference id="i9698768" Identification="R1.T1" Name="Testmethod 1" Description="Description of Testmethod 1" Sort="0"/>
-						<IfcClassificationReference id="i9698769" Identification="R1.TC" Name="Testmethod for CPR-Masonry" Description="Description of Testmethod 1" Sort="1"/>
-					</HasReferences>
+			<IfcClassificationReference id="i9698767" Location="18$XytmwHDIuPXEHcBpQtb" Identification="EN ISO 10077-1" Name="thermal performance of windows, doors and shutters - calculation of thermal transmittance - part 1: general | EN ISO 10077-1" Sort="0">
+				<HasReferences>
+					<IfcClassificationReference id="i9698768" Identification="EN 10077-1.Tm 1" Name="Testmethod 1" Description="Description of Testmethod 1" Sort="0"/>
+					<IfcClassificationReference id="i9698769" Identification="EN 10077-1.Tm 2" Name="Testmethod 2" Description="Description of Testmethod 2" Sort="1"/>
+				</HasReferences>
 			</IfcClassificationReference>
 			<IfcClassificationReference id="i9698770" Identification="R2" Name="Methods of measurement for Compressive strength of concrete" Sort="1">
-					<HasReferences>
-						<IfcClassificationReference id="i9698771" Identification="R2.MoM1" Name="Measuring cubes" Description="Description of Measuring cubes (MoM 1), " Sort="0"/>
-						<IfcClassificationReference id="i9698772" Identification="R2.MoM2" Name="Measuring cylinders" Description="Description of measuring cylinders (MoM 2)" Sort="1"/>
-					</HasReferences>
+				<HasReferences>
+					<IfcClassificationReference id="i9698771" Identification="R2.MoM1" Name="Measuring cubes" Description="Description of Measuring cubes (MoM 1), " Sort="0"/>
+					<IfcClassificationReference id="i9698772" Identification="R2.MoM2" Name="Measuring cylinders" Description="Description of measuring cylinders (MoM 2)" Sort="1"/>
+				</HasReferences>
 			</IfcClassificationReference>
 			<IfcClassificationReference id="i9698773" Identification="R3" Name="Methods of measurement for Heat transmission (U-Value)" Sort="2">
-					<HasReferences>
-						<IfcClassificationReference id="i9698774" Identification="R3.TBM" Name="the temperature based method" Description="Description of the temperature based method (TBM)" Sort="0"/>
-						<IfcClassificationReference id="i9698775" Identification="R3.HFM" Name="heat flux method" Description="Description of heat flux method (HFM)" Sort="1"/>
-					</HasReferences>
-			</IfcClassificationReference>		
+				<HasReferences>
+					<IfcClassificationReference id="i9698774" Identification="R3.TBM" Name="the temperature based method" Description="Description of the temperature based method (TBM)" Sort="0"/>
+					<IfcClassificationReference id="i9698775" Identification="R3.HFM" Name="heat flux method" Description="Description of heat flux method (HFM)" Sort="1"/>
+				</HasReferences>
+			</IfcClassificationReference>
 		</HasReferences>
-	</IfcClassificationReference>	
+	</IfcClassificationReference>
 	<!-- Step 2: Define a PropertySetTemplate , That can be generated/imported from a PSet, the bSDD, IfcDoc or elsewhere - -->
 	<IfcPropertySetTemplate id="i33467" GlobalId="2e_rZByaj3v9TmNwzXRpFy" Name="Unique Product identification code" Description="Sample Property for a Unique Product identification code" ApplicableEntity="IfcPipeSegment" TemplateType="pset_typedrivenonly" pos="1">
 		<HasPropertyTemplates>
@@ -433,9 +433,29 @@
 				</PrimaryUnit>
 			</IfcSimplePropertyTemplate>
 		</HasPropertyTemplates>
-  </IfcPropertySetTemplate>
+	</IfcPropertySetTemplate>
 	
-<!-- Step 3: Relate the PropertySetTemplate to  the classification node, that specifies the test method for all Properties in this PropertySet- -->
+   <!-- Step 2b: Define a PropertySetTemplate that includes a ComplexProperty (can be called "SuperProperty"), That can be generated/imported from a PSet, the bSDD, IfcDoc or elsewhere - -->
+	<IfcPropertySetTemplate id="i979942" GlobalId="1cbJaB0Uf0f8QbEnIhzd8b" Name="Discussion on methods of measurement and properties" Description="" ApplicableEntity="IfcWall">
+		<HasPropertyTemplates>
+			<IfcComplexPropertyTemplate id="i979943" GlobalId="10x58_dMjCtv6QMVLNUbj0" Name="Heat transmission (U-Value)" Description="This is an example of the ONE CLASSIFIED PROPERTYTEMPLATE FOR ALL TESTMETHODS WITH THE SAME UNIT solution. See Step 4 in this example!!!" pos="1">
+				<HasPropertyTemplates>
+					<IfcSimplePropertyTemplate id="i979944" GlobalId="10x58_dMjCtv6QMVLNUbj0" Name="Heat transmission (U-Value)" Description="This is an example of the ONE CLASSIFIED PROPERTYTEMPLATE FOR ALL TESTMETHODS WITH THE SAME UNIT solution. See Step 4 in this example!!!" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLengthMeasure" pos="10">
+						<PrimaryUnit>
+							<IfcSIUnit id="i979945" UnitType="userdefined"/>
+						</PrimaryUnit>
+					</IfcSimplePropertyTemplate>
+					<IfcSimplePropertyTemplate id="i979946" GlobalId="10x58_dMjCtv6QMVLNUbjA" Name="Heat transmission according to TBM" Description="This is an example of the ONE PROPERTYTEMPLATE PER TESTMETHOD solution" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLengthMeasure" pos="11">
+						<PrimaryUnit>
+							<IfcSIUnit id="i979947" UnitType="userdefined"/>
+						</PrimaryUnit>
+					</IfcSimplePropertyTemplate>
+				</HasPropertyTemplates>
+			</IfcComplexPropertyTemplate>
+		</HasPropertyTemplates>
+	</IfcPropertySetTemplate>
+	
+	<!-- Step 3: Relate the PropertySetTemplate to  the classification node, that specifies the test method for all Properties in this PropertySet- -->
 	<!-- If there is no thestmethod for this propertyset, do not insert this reference  -->
 	<IfcRelAssociatesClassification id="i33520" GlobalId="2mVNBe4$L75ejegqXTQllf" Name="Set a reference  from a PropertySetTemplate to Testmethod 1">
 		<RelatedObjects>
@@ -453,11 +473,9 @@
 		<RelatingClassification>
 			<IfcClassificationReference ref="i9698769" xsi:nil="true"/>
 		</RelatingClassification>
-	</IfcRelAssociatesClassification>	
-	
+	</IfcRelAssociatesClassification>
 	<!-- Step 4: Or Relate the individual PropertyTemplate to  the classification node, that specifies the test method , this could be more flexible if the testmethods differ for a single product -->
 	<!-- If there is no thestmethod for this property, do not insert this reference  -->
-	
 	<IfcRelAssociatesClassification id="i33521" GlobalId="2mVNBe4$L75ejegqXTQllf" Name="Set a reference  from a PropertyTemplate to Testmethod 1">
 		<RelatedObjects>
 			<IfcSimplePropertyTemplate ref="i33672" xsi:nil="true"/>
@@ -466,7 +484,6 @@
 			<IfcClassificationReference ref="i9698768" xsi:nil="true"/>
 		</RelatingClassification>
 	</IfcRelAssociatesClassification>
-		
 	<IfcRelAssociatesClassification id="i999949" GlobalId="2mVNBe4$L75ejegqXTQllf" Name="Set a test method reference for Heat transmission (U-Value) to TPM">
 		<RelatedObjects>
 			<IfcSimplePropertyTemplate ref="i999943" xsi:nil="true"/>
@@ -474,8 +491,7 @@
 		<RelatingClassification>
 			<IfcClassificationReference ref="i9698774" xsi:nil="true"/>
 		</RelatingClassification>
-	</IfcRelAssociatesClassification>	
-
+	</IfcRelAssociatesClassification>
 	<IfcRelAssociatesClassification id="i999950" GlobalId="2mVNBe4$L75ejegqXTQllf" Name="Set a test method reference for Heat transmission (U-Value) to HFM">
 		<RelatedObjects>
 			<IfcSimplePropertyTemplate ref="i999943" xsi:nil="true"/>
@@ -483,9 +499,7 @@
 		<RelatingClassification>
 			<IfcClassificationReference ref="i9698775" xsi:nil="true"/>
 		</RelatingClassification>
-	</IfcRelAssociatesClassification>		
-	
-	
+	</IfcRelAssociatesClassification>
 	<!--  Step 5: Go to "Start DATA" at the end of the file and insert the instances - the data itself based on this product data template-->
 	<!--  People can chose, if they transport the template every time alongside with the data to ensure, that the data stays valid according to the snapshot of the template at the time of creation (template embedding)-->
 	<!--  or if they transport the template and the data in separate files -->

@@ -312,7 +312,7 @@
 					</EnumerationValues>
 				</Enumerators>
 			</IfcSimplePropertyTemplate>
-			<IfcSimplePropertyTemplate id="i999930" GlobalId="10x58_dMjCtv6QMVLNUbjH" Name="Configuration – flatness of bed faces" Description="" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLengthMeasure" pos="8">
+			<IfcSimplePropertyTemplate id="i999930"  GlobalId="10x58_dMjCtv6QMVLNUbjH" Name="Configuration – flatness of bed faces" Description="" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLengthMeasure" pos="8">
 				<PrimaryUnit>
 					<IfcSIUnit id="i99996" UnitType="lengthunit" Prefix="milli" Name="metre"/>
 				</PrimaryUnit>
@@ -554,29 +554,35 @@
 	<!-- CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE -CPR - SAMPLE - CPR - SAMPLE - -->
 	<!--  Start DATA-->
 	<!--  Sample element with included propertyset-->
-	<IfcAlarm id="i6886" GlobalId="26JruP9Sj6_QQl9T2nuNCN" Name="430.41" Description="Bosch Fireray 50/100RV Linear Smoke Detectors" Tag="78463" PredefinedType="userdefined" ObjectType="i9999">
+	<IfcAlarm  id="i6886" GlobalId="26JruP9Sj6_QQl9T2nuNCN" Name="430.41" Description="Bosch Fireray 50/100RV Linear Smoke Detectors" Tag="78463" PredefinedType="userdefined" ObjectType="i9999">
 		<IsDefinedBy>
-			<IfcRelDefinesByProperties id="i6896976">
+			<IfcRelDefinesByProperties id="i6896976" >
 				<RelatingPropertyDefinition>
 					<IfcPropertySet ref="i33467">
 						<HasProperties>
-							<IfcComplexProperty>
+							<IfcComplexProperty id="i33468" Name="My Complex Propery (Essential Characteristics)" Description="The description of my ComplexProperty" UsageName="What is the UsageName?" pos="0">
 								<HasProperties>
-									<IfcPropertySingleValue id="i71301" Name="Unique Product identification code">
+									<IfcPropertySingleValue id="i71301" Name="Unique Product identification code" Description="Description of my Single value property" pos="0">
 										<NominalValue>
-											<IfcLabel-wrapper>Fireray50/100RV</IfcLabel-wrapper>
+											<IfcLabel-wrapper id="i33469" pos="1">Fireray50/100RV</IfcLabel-wrapper>
 										</NominalValue>
 									</IfcPropertySingleValue>
-									<IfcPropertySingleValue id="i71302" Name="Type according Articel 11-4">
+									<IfcPropertySingleValue id="i71302" Name="Type according Articel 11-4" Description="Description of my Single value property" pos="1">
 										<NominalValue>
-											<IfcLabel-wrapper>Fireray 50 RV and Fireray 100RV</IfcLabel-wrapper>
+											<IfcLabel-wrapper id="i33470">Fireray 50 RV and Fireray 100RV</IfcLabel-wrapper>
 										</NominalValue>
 									</IfcPropertySingleValue>
-									<IfcPropertySingleValue id="i71303" Name="Name of Property3">
+									<IfcPropertySingleValue id="i71303" Name="Name of Property3" Description="Description of my Single value property" pos="2">
 										<NominalValue>
-											<IfcLabel-wrapper>3456</IfcLabel-wrapper>
+											<IfcLabel-wrapper id="i33471">3456</IfcLabel-wrapper>
 										</NominalValue>
 									</IfcPropertySingleValue>
+									<IfcComplexProperty Name="My sub block of properties">
+										<HasProperties>
+											<IfcPropertySingleValue Name="sub prop1"></IfcPropertySingleValue>
+											<IfcPropertySingleValue Name="sub prop2"></IfcPropertySingleValue>
+										</HasProperties>
+									</IfcComplexProperty>
 								</HasProperties>
 							</IfcComplexProperty>
 						</HasProperties>

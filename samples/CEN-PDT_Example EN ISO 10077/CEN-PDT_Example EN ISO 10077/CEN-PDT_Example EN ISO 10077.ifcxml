@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ifcXML xmlns:ifc="http://www.buildingsmart-tech.org/ifcXML/IFC4/final" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="ifcXML4" xmlns="http://www.buildingsmart-tech.org/ifcXML/IFC4/Add2" xsi:schemaLocation="http://www.buildingsmart-tech.org/ifcXML/IFC4/Add2 IFC4_ADD2.xsd">
+	<header>
+		<name>CAFM-Connect Katalog 2014</name>
+		<time_stamp>2015-08-17T06:45:03</time_stamp>
+		<author>Aengenvoort</author>
+		<organization>CAFM-Connect</organization>
+		<preprocessor_version>.NET API etask.ifc</preprocessor_version>
+		<originating_system>.NET API etask.ifc</originating_system>
+		<authorization>file created with IFC.NET</authorization>
+		<documentation>ProductDataTemplate</documentation>
+	</header>
+	<IfcProjectLibrary id="i100" GlobalId="3W_wCy4R58hgkAO0WsiUkm">
+		<OwnerHistory id="i1001" CreationDate="12345" LastModifiedDate="12345" ChangeAction="nochange" State="readonly" path="api.myPreferredDictServer.org">
+			<OwningUser>
+				<ThePerson FamilyName="Aengenvoort" GivenName="Klaus"/>
+				<TheOrganization Identification="CEN-TC442-WG4-TG2" Description="A group of specialists for BIM products"/>
+			</OwningUser>
+			<OwningApplication>
+				<ApplicationDeveloper Identification="myPreferredDictServer" Description="My preffered Dictionary running according to CEN-TC442" path="api.myPreferredDictServer.org"/>
+			</OwningApplication>
+		</OwnerHistory>
+	</IfcProjectLibrary>
+	<!-- CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE -CPR - SAMPLE - CPR - SAMPLE - -->
+	<!-- Step 1: Define a classification of all Testmethods in a one dimensinal hierarchy as IfcClassification -That can be generated/imported from a the bSDD, IfcDoc or elsewhere - -->
+	<IfcClassification id="i9698765" Edition="Version 2.5.6" EditionDate="2016-12-11T12:21:03" Name="Catalogue of EU CPR Rules" Description="Catalogue of EU CPR Rules" Source="bSDD" Location="http://bsdd.buildingsmart.org/#concept/browse/{GlobalId}"/>
+	<IfcRelAssociatesClassification id="i9698766" GlobalId="1fbJ0AXVj7qQIdiMHqoMyI">
+		<RelatedObjects>
+			<IfcProject ref="i100" xsi:nil="true"/>
+		</RelatedObjects>
+		<RelatingClassification>
+			<IfcClassification ref="i9698765" xsi:nil="true"/>
+		</RelatingClassification>
+	</IfcRelAssociatesClassification>
+	<IfcClassificationReference id="i96987669" Identification="R" Name="Catalogue of EU CPR Rules" Sort="0">
+		<HasReferences>
+			<IfcClassificationReference id="i9698763" Location="18$XytmwHDIuPXEHcBpQtb" Identification="EN ISO 10077-1" Name="thermal performance of windows, doors and shutters - calculation of thermal transmittance - part 1: general | EN ISO 10077-1" Sort="0"/>
+			<IfcClassificationReference id="i9697766" Location="18$XytmwHDIuPXEHcBpQtc" Identification="EN ISO 10077-2" Name="thermal performance of windows, doors and shutters - calculation of thermal transmittance - part 1: general | EN ISO 10077-2" Sort="0"/>
+			<IfcClassificationReference id="i9698767" Location="18$XytmwHDIuPXEHcBpQtc" Identification="EN ISO 10077" Name="" Sort="0">
+				<HasReferences>
+					<IfcClassificationReference id="i9698768" Location="18$XytmwHDIuPXEHcBpQtc" Identification="EN 10077-1.Tm 1" Name="Testmethod 1" Description="Description of Testmethod 1" Sort="0"/>
+					<IfcClassificationReference id="i9698769" Location="18$XytmwHDIuPXEHcBpQtd" Identification="EN 10077-1.Tm 2" Name="Testmethod 2" Description="Description of Testmethod 2" Sort="1"/>
+				</HasReferences>
+			</IfcClassificationReference>
+		</HasReferences>
+	</IfcClassificationReference>
+	<!-- Step 2: Define a PropertySetTemplate , That can be generated/imported from a PSet, the bSDD, IfcDoc or elsewhere - -->
+	<IfcPropertySetTemplate id="i33467" GlobalId="2e_rZByaj3v9TmNwzXRpFy" Name="Example of some simple property definititions" Description="" ApplicableEntity="IfcPipeSegment" TemplateType="pset_typedrivenonly" pos="1">
+		<HasPropertyTemplates>
+			<IfcSimplePropertyTemplate id="i33668" GlobalId="26JruP9Sj6_QQl9T2nuNCN" Name="Unique Product identification code" Description="Description of Property" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="1"/>
+			<IfcSimplePropertyTemplate id="i33670" GlobalId="2gWUvQ3HT2FfUkpq4QgzE3" Name="Country of Production" Description="Description of Property3" TemplateType="p_enumeratedvalue" PrimaryMeasureType="IfcText" pos="3">
+				<Enumerators>
+					<EnumerationValues>
+						<IfcLabel-wrapper pos="0">NO</IfcLabel-wrapper>
+						<IfcLabel-wrapper pos="1">DE</IfcLabel-wrapper>
+						<IfcLabel-wrapper pos="1">A</IfcLabel-wrapper>
+					</EnumerationValues>
+				</Enumerators>
+			</IfcSimplePropertyTemplate>
+			<IfcSimplePropertyTemplate id="i33672" GlobalId="23KsS0qS4HuO00025QrE$V" Name="Property4" Description="Description of Property4 with a datatype real and a complex unit (m³/h)" TemplateType="p_singlevalue" PrimaryMeasureType="IfcReal" SecondaryMeasureType="What comes in here? Can this also be useful?" AccessState="readonly" Expression="The expression used to store additional information for the property template depending on the PropertyType." path="What is this for" pos="4">
+				<PrimaryUnit>
+					<IfcDerivedUnit id="i21114" UnitType="volumetricflowrateunit">
+						<Elements>
+							<IfcDerivedUnitElement id="i21115" Exponent="3">
+								<Unit xsi:type="IfcSIUnit" UnitType="lengthunit"/>
+							</IfcDerivedUnitElement>
+							<IfcDerivedUnitElement id="i21116" Exponent="-1">
+								<Unit xsi:type="IfcConversionBasedUnit" Name="Hour" UnitType="timeunit">
+									<ConversionFactor>
+										<ValueComponent>
+											<IfcTimeMeasure-wrapper>3600.</IfcTimeMeasure-wrapper>
+										</ValueComponent>
+										<UnitComponent>
+											<IfcSIUnit UnitType="timeunit"/>
+										</UnitComponent>
+									</ConversionFactor>
+								</Unit>
+							</IfcDerivedUnitElement>
+						</Elements>
+					</IfcDerivedUnit>
+				</PrimaryUnit>
+			</IfcSimplePropertyTemplate>
+		</HasPropertyTemplates>
+	</IfcPropertySetTemplate>
+	<IfcPropertySetTemplate id="i999910" GlobalId="1cbJaB0Uf0f8QbEnIhzd8b" Name="Dop Header Information" Description="This PropertySetTemplate can be reused in different product types" ApplicableEntity="">
+		<HasPropertyTemplates>
+			<IfcSimplePropertyTemplate id="i999911" GlobalId="10x58_dMjCtv6QMVLNUbj0" Name="DoP number" Description="DoP number" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="0"/>
+			<IfcSimplePropertyTemplate id="i999912" GlobalId="10x58_dMjCtv6QMVLNUbjA" Name="Unique identification code of the product-type" Description="" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="1"/>
+			<IfcSimplePropertyTemplate id="i999913" GlobalId="10x58_dMjCtv6QMVLNUbjB" Name="Intended use" Description="" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="2"/>
+			<IfcSimplePropertyTemplate id="i999914" GlobalId="10x58_dMjCtv6QMVLNUbjC" Name="Manufacturer name" Description="" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="3"/>
+			<IfcSimplePropertyTemplate id="i999915" GlobalId="10x58_dMjCtv6QMVLNUbjD" Name="Manufacturer address" Description="perhaps separate into postalcode, city and street?" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="4"/>
+			<IfcSimplePropertyTemplate id="i999916" GlobalId="10x58_dMjCtv6QMVLNUbjE" Name="Authorised representative" Description="" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="5"/>
+			<IfcSimplePropertyTemplate id="i999917" GlobalId="10x58_dMjCtv6QMVLNUbjF" Name="System/s of AVCP" Description="" TemplateType="p_enumeratedvalue" PrimaryMeasureType="IfcText" pos="6">
+				<Enumerators>
+					<EnumerationValues>
+						<IfcLabel-wrapper pos="0">2+</IfcLabel-wrapper>
+						<IfcLabel-wrapper pos="1">4</IfcLabel-wrapper>
+					</EnumerationValues>
+				</Enumerators>
+			</IfcSimplePropertyTemplate>
+			<IfcSimplePropertyTemplate id="i999918" GlobalId="10x58_dMjCtv6QMVLNUbjG" Name="Harmonised standard" Description="Empty,If System/s of AVCP was 4;to be fille my manufactuer if System/s of AVCP was not 4" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="7"/>
+			<IfcSimplePropertyTemplate id="i999919" GlobalId="10x58_dMjCtv6QMVLNUbjH" Name="Notified bodies" Description="" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="8"/>
+		</HasPropertyTemplates>
+	</IfcPropertySetTemplate>
+	<IfcPropertySetTemplate id="i999920" GlobalId="1cbJaB0Uf0f8QbEnIhzd8b" Name="Thermal Transmittance" Description="" ApplicableEntity="IfcWindows">
+		<HasPropertyTemplates>
+			<IfcSimplePropertyTemplate id="i999921" GlobalId="10x58_dMjCtv6QMVLNUbj0" Name="Thermal Transmittance coefficient according to EN 10077-1.Tm 1" Description="" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLengthMeasure" pos="10">
+				<PrimaryUnit>
+					<IfcDerivedUnit id="i21719" UnitType="heatfluxdensityunit" path="10x58_dMjCtv6QMVLNUbj0">
+						<Elements>
+							<IfcDerivedUnitElement id="i21715" Exponent="1">
+								<Unit xsi:type="IfcSIUnit" UnitType="powerunit"/>
+							</IfcDerivedUnitElement>
+							<IfcDerivedUnitElement id="i21716" Exponent="-1">
+								<Unit xsi:type="IfcSIUnit" UnitType="areaunit"/>
+							</IfcDerivedUnitElement>
+							<IfcDerivedUnitElement id="i21717" Exponent="-1">
+								<Unit xsi:type="IfcSIUnit" UnitType="thermodynamictemperatureunit"/>
+							</IfcDerivedUnitElement>
+						</Elements>
+					</IfcDerivedUnit>
+				</PrimaryUnit>
+			</IfcSimplePropertyTemplate>
+		</HasPropertyTemplates>
+	</IfcPropertySetTemplate>
+	<!-- Step 2b: Define a PropertySetTemplate that includes a ComplexProperty (can be called "SuperProperty"), That can be generated/imported from a PSet, the bSDD, IfcDoc or elsewhere - -->
+	<IfcPropertySetTemplate id="i979942" GlobalId="1cbJaB0Uf0f8QbEnIhzd8b" Name="Thermal Transmittance with related classification for testing methods" Description="" ApplicableEntity="IfcWall">
+		<HasPropertyTemplates>
+			<IfcComplexPropertyTemplate id="i979943" GlobalId="10x58_dMjCtv6QMVLNUbj0" Name="SuperProperty" Description="This is an example of the ONE CLASSIFIED PROPERTYTEMPLATE FOR ALL TESTMETHODS WITH THE SAME UNIT solution. See Step 4 in this example!!!" pos="1">
+				<HasPropertyTemplates>
+					<IfcSimplePropertyTemplate id="i979944" GlobalId="10x58_dMjCtv6QMVLNUbjA" Name="Thermal Transmittance" Description="This is an example of the ONE CLASSIFIED PROPERTYTEMPLATE FOR ALL TESTMETHODS WITH THE SAME UNIT solution. See Step 4 in this example!!!" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLengthMeasure" pos="10">
+						<PrimaryUnit>
+							<IfcDerivedUnit id="i21720" UnitType="heatfluxdensityunit" path="10x58_dMjCtv6QMVLNUbj0">
+								<Elements>
+									<IfcDerivedUnitElement id="i21721" Exponent="1">
+										<Unit xsi:type="IfcSIUnit" UnitType="powerunit"/>
+									</IfcDerivedUnitElement>
+									<IfcDerivedUnitElement id="i21722" Exponent="-1">
+										<Unit xsi:type="IfcSIUnit" UnitType="areaunit"/>
+									</IfcDerivedUnitElement>
+									<IfcDerivedUnitElement id="i21723" Exponent="-1">
+										<Unit xsi:type="IfcSIUnit" UnitType="thermodynamictemperatureunit"/>
+									</IfcDerivedUnitElement>
+								</Elements>
+							</IfcDerivedUnit>
+						</PrimaryUnit>
+					</IfcSimplePropertyTemplate>
+					<IfcSimplePropertyTemplate id="i979946" GlobalId="10x58_dMjCtv6QMVLNUbjA" Name="TestingMethod" Description="Put in here the name of the Test Method" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="11"/>
+				</HasPropertyTemplates>
+			</IfcComplexPropertyTemplate>
+		</HasPropertyTemplates>
+	</IfcPropertySetTemplate>
+	<IfcPropertySetTemplate id="i979643" GlobalId="1cbJaB0Uf0f8QbEnIhzd8b" Name="Thermal Transmittance with individual names for testing methods per property (french request)" Description="" ApplicableEntity="IfcWall">
+		<HasPropertyTemplates>
+			<IfcComplexPropertyTemplate id="i979844" GlobalId="10x58_dMjCtv6QMVLNUbj0" Name="Thermal Transmittance" Description="This is an super property for Thermal Transmittance (global)" pos="1">
+				<HasPropertyTemplates>
+					<IfcSimplePropertyTemplate id="i979945" GlobalId="10x58_dMjCtv6QMVLNUbjA" Name="Thermal Transmittance according to EN 10077-1" Description="Put in the description of Thermal Transmittance according to EN 10077-1 here" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLengthMeasure" pos="10">
+						<PrimaryUnit>
+							<IfcDerivedUnit id="i23720" UnitType="heatfluxdensityunit" path="10x58_dMjCtv6QMVLNUbj0">
+								<Elements>
+									<IfcDerivedUnitElement id="i21421" Exponent="1">
+										<Unit xsi:type="IfcSIUnit" UnitType="powerunit"/>
+									</IfcDerivedUnitElement>
+									<IfcDerivedUnitElement id="i21822" Exponent="-1">
+										<Unit xsi:type="IfcSIUnit" UnitType="areaunit"/>
+									</IfcDerivedUnitElement>
+									<IfcDerivedUnitElement id="i21423" Exponent="-1">
+										<Unit xsi:type="IfcSIUnit" UnitType="thermodynamictemperatureunit"/>
+									</IfcDerivedUnitElement>
+								</Elements>
+							</IfcDerivedUnit>
+						</PrimaryUnit>
+					</IfcSimplePropertyTemplate>
+					<IfcSimplePropertyTemplate id="i979936" GlobalId="10x58_dMjCtv6QMVLNUbjB" Name="Thermal Transmittance according to EN 10077-2" Description="Put in the description of Thermal Transmittance according to EN 10077-2 here" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="11">
+						<PrimaryUnit>
+							<IfcDerivedUnit id="i23740" UnitType="heatfluxdensityunit" path="10x58_dMjCtv6QMVLNUbj0">
+								<Elements>
+									<IfcDerivedUnitElement id="i21451" Exponent="1">
+										<Unit xsi:type="IfcSIUnit" UnitType="powerunit"/>
+									</IfcDerivedUnitElement>
+									<IfcDerivedUnitElement id="i21812" Exponent="-1">
+										<Unit xsi:type="IfcSIUnit" UnitType="areaunit"/>
+									</IfcDerivedUnitElement>
+									<IfcDerivedUnitElement id="i21433" Exponent="-1">
+										<Unit xsi:type="IfcSIUnit" UnitType="thermodynamictemperatureunit"/>
+									</IfcDerivedUnitElement>
+								</Elements>
+							</IfcDerivedUnit>
+						</PrimaryUnit>
+					</IfcSimplePropertyTemplate>
+				</HasPropertyTemplates>
+			</IfcComplexPropertyTemplate>
+		</HasPropertyTemplates>
+	</IfcPropertySetTemplate>
+	<!-- Step 3: Relate the PropertySetTemplate to  the classification node, that specifies the test method for all Properties in this PropertySet- -->
+	<!-- If there is no thestmethod for this propertyset, do not insert this reference  -->
+	<IfcRelAssociatesClassification id="i33520" GlobalId="2mVNBe4$L75ejegqXTQllf" Name="Set a reference  from Thermal Transmittance to Testmethod 1">
+		<RelatedObjects>
+			<IfcSimplePropertyTemplate ref="i979945" xsi:nil="true"/>
+		</RelatedObjects>
+		<RelatingClassification>
+			<IfcClassificationReference ref="i9698768" xsi:nil="true"/>
+		</RelatingClassification>
+	</IfcRelAssociatesClassification>
+	<IfcRelAssociatesClassification id="i99999" GlobalId="000000000r40691_r40182">
+		<RelatedObjects>
+			<IfcSimplePropertyTemplate ref="i979936" xsi:nil="true"/>
+		</RelatedObjects>
+		<RelatingClassification>
+			<IfcClassificationReference ref="i9698769" xsi:nil="true"/>
+		</RelatingClassification>
+	</IfcRelAssociatesClassification>
+	<!-- Step 4: Or Relate the individual PropertyTemplate to  the classification node, that specifies the test method , this could be more flexible if the testmethods differ for a single product -->
+	<!-- If there is no thestmethod for this property, do not insert this reference  -->
+	<IfcRelAssociatesClassification id="i33521" GlobalId="2mVNBe4$L75ejegqXTQllf" Name="Set a reference  from a PropertyTemplate to Testmethod 1">
+		<RelatedObjects>
+			<IfcSimplePropertyTemplate ref="i33672" xsi:nil="true"/>
+		</RelatedObjects>
+		<RelatingClassification>
+			<IfcClassificationReference ref="i9698768" xsi:nil="true"/>
+		</RelatingClassification>
+	</IfcRelAssociatesClassification>
+	<!--  Step 5: Go to "Start DATA" at the end of the file and insert the instances - the data itself based on this product data template-->
+	<!--  People can chose, if they transport the template every time alongside with the data to ensure, that the data stays valid according to the snapshot of the template at the time of creation (template embedding)-->
+	<!--  or if they transport the template and the data in separate files -->
+	<!--  The data must rely on a template, the template can rely on a dictionary; if the template relies on a dictionary the template shoul make clear on which dictionary it relies on; -->
+	<!--  and if the template relies on a dictionary, all GUID's from the dictionry must be stored also in the template to ensure the updatability of the template and the migratability of the data -->
+	<!-- See http://jira.buildingsmart.org/browse/IFR-1072 for the last remark -->
+	<!-- CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE - CPR - SAMPLE -CPR - SAMPLE - CPR - SAMPLE - -->
+	
+	
+	<!--  Start DATA-->
+	<!--  Sample element with included propertyset-->
+	<IfcDoor id="i6886" GlobalId="26JruP9Sj6_QQl9T2nuNCN" Name="430.41" Description="Bosch Fireray 50/100RV Linear Smoke Detectors" Tag="78463" PredefinedType="userdefined" ObjectType="i9999">
+		<IsDefinedBy>
+			<IfcRelDefinesByProperties id="i6896976">
+				<RelatingPropertyDefinition>
+					<IfcPropertySet ref="i33467">
+						<HasProperties>
+							<IfcComplexProperty>
+								<HasProperties>
+									<IfcPropertySingleValue id="i71301" Name="Unique Product identification code">
+										<NominalValue>
+											<IfcLabel-wrapper>Entrance door</IfcLabel-wrapper>
+										</NominalValue>
+									</IfcPropertySingleValue>
+									<IfcPropertySingleValue id="i71302" Name="Type according Articel 11-4">
+										<NominalValue>
+											<IfcLabel-wrapper>Fireray 50 RV and Fireray 100RV</IfcLabel-wrapper>
+										</NominalValue>
+									</IfcPropertySingleValue>
+									<IfcPropertySingleValue id="i71303" Name="Name of Property3">
+										<NominalValue>
+											<IfcLabel-wrapper>3456</IfcLabel-wrapper>
+										</NominalValue>
+									</IfcPropertySingleValue>
+								</HasProperties>
+							</IfcComplexProperty>
+						</HasProperties>
+					</IfcPropertySet>
+				</RelatingPropertyDefinition>
+			</IfcRelDefinesByProperties>
+		</IsDefinedBy>
+	</IfcDoor>
+	<IfcDocumentInformation id="i6690" Identification="d96295cf779240e9a204105627ec00be" Name="DOP D-EW-V-160804 Ribo alu.pdf" Location="Documents\DOP D-EW-V-160804 Ribo alu.pdf" CreationTime="25.10.2016 09:47:48" LastRevisionTime="25.10.2016 09:47:52" ElectronicFormat="application/pdf"/>
+	<IfcRelAssociatesDocument GlobalId="3EGlhekFT4z96nW7gmGyfS">
+		<RelatedObjects>
+			<IfcAlarm xsi:nil="true" ref="i6886"/>
+		</RelatedObjects>
+		<RelatingDocument>
+			<IfcDocumentInformation xsi:nil="true" ref="i6690"/>
+		</RelatingDocument>
+	</IfcRelAssociatesDocument>
+	<!--  End DATA-->
+</ifcXML>
