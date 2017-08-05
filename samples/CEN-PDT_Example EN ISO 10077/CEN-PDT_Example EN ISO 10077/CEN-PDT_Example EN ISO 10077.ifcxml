@@ -10,7 +10,7 @@
 		<authorization>Aengenvoort/Schulze/Muigg</authorization>
 		<documentation>http://www.buildingsmart-tech.org</documentation>
 	</header>
-	<IfcProjectLibrary id="i100" GlobalId="3W_wCy4R58hgkAO0WsiUkm">
+	<IfcProjectLibrary id="i100" GlobalId="3W_wCy4R58hgkAO0WsiUkm" Phase="" Name="" LongName="" Description="">
 		<OwnerHistory id="i1001" CreationDate="12345" LastModifiedDate="12345" ChangeAction="nochange" State="readonly" path="api.myPreferredDictServer.org">
 			<OwningUser>
 				<ThePerson FamilyName="Aengenvoort" GivenName="Klaus"/>
@@ -25,17 +25,17 @@
 				<RelatedDefinitions>
 					<IfcPropertySetTemplate id="i33467" GlobalId="2e_rZByaj3v9TmNwzXRpFy" Name="Example of some simple property definititions" Description="Description of the property set" ApplicableEntity="IfcWindow/LIGHTDOME,IfcDoor/GATE" TemplateType="pset_typedrivenonly" pos="1">
 						<HasPropertyTemplates>
-							<IfcSimplePropertyTemplate id="i33668" GlobalId="26JruP9Sj6_QQl9T2nuNCN" Name="Unique Product identification code" Description="Description of Property" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="1"/>
+							<IfcSimplePropertyTemplate id="i33668" GlobalId="26JruP9Sj6_QQl9T2nuNCN" Name="Unique Product identification code" Description="Description of Property" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="1" AccessState="readonly" />
 							<IfcSimplePropertyTemplate id="i33670" GlobalId="2gWUvQ3HT2FfUkpq4QgzE3" Name="Country of Production" Description="Description of Property3" TemplateType="p_enumeratedvalue" PrimaryMeasureType="IfcText" pos="3">
 								<Enumerators>
 									<EnumerationValues>
 										<IfcLabel-wrapper pos="0">NO</IfcLabel-wrapper>
 										<IfcLabel-wrapper pos="1">DE</IfcLabel-wrapper>
-										<IfcLabel-wrapper pos="1">A</IfcLabel-wrapper>
+										<IfcLabel-wrapper pos="2">A</IfcLabel-wrapper>
 									</EnumerationValues>
 								</Enumerators>
 							</IfcSimplePropertyTemplate>
-							<IfcSimplePropertyTemplate id="i33672" GlobalId="23KsS0qS4HuO00025QrE$V" Name="Property4" Description="Description of Property4 with a datatype real and a complex unit (m³/h)" TemplateType="p_singlevalue" PrimaryMeasureType="IfcReal" SecondaryMeasureType="What comes in here? Can this also be useful?" AccessState="readonly" Expression="The expression used to store additional information for the property template depending on the PropertyType." path="What is this for" pos="4">
+							<IfcSimplePropertyTemplate id="i33672" GlobalId="23KsS0qS4HuO00025QrE$V" Name="AirFlowRate" Description="Description of Property4 with a datatype real and a complex unit (m³/h)" TemplateType="p_singlevalue" PrimaryMeasureType="IfcReal" SecondaryMeasureType="What comes in here? Can this also be useful?" AccessState="readonly" Expression="The expression used to store additional information for the property template depending on the PropertyType." path="What is this for" pos="4">
 								<PrimaryUnit>
 									<IfcDerivedUnit id="i21114" UnitType="volumetricflowrateunit">
 										<Elements>
@@ -46,7 +46,7 @@
 												<Unit xsi:type="IfcConversionBasedUnit" Name="Hour" UnitType="timeunit">
 													<ConversionFactor>
 														<ValueComponent>
-															<IfcTimeMeasure-wrapper>3600.</IfcTimeMeasure-wrapper>
+															<IfcTimeMeasure-wrapper>3600</IfcTimeMeasure-wrapper>
 														</ValueComponent>
 														<UnitComponent>
 															<IfcSIUnit UnitType="timeunit"/>
