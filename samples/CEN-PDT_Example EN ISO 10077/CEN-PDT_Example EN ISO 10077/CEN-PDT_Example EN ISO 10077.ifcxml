@@ -29,9 +29,9 @@
 							<IfcSimplePropertyTemplate id="i33670" GlobalId="2gWUvQ3HT2FfUkpq4QgzE3" Name="Country of Production" Description="Description of Property3" TemplateType="p_enumeratedvalue" PrimaryMeasureType="IfcText" pos="3">
 								<Enumerators>
 									<EnumerationValues>
-										<IfcLabel-wrapper pos="0">NO</IfcLabel-wrapper>
-										<IfcLabel-wrapper pos="1">DE</IfcLabel-wrapper>
-										<IfcLabel-wrapper pos="2">A</IfcLabel-wrapper>
+										<IfcLabel-wrapper id="i9999171" pos="0">NO</IfcLabel-wrapper>
+										<IfcLabel-wrapper id="i9999172" pos="1">DE</IfcLabel-wrapper>
+										<IfcLabel-wrapper id="i9999173" pos="2">A</IfcLabel-wrapper>
 									</EnumerationValues>
 								</Enumerators>
 							</IfcSimplePropertyTemplate>
@@ -72,8 +72,8 @@
 							<IfcSimplePropertyTemplate id="i999917" GlobalId="10x58_dMjCtv6QMVLNUbjF" Name="System/s of AVCP" Description="" TemplateType="p_enumeratedvalue" PrimaryMeasureType="IfcText" pos="6">
 								<Enumerators>
 									<EnumerationValues>
-										<IfcLabel-wrapper pos="0">2+</IfcLabel-wrapper>
-										<IfcLabel-wrapper pos="1">4</IfcLabel-wrapper>
+										<IfcLabel-wrapper id="i9999174" pos="0">2+</IfcLabel-wrapper>
+										<IfcLabel-wrapper id="i9999175" pos="1">4</IfcLabel-wrapper>
 									</EnumerationValues>
 								</Enumerators>
 							</IfcSimplePropertyTemplate>
@@ -169,29 +169,42 @@
 			<IfcClassificationReference ref="i9697766" xsi:nil="true"/>
 		</RelatingClassification>
 	</IfcRelAssociatesClassification>
+	<!-- The following table stored the references to a dictionary for those elements who do not have an own atrribute "GlobalId". These are IfcClassificationReference and EnumerationValues/IfcLabel-wrapper-->
 	<IfcTable id="i96885" Name="DictionaryReferenceTable">
 		<Rows>
 			<IfcTableRow>
 				<RowCells>
-					<IfcText-wrapper id="i96890" pos="1">IfcClassificationReference</IfcText-wrapper>
-					<IfcIdentifier-wrapper id="i96891" pos="2">i96987669</IfcIdentifier-wrapper>
-					<IfcText-wrapper id="i96893" pos="3"/>
-					<IfcIdentifier-wrapper id="i96894" pos="4">2mVNBe4$L75ejegqXTQllf</IfcIdentifier-wrapper>
+					<IfcIdentifier-wrapper>i96987669</IfcIdentifier-wrapper>
+					<IfcIdentifier-wrapper>2mVNBe4$L75ejegqXTQllf</IfcIdentifier-wrapper>
 				</RowCells>
 			</IfcTableRow>
 			<IfcTableRow>
 				<RowCells>
-					<IfcText-wrapper id="i96895" pos="1">EnumerationValues</IfcText-wrapper>
-					<IfcIdentifier-wrapper id="i96896" pos="2">i999917</IfcIdentifier-wrapper>
-					<IfcText-wrapper id="i96897" pos="2">2+</IfcText-wrapper>
-					<IfcIdentifier-wrapper id="i96898" pos="3">2mVNBe4$L75ejegqXTQlld</IfcIdentifier-wrapper>
+					<IfcIdentifier-wrapper>i9999171</IfcIdentifier-wrapper>
+					<IfcIdentifier-wrapper>2mVNBe4$L75ejegqXTQlld</IfcIdentifier-wrapper>
+				</RowCells>
+			</IfcTableRow>
+			<IfcTableRow>
+				<RowCells>
+					<IfcIdentifier-wrapper>i9999171</IfcIdentifier-wrapper>
+					<IfcIdentifier-wrapper>2mVNBe4$L75ejegqXTQlld</IfcIdentifier-wrapper>
+				</RowCells>
+			</IfcTableRow>
+						<IfcTableRow>
+				<RowCells>
+					<IfcIdentifier-wrapper>i9999172</IfcIdentifier-wrapper>
+					<IfcIdentifier-wrapper>2mVNBe4$L75ejegqXTQll3</IfcIdentifier-wrapper>
+				</RowCells>
+			</IfcTableRow>
+						<IfcTableRow>
+				<RowCells>
+					<IfcIdentifier-wrapper>i9999173</IfcIdentifier-wrapper>
+					<IfcIdentifier-wrapper>2mVNBe4$L75ejegqXTQllt</IfcIdentifier-wrapper>
 				</RowCells>
 			</IfcTableRow>
 		</Rows>
 		<Columns>
-			<IfcTableColumn id="i96886" Identifier="ENTITYTYPE" Name="ENTITYTYPE" Description="This is the name of the entity that shall connected to a GUID"/>
-			<IfcTableColumn id="i96887" Identifier="id" Name="id" Description="This is the column that stored the internal ID-value in the instance of the entity IFC file"/>
-			<IfcTableColumn id="i96888" Identifier="ID2" Name="ID2" Description="This is the column that stored the internal ID-value in the instance of the entity IFC file"/>
+			<IfcTableColumn id="i96887" Identifier="LocalId" Name="id" Description="This is the column that stored the internal ID-value in the instance of the entity IFC file"/>
 			<IfcTableColumn id="i96889" Identifier="GlobalId" Name="GlobalId" Description="This is the column that stores the external GUID of the instance of the entity in the IFC format"/>
 		</Columns>
 	</IfcTable>
