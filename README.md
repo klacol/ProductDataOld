@@ -1,6 +1,6 @@
-# CafmConnectProductData
-System to describe product data in CAFM-Connect (IFC 4 XML).
+# Product data template (PDT) and product data sheets (PDS)
+System to describe product data template and product date with IfcXML (ISO 16739).
 
-The CafmConnectProductDataGui ist a small Tool to extract data from a file in the format VDI 3805 and save this data in an IFCXML file based on the CAFM-Connect structure.
+This repo is used for communication of ideas and samples for the buildingSMART product room (PDT group).
 
 
