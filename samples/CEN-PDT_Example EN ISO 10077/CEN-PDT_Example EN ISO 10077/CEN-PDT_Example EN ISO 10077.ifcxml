@@ -23,7 +23,7 @@
 		<Declares>
 			<IfcRelDeclares>
 				<RelatedDefinitions>
-					<IfcPropertySetTemplate id="i33467" GlobalId="2e_rZByaj3v9TmNwzXRpFy" Name="Example of some simple property definititions" Description="Description of the property set" ApplicableEntity="IfcWindow/LIGHTDOME,IfcDoor/GATE" TemplateType="pset_typedrivenonly" pos="1">
+					<IfcPropertySetTemplate id="i33467" GlobalId="2e_rZByaj3v9TmNwzXRpFy" Name="Example of some simple type property definititions" Description="Description of the property set" ApplicableEntity="IfcWindow/LIGHTDOME,IfcDoor/GATE" TemplateType="pset_typedrivenonly" pos="1">
 						<HasPropertyTemplates>
 							<IfcSimplePropertyTemplate id="i33668" GlobalId="26JruP9Sj6_QQl9T2nuNCN" Name="Unique Product identification code" Description="Description of Property" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="1" AccessState="readonly" />
 							<IfcSimplePropertyTemplate id="i33670" GlobalId="2gWUvQ3HT2FfUkpq4QgzE3" Name="Country of Production" Description="Description of Property3" TemplateType="p_enumeratedvalue" PrimaryMeasureType="IfcText" pos="3">
@@ -219,64 +219,121 @@
 	<!--  Start DATA-->
 	<!--  Sample element with included propertyset-->
 	<IfcProject id="i6885" Description="DataProject"/>
-	<IfcWindowType id="i76886">
+	<IfcWindowType id="i76886" GlobalId="26JruP9Sj6_QQl9T2nuNCG">
 		<HasPropertySets>
-			<IfcPropertySet ref="i33467">
+			<IfcPropertySet id="i76887" ref="i33467" Name="Example of some simple type property definititions" Description="This property set is valid for all instances of this type">
 				<HasProperties>
-					<IfcComplexProperty>
-						<HasProperties>
-							<IfcPropertySingleValue id="i71301" Name="Unique Product identification code">
-								<NominalValue>
-									<IfcLabel-wrapper>Entrance door</IfcLabel-wrapper>
-								</NominalValue>
-							</IfcPropertySingleValue>
-							<IfcPropertySingleValue id="i71302" Name="Type according Articel 11-4">
-								<NominalValue>
-									<IfcLabel-wrapper>The typ of my window</IfcLabel-wrapper>
-								</NominalValue>
-							</IfcPropertySingleValue>
-							<IfcPropertySingleValue id="i71303" Name="Name of Property3">
-								<NominalValue>
-									<IfcLabel-wrapper>3456</IfcLabel-wrapper>
-								</NominalValue>
-							</IfcPropertySingleValue>
-						</HasProperties>
-					</IfcComplexProperty>
+					<IfcPropertySingleValue id="i71301" Name="Unique Product identification code">
+						<NominalValue>
+							<IfcLabel-wrapper>value of Unique Product identification code</IfcLabel-wrapper>
+						</NominalValue>
+					</IfcPropertySingleValue>
+					<IfcPropertySingleValue id="i71302" Name="Country of Production">
+						<NominalValue>
+							<IfcLabel-wrapper>The typ of my window</IfcLabel-wrapper>
+						</NominalValue>
+					</IfcPropertySingleValue>
+					<IfcPropertySingleValue id="i71303" Name="AirFlowRate">
+						<NominalValue>
+							<IfcLabel-wrapper>3456</IfcLabel-wrapper>
+						</NominalValue>
+					</IfcPropertySingleValue>
 				</HasProperties>
 			</IfcPropertySet>
 		</HasPropertySets>
 	</IfcWindowType>
-	<IfcWindow id="i6886" GlobalId="26JruP9Sj6_QQl9T2nuNCN" Name="430.41" Description="Real Windows from a real manufacturer" Tag="78463" PredefinedType="skylight" ObjectType="i76886">
+	<IfcRelDefinesByTemplate>
+		<RelatedPropertySets>
+			<IfcPropertySet xsi:nil="true" ref="i76887" />
+		</RelatedPropertySets>
+		<RelatingTemplate xsi:nil="true" ref="i33467" />
+	</IfcRelDefinesByTemplate>		
+	<IfcWindow id="i6886" GlobalId="26JruP9Sj6_QQl9T2nuNCi" Name="430.41" Description="Real Windows from a real manufacturer" Tag="78463" PredefinedType="skylight" ObjectType="i76886">
 		<IsDefinedBy>
 			<IfcRelDefinesByProperties id="i6896976">
 				<RelatingPropertyDefinition>
-					<IfcPropertySet ref="i33467">
+					<IfcPropertySet id="i6896977" ref="i999910" Name="Dop Header Information">
 						<HasProperties>
-							<IfcComplexProperty>
-								<HasProperties>
-									<IfcPropertySingleValue id="i971301" Name="Unique Product identification code">
-										<NominalValue>
-											<IfcLabel-wrapper>Entrance door</IfcLabel-wrapper>
-										</NominalValue>
-									</IfcPropertySingleValue>
-									<IfcPropertySingleValue id="i971302" Name="Type according Articel 11-4">
-										<NominalValue>
-											<IfcLabel-wrapper>The typ of my window</IfcLabel-wrapper>
-										</NominalValue>
-									</IfcPropertySingleValue>
-									<IfcPropertySingleValue id="i971303" Name="Name of Property3">
-										<NominalValue>
-											<IfcLabel-wrapper>3456</IfcLabel-wrapper>
-										</NominalValue>
-									</IfcPropertySingleValue>
-								</HasProperties>
-							</IfcComplexProperty>
+							<IfcPropertySingleValue id="i971301" Name="Unique identification code of the product-type">
+								<NominalValue>
+									<IfcLabel-wrapper>value of the Unique identification code of the product-type</IfcLabel-wrapper>
+								</NominalValue>
+							</IfcPropertySingleValue>
+							<IfcPropertySingleValue id="i971302" Name="Intended use">
+								<NominalValue>
+									<IfcLabel-wrapper>value of the Intended use</IfcLabel-wrapper>
+								</NominalValue>
+							</IfcPropertySingleValue>
+							<IfcPropertySingleValue id="i971303" Name="Manufacturer name">
+								<NominalValue>
+									<IfcLabel-wrapper>value of the Manufacturer name</IfcLabel-wrapper>
+								</NominalValue>
+							</IfcPropertySingleValue>
+							<IfcPropertySingleValue id="i971304" Name="Manufacturer address">
+								<NominalValue>
+									<IfcLabel-wrapper>Value of the Manufacturer address</IfcLabel-wrapper>
+								</NominalValue>
+							</IfcPropertySingleValue>
+							<IfcPropertySingleValue id="i971305" Name="Authorised representative">
+								<NominalValue>
+									<IfcLabel-wrapper>Value of the Authorised representative</IfcLabel-wrapper>
+								</NominalValue>
+							</IfcPropertySingleValue>
+							<IfcPropertySingleValue id="i971306" Name="System/s of AVCP">
+								<NominalValue>
+									<IfcLabel-wrapper>2+</IfcLabel-wrapper>
+								</NominalValue>
+							</IfcPropertySingleValue>
+							<IfcPropertySingleValue id="i971307" Name="Harmonised standard">
+								<NominalValue>
+									<IfcLabel-wrapper>value of Harmonised standard</IfcLabel-wrapper>
+								</NominalValue>
+							</IfcPropertySingleValue>
+							<IfcPropertySingleValue id="i971308" Name="Notified bodies">
+								<NominalValue>
+									<IfcLabel-wrapper>Value of Notified bodies</IfcLabel-wrapper>
+								</NominalValue>
+							</IfcPropertySingleValue>										
 						</HasProperties>
-					</IfcPropertySet>
+					</IfcPropertySet>			
+				</RelatingPropertyDefinition>
+			</IfcRelDefinesByProperties>
+			<IfcRelDefinesByProperties id="i971309">
+				<RelatingPropertyDefinition>
+					<IfcPropertySet id="i971310" ref="i979643" Name="Thermal Transmittance">
+						<HasProperties>
+							<IfcComplexProperty id="i979911" Name="Thermal Transmittance">
+								<HasProperties>
+									<IfcPropertySingleValue id="i979912" Name="Thermal Transmittance according to EN 10077-1">
+										<NominalValue>
+											<IfcLabel-wrapper>value of the Thermal Transmittance according to EN 10077-1</IfcLabel-wrapper>
+										</NominalValue>
+									</IfcPropertySingleValue>
+									<IfcPropertySingleValue id="i979913" Name="Thermal Transmittance according to EN 12567-1">
+										<NominalValue>
+											<IfcLabel-wrapper>value of the Thermal Transmittance according to EN 12567-1</IfcLabel-wrapper>
+										</NominalValue>
+									</IfcPropertySingleValue>								
+								</HasProperties>
+							</IfcComplexProperty>			
+						</HasProperties>
+					</IfcPropertySet>			
 				</RelatingPropertyDefinition>
 			</IfcRelDefinesByProperties>
 		</IsDefinedBy>
 	</IfcWindow>
+	<IfcRelDefinesByTemplate>
+		<RelatedPropertySets>
+			<IfcPropertySet xsi:nil="true" ref="i6896977" />
+		</RelatedPropertySets>
+		<RelatingTemplate xsi:nil="true" ref="i999910" />
+	</IfcRelDefinesByTemplate>	
+	<IfcRelDefinesByTemplate>
+		<RelatedPropertySets>
+			<IfcPropertySet xsi:nil="true" ref="i971310" />
+		</RelatedPropertySets>
+		<RelatingTemplate xsi:nil="true" ref="i979643" />
+	</IfcRelDefinesByTemplate>	
 	<IfcDocumentInformation id="i6690" Identification="d96295cf779240e9a204105627ec00be" Name="DOP D-EW-V-160804 Ribo alu.pdf" Location="Documents\DOP D-EW-V-160804 Ribo alu.pdf" CreationTime="25.10.2016 09:47:48" LastRevisionTime="25.10.2016 09:47:52" ElectronicFormat="application/pdf"/>
 	<IfcRelAssociatesDocument GlobalId="3EGlhekFT4z96nW7gmGyfS">
 		<RelatedObjects>
