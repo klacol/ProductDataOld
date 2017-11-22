@@ -170,8 +170,8 @@ Nextrema G3 TB 8000-840 ETDD +LLWC
 		<IsDefinedBy>
 		</IsDefinedBy>
 	</IfcLamp>
-	<IfcDocumentInformation id="i300" Identification="d96295cf779240e9a204105627ec00be" Name="CE180_RED_06.17_Nextrema_G3_HFS_LLWC.pdf" Location="Documents\CE180_RED_06.17_Nextrema_G3_HFS_LLWC.pdf" CreationTime="2017-06-10T00:00:00+00:01" LastRevisionTime="2017-06-10T00:00:00+00:01" ElectronicFormat="application/pdf"/>
-	<IfcRelAssociatesDocument GlobalId="3EGlhekFT4z96nW7gmGyfS">
+	<IfcDocumentInformation id="i300" Identification="26JzuP9Sj6_QQl9T2nuNCG" Name="CE180_RED_06.17_Nextrema_G3_HFS_LLWC.pdf" Location="Documents\CE180_RED_06.17_Nextrema_G3_HFS_LLWC.pdf" CreationTime="2017-06-10T00:00:00+00:01" LastRevisionTime="2017-06-10T00:00:00+00:01" ElectronicFormat="application/pdf"/>
+	<IfcRelAssociatesDocument>
 		<RelatedObjects>
 			<IfcLampType xsi:nil="true" ref="i202"/>
 		</RelatedObjects>
@@ -179,13 +179,22 @@ Nextrema G3 TB 8000-840 ETDD +LLWC
 			<IfcDocumentInformation xsi:nil="true" ref="i300"/>
 		</RelatingDocument>
 	</IfcRelAssociatesDocument>
-	<IfcDocumentInformation id="i301" Identification="d96295cf779240e9a204105627ec00be" Name="Trilux Nextrema G3 B 4000-840 ET +HFS.pdf" Location="Documents\Trilux Nextrema G3 B 4000-840 ET +HFS.pdf" CreationTime="2017-06-10T00:00:00+00:01" LastRevisionTime="2017-06-10T00:00:00+00:01" ElectronicFormat="application/pdf"/>
-	<IfcRelAssociatesDocument GlobalId="3EGlhekFT4z96nW7gmGyfS">
+	<IfcDocumentInformation id="i301" Identification="26JruP9Sj6_QQl9T2nuNCG" Name="Trilux Nextrema G3 B 4000-840 ET +HFS.pdf" Location="Documents\Trilux Nextrema G3 B 4000-840 ET +HFS.pdf" CreationTime="2017-06-10T00:00:00+00:01" LastRevisionTime="2017-06-10T00:00:00+00:01" ElectronicFormat="application/pdf" />
+	<IfcRelAssociatesDocument>
 		<RelatedObjects>
 			<IfcLampType xsi:nil="true" ref="i202"/>
 		</RelatedObjects>
 		<RelatingDocument>
 			<IfcDocumentInformation xsi:nil="true" ref="i301"/>
+		</RelatingDocument>
+	</IfcRelAssociatesDocument>	
+	<IfcDocumentInformation id="i302" Identification="26JruP9Sj6_QQl9T3nuNCG" Name="Trilux Nextrema G3 B 4000-840 ET +HFS.pdf" Location="![CDATA[PLACE_HERE_THE_LONG_BASE64_STRING_TO_EMBED_FILES_DIRECTLY]]" CreationTime="2017-06-10T00:00:00+00:01" LastRevisionTime="2017-06-10T00:00:00+00:01" ElectronicFormat="application/pdf" />
+	<IfcRelAssociatesDocument>
+		<RelatedObjects>
+			<IfcLampType xsi:nil="true" ref="i202"/>
+		</RelatedObjects>
+		<RelatingDocument> 
+			<IfcDocumentInformation xsi:nil="true" ref="i302"/>
 		</RelatingDocument>
 	</IfcRelAssociatesDocument>	
 	<!--  End DATA-->
