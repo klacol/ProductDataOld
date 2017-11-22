@@ -11,22 +11,34 @@
 		<documentation>http://www.buildingsmart-tech.org</documentation>
 	</header>
 	<!-- THE TEMPLATE STARTS HERE - PDT START - -->
-	<IfcProjectLibrary id="i100" GlobalId="3W_wCy4R58hgkAO0WsiUkm">
+	<IfcProjectLibrary id="i100" GlobalId="3W_wCy4R58hgkAO0WsiUkm" Name="DoCLigthingProductsLibrary" LongName="Library for DoC of ligthing products" Description="A long description of the library content and usage concepts">
+		<OwnerHistory id="i101" CreationDate="20171122" LastModifiedDate="20171122" ChangeAction="nochange" State="readonly">
+			<OwningUser>
+				<ThePerson/>
+				<TheOrganization id="i102" Identification="bSI" Name="buildingSMART International" Description="A possible publisher of libraries, one out of many publisher"/>
+				<Roles>
+					<IfcActorRole id="i103" Role="userdefined" UserDefinedRole="LibraryPublisher"/>
+				</Roles>
+			</OwningUser>
+			<OwningApplication id="i104" ApplicationFullName="buildingSMART Data Dictionary" ApplicationIdentifier="bsdd.buildingsmart.org" Version="1.0">
+				<ApplicationDeveloper/>
+			</OwningApplication>
+		</OwnerHistory>
 		<Declares>
 			<IfcRelDeclares>
 				<RelatedDefinitions>
 					<!-- Step 1: Define a PropertySetTemplate , That can be generated/imported from a PSet, the bSDD, IfcDoc or elsewhere - -->
-					<IfcPropertySetTemplate id="i101" GlobalId="2e_rZByaj3v9TmNwzXRpFy" Name="Property set DoC header" Description="Property set of the header of a declaration of conformity" TemplateType="notdefined" pos="1">
+					<IfcPropertySetTemplate id="i105" GlobalId="2e_rZByaj3v9TmNwzXRpFy" Name="Property set DoC header" Description="Property set of the header of a declaration of conformity" TemplateType="pset_typedrivenoverride" ApplicableEntity="IfcLamp" pos="1">
 						<HasPropertyTemplates>
-							<IfcSimplePropertyTemplate id="i102" GlobalId="26JruP9Sj6_QQl9T2nuNCN" Name="Document number" Description="Number of the DoC document" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLabel" pos="1" AccessState="readonly"/>
-							<IfcSimplePropertyTemplate id="i103" GlobalId="26JruP9Sj6_QQl9T2nuNCJ" Name="Document title" Description="Title of the DoC document" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLabel" pos="2" AccessState="readonly"/>
-							<IfcSimplePropertyTemplate id="i104" GlobalId="26JruP9Sj6_QQl9T2nuNCK" Name="Document text" Description="Text of the DoC document" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="3" AccessState="readonly"/>
-							<IfcSimplePropertyTemplate id="i105" GlobalId="2gWUvQ3HT2FfUkpq4QgzE3" Name="Country of Production" Description="Country of production in the format ISO-3166-1-ALPHA-2" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLabel" pos="4"/>
-							<IfcSimplePropertyTemplate id="i106" GlobalId="2gWUvQ3HT2FfUkpq4QgzE4" Name="Manufacturer" Description="Name of the manufacturer" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLabel" pos="5"/>
-							<IfcSimplePropertyTemplate id="i107" GlobalId="10x58_dMjCtv6QMVLNUbjD" Name="Manufacturer address" Description="postalcode, city and street of the manufacturer" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="6"/>
-							<IfcSimplePropertyTemplate id="i108" GlobalId="2gWUvQ3HT2FfUkpq4QgzE5" Name="Product brand" Description="Name of the product brand" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLabel" pos="7"/>
-							<IfcSimplePropertyTemplate id="i109" GlobalId="2gWUvQ3HT2FfUkpq4QgzE6" Name="Issuer" Description="Name of the issurer of this DoC" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLabel" pos="8"/>
-							<IfcSimplePropertyTemplate id="i110" GlobalId="2gWUvQ3HT2FfUkpq4QgzE7" Name="Date" Description="Date of this DoC" TemplateType="p_singlevalue" PrimaryMeasureType="IfcDate" pos="9"/>
+							<IfcSimplePropertyTemplate id="i106" GlobalId="26JruP9Sj6_QQl9T2nuNCN" Name="Document number" Description="Number of the DoC document" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLabel" pos="1" AccessState="readonly"/>
+							<IfcSimplePropertyTemplate id="i107" GlobalId="26JruP9Sj6_QQl9T2nuNCJ" Name="Document title" Description="Title of the DoC document" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLabel" pos="2" AccessState="readonly"/>
+							<IfcSimplePropertyTemplate id="i108" GlobalId="26JruP9Sj6_QQl9T2nuNCK" Name="Document text" Description="Text of the DoC document" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="3" AccessState="readonly"/>
+							<IfcSimplePropertyTemplate id="i109" GlobalId="2gWUvQ3HT2FfUkpq4QgzE3" Name="Country of Production" Description="Country of production in the format ISO-3166-1-ALPHA-2" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLabel" pos="4"/>
+							<IfcSimplePropertyTemplate id="i110" GlobalId="2gWUvQ3HT2FfUkpq4QgzE4" Name="Manufacturer" Description="Name of the manufacturer" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLabel" pos="5"/>
+							<IfcSimplePropertyTemplate id="i111" GlobalId="10x58_dMjCtv6QMVLNUbjD" Name="Manufacturer address" Description="postalcode, city and street of the manufacturer" TemplateType="p_singlevalue" PrimaryMeasureType="IfcText" pos="6"/>
+							<IfcSimplePropertyTemplate id="i112" GlobalId="2gWUvQ3HT2FfUkpq4QgzE5" Name="Product brand" Description="Name of the product brand" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLabel" pos="7"/>
+							<IfcSimplePropertyTemplate id="i113" GlobalId="2gWUvQ3HT2FfUkpq4QgzE6" Name="Issuer" Description="Name of the issurer of this DoC" TemplateType="p_singlevalue" PrimaryMeasureType="IfcLabel" pos="8"/>
+							<IfcSimplePropertyTemplate id="i114" GlobalId="2gWUvQ3HT2FfUkpq4QgzE7" Name="Date" Description="Date of this DoC" TemplateType="p_singlevalue" PrimaryMeasureType="IfcDate" pos="9"/>
 						</HasPropertyTemplates>
 					</IfcPropertySetTemplate>
 					<!-- Step 2: Define a PropertySetTemplate that includes a ComplexProperty (can be called "SuperProperty"), That can be generated/imported from a PSet, the bSDD, IfcDoc or elsewhere - -->
@@ -48,7 +60,7 @@
 	<!--         and if the template relies on a dictionary, all GUID's from the dictionry must be stored also in the template to ensure the updatability of the template and the migratability of the data -->
 	<!--         See http://jira.buildingsmart.org/browse/IFR-1072 for the last remark -->
 	<IfcProject id="i200" GlobalId="23JruP9Sj6_QQl9T2nuNCG" Name="EC Declaration if Conformity">
-	<!-- Step 7: Insert the tracking information for the PDS-->
+		<!-- Step 7: Insert the tracking information for the PDS-->
 		<OwnerHistory id="i201" CreationDate="20171120" LastModifiedDate="20171120" ChangeAction="nochange" State="readonly">
 			<OwningUser>
 				<ThePerson FamilyName="Heinze" GivenName="Robert"/>
@@ -68,9 +80,9 @@
 				</Roles>
 			</LastModifyingUser>
 			<LastModifyingApplication ApplicationFullName="Trilux product management system" ApplicationIdentifier="api.trilux.com" Version="1.0">
-				<ApplicationDeveloper></ApplicationDeveloper>
+				<ApplicationDeveloper/>
 			</LastModifyingApplication>
-		</OwnerHistory>	
+		</OwnerHistory>
 	</IfcProject>
 	<!-- Step 8: Insert the name of the entity that describes all types of the product in ISO 16739 (IFC)-->
 	<IfcLampType id="i202" GlobalId="26JruP9Sj6_QQl9T2nuNCG">
@@ -101,16 +113,46 @@ Verwendungszweck / Intended use:
 Produktbezeichnung / Type name: 
 HFS: Funkortung / Radiodetermination 
 LLWC: Funkfernsteuerung (Empfänger) / Radiocommunication 
-Nextrema G3 B 4000-840 ETDD +HFS.. 
-Nextrema G3 B 6000-840 ETDD +HFS.. 
+Nextrema G3 B 4000-840 ETDD +HFS
+Nextrema G3 B 6000-840 ETDD +HFS 
 Nextrema G3 XB 2300-840 ETDD *LI-WC 
 Nextrema G3 B 6000-840 ETDD *LI-WC 
-Nextrema (33 XB 2300-840 ETDD +HFS.. 
-Nextreme XB 4000-840 ETDD +HFS.. 
-Nextreme XB 6000-840 ETDD +HFS.. 
+Nextrema (33 XB 2300-840 ETDD +HFS 
+Nextreme XB 4000-840 ETDD +HFS
+Nextreme XB 6000-840 ETDD +HFS 
 Nextrema G3 B 4000-840 ETDD +LLWC 
 Nextrema G3 TB 8000-840 ETDD +LLWC 
 ]]></IfcText-wrapper>
+						</NominalValue>
+					</IfcPropertySingleValue>
+					<IfcPropertySingleValue id="i207" Name="Country of Production">
+						<NominalValue>
+							<IfcLabel-wrapper>DE</IfcLabel-wrapper>
+						</NominalValue>
+					</IfcPropertySingleValue>
+					<IfcPropertySingleValue id="i208" Name="Manufacturer">
+						<NominalValue>
+							<IfcLabel-wrapper><![CDATA[TRILUX GmbH & Co. KG]]></IfcLabel-wrapper>
+						</NominalValue>
+					</IfcPropertySingleValue>
+					<IfcPropertySingleValue id="i209" Name="Manufacturer address">
+						<NominalValue>
+							<IfcText-wrapper><![CDATA[Heidestraße, 59759 Arnsberg-Hüsten]]></IfcText-wrapper>
+						</NominalValue>
+					</IfcPropertySingleValue>
+					<IfcPropertySingleValue id="i210" Name="Product brand">
+						<NominalValue>
+							<IfcLabel-wrapper><![CDATA[Nextrema]]></IfcLabel-wrapper>
+						</NominalValue>
+					</IfcPropertySingleValue>
+					<IfcPropertySingleValue id="i211" Name="Issuer">
+						<NominalValue>
+							<IfcLabel-wrapper><![CDATA[TRILUX GmbH & Co. KG]]></IfcLabel-wrapper>
+						</NominalValue>
+					</IfcPropertySingleValue>
+					<IfcPropertySingleValue id="i212" Name="Date">
+						<NominalValue>
+							<IfcLabel-wrapper>2017-06-10T00:00:00+00:01</IfcLabel-wrapper>
 						</NominalValue>
 					</IfcPropertySingleValue>
 				</HasProperties>
@@ -121,103 +163,30 @@ Nextrema G3 TB 8000-840 ETDD +LLWC
 		<RelatedPropertySets>
 			<IfcPropertySet xsi:nil="true" ref="i203"/>
 		</RelatedPropertySets>
-		<RelatingTemplate xsi:nil="true" ref="i101"/>
+		<RelatingTemplate xsi:nil="true" ref="i105"/>
 	</IfcRelDefinesByTemplate>
-	<!-- Step 8: Insert the tracking information for the PDS-->
-	<IfcWindow id="i6886" GlobalId="26JruP9Sj6_QQl9T2nuNCi" Name="430.41" Description="Real Windows from a real manufacturer" Tag="78463" PredefinedType="skylight" ObjectType="i76886">
+	<!-- Step 8: Insert the tracking information for the PDS (tbd)-->
+	<IfcLamp id="i213" GlobalId="26JruP9Sj6_QQl9T2nuNCi" Name="Nextrema G3 B 4000-840 ETDD +HFS" Description="Real Lamp (AsDelivered)" Tag="4711" PredefinedType="halogen">
 		<IsDefinedBy>
-			<IfcRelDefinesByProperties id="i6896976">
-				<RelatingPropertyDefinition>
-					<IfcPropertySet id="i6896977" ref="i100" Name="Dop Header Information">
-						<HasProperties>
-							<IfcPropertySingleValue id="i971301" Name="Unique identification code of the product-type">
-								<NominalValue>
-									<IfcLabel-wrapper>value of the Unique identification code of the product-type</IfcLabel-wrapper>
-								</NominalValue>
-							</IfcPropertySingleValue>
-							<IfcPropertySingleValue id="i971302" Name="Intended use">
-								<NominalValue>
-									<IfcLabel-wrapper>value of the Intended use</IfcLabel-wrapper>
-								</NominalValue>
-							</IfcPropertySingleValue>
-							<IfcPropertySingleValue id="i971303" Name="Manufacturer name">
-								<NominalValue>
-									<IfcLabel-wrapper>value of the Manufacturer name</IfcLabel-wrapper>
-								</NominalValue>
-							</IfcPropertySingleValue>
-							<IfcPropertySingleValue id="i971304" Name="Manufacturer address">
-								<NominalValue>
-									<IfcLabel-wrapper>Value of the Manufacturer address</IfcLabel-wrapper>
-								</NominalValue>
-							</IfcPropertySingleValue>
-							<IfcPropertySingleValue id="i971305" Name="Authorised representative">
-								<NominalValue>
-									<IfcLabel-wrapper>Value of the Authorised representative</IfcLabel-wrapper>
-								</NominalValue>
-							</IfcPropertySingleValue>
-							<IfcPropertySingleValue id="i971306" Name="System/s of AVCP">
-								<NominalValue>
-									<IfcLabel-wrapper>2+</IfcLabel-wrapper>
-								</NominalValue>
-							</IfcPropertySingleValue>
-							<IfcPropertySingleValue id="i971307" Name="Harmonised standard">
-								<NominalValue>
-									<IfcLabel-wrapper>value of Harmonised standard</IfcLabel-wrapper>
-								</NominalValue>
-							</IfcPropertySingleValue>
-							<IfcPropertySingleValue id="i971308" Name="Notified bodies">
-								<NominalValue>
-									<IfcLabel-wrapper>Value of Notified bodies</IfcLabel-wrapper>
-								</NominalValue>
-							</IfcPropertySingleValue>
-						</HasProperties>
-					</IfcPropertySet>
-				</RelatingPropertyDefinition>
-			</IfcRelDefinesByProperties>
-			<IfcRelDefinesByProperties id="i971309">
-				<RelatingPropertyDefinition>
-					<IfcPropertySet id="i971310" ref="i100" Name="Thermal Transmittance">
-						<HasProperties>
-							<IfcComplexProperty id="i979911" Name="Thermal Transmittance">
-								<HasProperties>
-									<IfcPropertySingleValue id="i979912" Name="Thermal Transmittance according to EN 10077-1">
-										<NominalValue>
-											<IfcLabel-wrapper>value of the Thermal Transmittance according to EN 10077-1</IfcLabel-wrapper>
-										</NominalValue>
-									</IfcPropertySingleValue>
-									<IfcPropertySingleValue id="i979913" Name="Thermal Transmittance according to EN 12567-1">
-										<NominalValue>
-											<IfcLabel-wrapper>value of the Thermal Transmittance according to EN 12567-1</IfcLabel-wrapper>
-										</NominalValue>
-									</IfcPropertySingleValue>
-								</HasProperties>
-							</IfcComplexProperty>
-						</HasProperties>
-					</IfcPropertySet>
-				</RelatingPropertyDefinition>
-			</IfcRelDefinesByProperties>
 		</IsDefinedBy>
-	</IfcWindow>
-	<IfcRelDefinesByTemplate>
-		<RelatedPropertySets>
-			<IfcPropertySet xsi:nil="true" ref="i6896977"/>
-		</RelatedPropertySets>
-		<RelatingTemplate xsi:nil="true" ref="i100"/>
-	</IfcRelDefinesByTemplate>
-	<IfcRelDefinesByTemplate>
-		<RelatedPropertySets>
-			<IfcPropertySet xsi:nil="true" ref="i971310"/>
-		</RelatedPropertySets>
-		<RelatingTemplate xsi:nil="true" ref="i100"/>
-	</IfcRelDefinesByTemplate>
-	<IfcDocumentInformation id="i6690" Identification="d96295cf779240e9a204105627ec00be" Name="DOP D-EW-V-160804 Ribo alu.pdf" Location="Documents\DOP D-EW-V-160804 Ribo alu.pdf" CreationTime="25.10.2016 09:47:48" LastRevisionTime="25.10.2016 09:47:52" ElectronicFormat="application/pdf"/>
+	</IfcLamp>
+	<IfcDocumentInformation id="i300" Identification="d96295cf779240e9a204105627ec00be" Name="CE180_RED_06.17_Nextrema_G3_HFS_LLWC.pdf" Location="Documents\CE180_RED_06.17_Nextrema_G3_HFS_LLWC.pdf" CreationTime="2017-06-10T00:00:00+00:01" LastRevisionTime="2017-06-10T00:00:00+00:01" ElectronicFormat="application/pdf"/>
 	<IfcRelAssociatesDocument GlobalId="3EGlhekFT4z96nW7gmGyfS">
 		<RelatedObjects>
-			<IfcWindow xsi:nil="true" ref="i6886"/>
+			<IfcLampType xsi:nil="true" ref="i202"/>
 		</RelatedObjects>
 		<RelatingDocument>
-			<IfcDocumentInformation xsi:nil="true" ref="i6690"/>
+			<IfcDocumentInformation xsi:nil="true" ref="i300"/>
 		</RelatingDocument>
 	</IfcRelAssociatesDocument>
+	<IfcDocumentInformation id="i301" Identification="d96295cf779240e9a204105627ec00be" Name="Trilux Nextrema G3 B 4000-840 ET +HFS.pdf" Location="Documents\Trilux Nextrema G3 B 4000-840 ET +HFS.pdf" CreationTime="2017-06-10T00:00:00+00:01" LastRevisionTime="2017-06-10T00:00:00+00:01" ElectronicFormat="application/pdf"/>
+	<IfcRelAssociatesDocument GlobalId="3EGlhekFT4z96nW7gmGyfS">
+		<RelatedObjects>
+			<IfcLampType xsi:nil="true" ref="i202"/>
+		</RelatedObjects>
+		<RelatingDocument>
+			<IfcDocumentInformation xsi:nil="true" ref="i301"/>
+		</RelatingDocument>
+	</IfcRelAssociatesDocument>	
 	<!--  End DATA-->
 </ifcXML>
